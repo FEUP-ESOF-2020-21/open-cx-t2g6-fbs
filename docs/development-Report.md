@@ -1,26 +1,15 @@
-# openCX-your module name Development Report
-Welcome to the documentation pages of the your (sub)product name of openCX!
+# Submit a Question
+[Short description]
 
-You can find here detailed about the (sub)product, hereby mentioned as module, from a high-level vision to low-level implementation decisions, a kind of Software Development Report (see template), organized by discipline (as of RUP):
+Team members:
+<ul>
+  <li>Fabio Moreira </li>
+  <li>Luís Afonso  </li>
+  <li>João Cunha </li>
+  <li>Pedro Coelho </li>
+  <liJosé Maçães </li>
+ </ul>
 
-Business modeling
-Product Vision
-Elevator Pitch
-Requirements
-Use Case Diagram
-User stories
-Domain model
-Architecture and Design
-Logical architecture
-Physical architecture
-Prototype
-Implementation
-Test
-Configuration and change management
-Project management
-
-
-team members names
 
 ## Product Vision
 
