@@ -12,7 +12,7 @@ Team members:
 
 
 ## Product Vision
-
+Our app will allow the audience to submit questions, with the possibility of being associated to a specific slide of the presentation. The submitted questions will be visible by the other users, who can vote on the most pertinent questions to be answered at the end of the presentation, which will be extremely useful to make the best use of limited time.
 
 ## Elevator Pitch
 
