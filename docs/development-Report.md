@@ -7,7 +7,7 @@ Team members:
   <li>Luís Afonso  </li>
   <li>João Cunha </li>
   <li>Pedro Coelho </li>
-  <liJosé Maçães </li>
+  <li>José Maçães </li>
  </ul>
 
 
