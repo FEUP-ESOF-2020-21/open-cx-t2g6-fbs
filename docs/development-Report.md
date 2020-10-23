@@ -7,12 +7,12 @@ Team members:
   <li>Luís Afonso  </li>
   <li>João Cunha </li>
   <li>Pedro Coelho </li>
-  <li>José Maçães </li>
+  <liJosé Maçães </li>
  </ul>
 
 
 ## Product Vision
-Our application will allow users to submit questions, with the possibility of being associated to a specific slide in the presentation. The submitted questions will be visible by the other users, who can then vote on the most pertinent questions to be answered at the end of the presentation. This will in turn be extremely useful to ensure the best use of limited time.
+
 
 ## Elevator Pitch
 
@@ -23,7 +23,7 @@ Conference attendees often feel frustrated by the quality (or the lack thereof) 
 
 ## Requirements 
 ### Use case diagram
-
+![use case diagram](./images/use_case_diagram.png "Use Case Diagram")
 
 
 
