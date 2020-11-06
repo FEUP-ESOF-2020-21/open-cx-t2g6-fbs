@@ -7,7 +7,7 @@ Team members:
   <li>Luís Afonso  </li>
   <li>João Cunha </li>
   <li>Pedro Coelho </li>
-  <liJosé Maçães </li>
+  <li>José Maçães </li>
  </ul>
 
 
@@ -18,7 +18,7 @@ Team members:
 
 Conference attendees often feel frustrated by the quality (or the lack thereof) of questions taking up the very limited time at the end. 
 (productName) optimizes everyone's experience  by allowing all the attendees to vote on the best questions, leading to a better use of the time.
-(From now on?) you can attend any conference knowing that only the most pertinent questions will be asked, leading to more intriguing discussions.
+From now on you can attend any conference knowing that only the most pertinent questions will be asked, leading to more intriguing discussions.
 
 
 ## Requirements 
@@ -28,6 +28,25 @@ Conference attendees often feel frustrated by the quality (or the lack thereof) 
 
 
 ### User stories
+
+User story: As a user I can reply to other user's questions after the lecture has ended so that more questions can get answered.
+
+User story: As a lecturer I can look at the highest rated questions so that I can answer the most wanted questions first.
+
+User story: As a user I can select which slide I have a doubt so that it is easier for the lecturer to  answer my question.
+
+User story: As a lecturer I can submit my presentation so that attendees can follow along my presentation.
+
+User story: As a user, I can vote on which questions I like the most so that they are more likely to get answered.
+
+#### User interface mockups
+<img src="images/Mockup.png" />  
+
+#### Acceptance tests
+For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+#### Value and effort
+At the end, it is good to add a rough indication of the value of the user story to the customers (e.g. MoSCoW method) and the team should add an estimation of the effort to implement it, for example, using t-shirt sizes (XS, S, M, L, XL).
 
 
 ### Domain model
