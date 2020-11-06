@@ -39,6 +39,8 @@ User story: As a lecturer I can submit my presentation so that attendees can fol
 
 User story: As a user, I can vote on which questions I like the most so that they are more likely to get answered.
 
+#### User interface mockups
+<img src="images/Mockup.png" />
 ### Domain model
 To better understand the context of the software system, it is very useful to have a simple UML class diagram with all the key concepts (names, attributes) and relationships involved of the problem domain addressed by your module.
 
