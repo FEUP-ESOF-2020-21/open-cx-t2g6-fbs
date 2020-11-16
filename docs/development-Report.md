@@ -38,9 +38,9 @@ As a user, I want to log into the app.
 For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
 
 #### Value and effort
-Value: [ Must have / Should have / Could have / Will not have ]
+Value: Must have
 
-Effort: XS / S / M / L / XL
+Effort: M
 
 ### - User story #02: 
 As a user, I want to filter and view lectures that I have attended or will attend.
@@ -51,7 +51,7 @@ As a user, I want to filter and view lectures that I have attended or will atten
 For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
 
 #### Value and effort
-Value: [ Must have / Should have / Could have / Will not have ]
+Value: Must have
 
 Effort: XS / S / M / L / XL
 
