@@ -94,8 +94,21 @@ Value: [ Must have / Should have / Could have / Will not have ]
 
 Effort: XS / S / M / L / XL
 
-### - User story #07: 
+### - User story #06: 
 As a lecturer I can submit my presentation so that attendees can follow along my presentation.
+#### User interface mockups
+<img src="./images/UserStory06.png" height="400" alt="User Story 06 Mockup">
+
+#### Acceptance tests
+For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+#### Value and effort
+Value: [ Must have / Should have / Could have / Will not have ]
+
+Effort: XS / S / M / L / XL
+
+### - User story #07: 
+As an attendee, I can access the slides submitted by the lecturer to follow along (given lecturer submitted)
 #### User interface mockups
 <img src="./images/UserStory07.png" height="400" alt="User Story 07 Mockup">
 
@@ -107,8 +120,9 @@ Value: [ Must have / Should have / Could have / Will not have ]
 
 Effort: XS / S / M / L / XL
 
+
 ### - User story #08: 
-As an attendee, I can access the slides submitted by the lecturer to follow along (given lecturer submitted)
+As a user I can select which slide I have a doubt so that it is easier for the lecturer to  answer my question.
 #### User interface mockups
 <img src="./images/UserStory08.png" height="400" alt="User Story 08 Mockup">
 
@@ -121,8 +135,8 @@ Value: [ Must have / Should have / Could have / Will not have ]
 Effort: XS / S / M / L / XL
 
 
-### - User story #9: 
-As a user I can select which slide I have a doubt so that it is easier for the lecturer to  answer my question.
+### - User story #09: 
+As a user, I can vote on which questions I like the most so that they are more likely to get answered.
 #### User interface mockups
 <img src="./images/UserStory09.png" height="400" alt="User Story 09 Mockup">
 
@@ -136,7 +150,7 @@ Effort: XS / S / M / L / XL
 
 
 ### - User story #10: 
-As a user, I can vote on which questions I like the most so that they are more likely to get answered.
+ As a lecturer I can look at the highest rated questions so that I can answer the most wanted questions first.
 #### User interface mockups
 <img src="./images/UserStory10.png" height="400" alt="User Story 10 Mockup">
 
@@ -148,21 +162,7 @@ Value: [ Must have / Should have / Could have / Will not have ]
 
 Effort: XS / S / M / L / XL
 
-
 ### - User story #11: 
- As a lecturer I can look at the highest rated questions so that I can answer the most wanted questions first.
-#### User interface mockups
-<img src="./images/UserStory11.png" height="400" alt="User Story 11 Mockup">
-
-#### Acceptance tests
-For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
-
-#### Value and effort
-Value: [ Must have / Should have / Could have / Will not have ]
-
-Effort: XS / S / M / L / XL
-
-### - User story #12: 
 As a user I can reply to other user's questions after the lecture has ended so that more questions can get answered.
 #### User interface mockups
 <img src="./images/UserStory11.png" height="400" alt="User Story 11 Mockup">
