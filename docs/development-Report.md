@@ -29,6 +29,72 @@ From now on you can attend any conference knowing that only the most pertinent q
 
 ### User stories
 
+### - User story #01: 
+As a user, I want to log into the app.
+#### User interface mockups
+<img src="./images/UserStory01.png" height="400" alt="User Story 01 Mockup">
+
+#### Acceptance tests
+For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+#### Value and effort
+Value: [ Must have / Should have / Could have / Will not have ]
+
+Effort: XS / S / M / L / XL
+
+### - User story #02: 
+As a user, I want to filter and view existing lectures
+#### User interface mockups
+<img src="./images/UserStory02.png" height="400" alt="User Story 02 Mockup">
+
+#### Acceptance tests
+For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+#### Value and effort
+Value: [ Must have / Should have / Could have / Will not have ]
+
+Effort: XS / S / M / L / XL
+
+### - User story #03: 
+As a lecturer, I can create a new lecture
+#### User interface mockups
+<img src="./images/UserStory03.png" height="400" alt="User Story 03 Mockup">
+
+#### Acceptance tests
+For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+#### Value and effort
+Value: [ Must have / Should have / Could have / Will not have ]
+
+Effort: XS / S / M / L / XL
+
+### - User story #04: 
+As a lecturer, I can change the status of my presentation (Live/Finished)
+#### User interface mockups
+<img src="./images/UserStory04.png" height="400" alt="User Story 04 Mockup">
+
+#### Acceptance tests
+For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+#### Value and effort
+Value: [ Must have / Should have / Could have / Will not have ]
+
+Effort: XS / S / M / L / XL
+
+### - User story #05: 
+As a user, I can select an existing lecture to attend (given capacity is not full)
+#### User interface mockups
+<img src="./images/UserStory05.png" height="400" alt="User Story 05 Mockup">
+
+#### Acceptance tests
+For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+#### Value and effort
+Value: [ Must have / Should have / Could have / Will not have ]
+
+Effort: XS / S / M / L / XL
+
+
 ### - User story #06: 
 As a lecturer I can submit my presentation so that attendees can follow along my presentation.
 #### User interface mockups
@@ -41,6 +107,20 @@ For each user story you should write also the acceptance tests (textually in Ghe
 Value: [ Must have / Should have / Could have / Will not have ]
 
 Effort: XS / S / M / L / XL
+
+### - User story #07: 
+As an attendee, I can access the slides submitted by the lecturer to follow along (given lecturer submitted)
+#### User interface mockups
+<img src="./images/UserStory07.png" height="400" alt="User Story 07 Mockup">
+
+#### Acceptance tests
+For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+#### Value and effort
+Value: [ Must have / Should have / Could have / Will not have ]
+
+Effort: XS / S / M / L / XL
+
 
 ### - User story #8: 
 As a user I can select which slide I have a doubt so that it is easier for the lecturer to  answer my question.
