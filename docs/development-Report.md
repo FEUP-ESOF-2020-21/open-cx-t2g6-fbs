@@ -29,60 +29,75 @@ From now on you can attend any conference knowing that only the most pertinent q
 
 ### User stories
 
-### - User story #01: 
-As a user I can reply to other user's questions after the lecture has ended so that more questions can get answered.
-#### User interface mockups
-<img src="./images/UserStory01.png" height="300" alt="User Story 01 Mockup">
-
-#### Acceptance tests
-For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
-
-#### Value and effort
-At the end, it is good to add a rough indication of the value of the user story to the customers (e.g. MoSCoW method) and the team should add an estimation of the effort to implement it, for example, using t-shirt sizes (XS, S, M, L, XL).
-
-### - User story #02: 
- As a lecturer I can look at the highest rated questions so that I can answer the most wanted questions first.
-#### User interface mockups
-<img src="./images/UserStory02.png" height="300" alt="User Story 02 Mockup">
-
-#### Acceptance tests
-For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
-
-#### Value and effort
-At the end, it is good to add a rough indication of the value of the user story to the customers (e.g. MoSCoW method) and the team should add an estimation of the effort to implement it, for example, using t-shirt sizes (XS, S, M, L, XL).
-
-### - User story #03: 
-As a user I can select which slide I have a doubt so that it is easier for the lecturer to  answer my question.
-#### User interface mockups
-<img src="./images/UserStory03.png" height="300" alt="User Story 03 Mockup">
-
-#### Acceptance tests
-For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
-
-#### Value and effort
-At the end, it is good to add a rough indication of the value of the user story to the customers (e.g. MoSCoW method) and the team should add an estimation of the effort to implement it, for example, using t-shirt sizes (XS, S, M, L, XL).
-
-### - User story #04: 
+### - User story #06: 
 As a lecturer I can submit my presentation so that attendees can follow along my presentation.
 #### User interface mockups
-<img src="./images/UserStory04.png" height="300" alt="User Story 04 Mockup">
+<img src="./images/UserStory06.png" height="300" alt="User Story 06 Mockup">
 
 #### Acceptance tests
 For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
 
 #### Value and effort
-At the end, it is good to add a rough indication of the value of the user story to the customers (e.g. MoSCoW method) and the team should add an estimation of the effort to implement it, for example, using t-shirt sizes (XS, S, M, L, XL).
+Value: [ Must have / Should have / Could have / Will not have ]
 
-### - User story #05: 
+Effort: XS / S / M / L / XL
+
+### - User story #8: 
+As a user I can select which slide I have a doubt so that it is easier for the lecturer to  answer my question.
+#### User interface mockups
+<img src="./images/UserStory08.png" height="300" alt="User Story 08 Mockup">
+
+#### Acceptance tests
+For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+#### Value and effort
+Value: [ Must have / Should have / Could have / Will not have ]
+
+Effort: XS / S / M / L / XL
+
+
+### - User story #09: 
 As a user, I can vote on which questions I like the most so that they are more likely to get answered.
 #### User interface mockups
-<img src="./images/UserStory05.png" height="300" alt="User Story 05 Mockup">
+<img src="./images/UserStory09.png" height="300" alt="User Story 09 Mockup">
 
 #### Acceptance tests
 For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
 
 #### Value and effort
-At the end, it is good to add a rough indication of the value of the user story to the customers (e.g. MoSCoW method) and the team should add an estimation of the effort to implement it, for example, using t-shirt sizes (XS, S, M, L, XL).
+Value: [ Must have / Should have / Could have / Will not have ]
+
+Effort: XS / S / M / L / XL
+
+
+### - User story #10: 
+ As a lecturer I can look at the highest rated questions so that I can answer the most wanted questions first.
+#### User interface mockups
+<img src="./images/UserStory10.png" height="300" alt="User Story 10 Mockup">
+
+#### Acceptance tests
+For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+#### Value and effort
+Value: [ Must have / Should have / Could have / Will not have ]
+
+Effort: XS / S / M / L / XL
+
+### - User story #11: 
+As a user I can reply to other user's questions after the lecture has ended so that more questions can get answered.
+#### User interface mockups
+<img src="./images/UserStory11.png" height="300" alt="User Story 11 Mockup">
+
+#### Acceptance tests
+For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+#### Value and effort
+Value: [ Must have / Should have / Could have / Will not have ]  
+
+Effort: XS / S / M / L / XL
+
+
+
 
 
 
