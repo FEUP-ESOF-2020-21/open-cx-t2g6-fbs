@@ -94,20 +94,6 @@ Value: [ Must have / Should have / Could have / Will not have ]
 
 Effort: XS / S / M / L / XL
 
-### - User story #06: 
-As a user, I can select an existing lecture to attend (given capacity is not full)
-#### User interface mockups
-<img src="./images/UserStory06.png" height="400" alt="User Story 06 Mockup">
-
-#### Acceptance tests
-For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
-
-#### Value and effort
-Value: [ Must have / Should have / Could have / Will not have ]
-
-Effort: XS / S / M / L / XL
-
-
 ### - User story #07: 
 As a lecturer I can submit my presentation so that attendees can follow along my presentation.
 #### User interface mockups
