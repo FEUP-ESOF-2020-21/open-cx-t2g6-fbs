@@ -35,7 +35,13 @@ As a user, I want to log into the app.
 <img src="./images/UserStory01.png" height="400" alt="User Story 01 Mockup">
 
 #### Acceptance tests
-For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+| Id |Given  |  When | Then
+|--|--|--|--|
+| 1 |There are fields for user to input email and password  | User fills those fields __AND__  the information is correct|  The user is logged in|
+| 2 | There are fields for user to input email and password | User fills those fields __AND__ the information is incorrect | The user is not logged in __AND__ an error message is displayed |
+
+
 
 #### Value and effort
 Value: Must have
