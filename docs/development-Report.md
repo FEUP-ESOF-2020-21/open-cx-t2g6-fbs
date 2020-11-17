@@ -230,6 +230,24 @@ Value: Should have
 
 Effort: L
 
+### - User story #12: 
+As a user, I want to sort the existent questions by rating or by new.
+#### User interface mockups
+<img src="./images/UserStory12.png" height="400" alt="User Story 12 Mockup">
+
+#### Acceptance tests
+
+
+| Id |Given  |  When | Then
+|--|--|--|--|
+|28| User is in the lecture's question page __AND__ questions exist| User selects the "New" filter | Recent questions should appear first
+|29| User is in the lecture's question page __AND__ questions exist | User selects the "Rating" filter | Questions with the highest score should appear first
+
+#### Value and effort
+Value: Could have
+
+Effort: M
+
 
 
 
