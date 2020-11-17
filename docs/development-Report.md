@@ -66,7 +66,7 @@ As a user, I want to filter and view lectures that I have attended or will atten
 #### Value and effort
 Value: Must have
 
-Effort: XS / S / M / L / XL
+Effort: S
 
 ### - User story #03: 
 As a lecturer, I can create a new lecture
@@ -84,9 +84,9 @@ As a lecturer, I can create a new lecture
 
 
 #### Value and effort
-Value: [ Must have / Should have / Could have / Will not have ]
+Value: Must have
 
-Effort: XS / S / M / L / XL
+Effort: L
 
 ### - User story #04: 
 As a user, I want to be able to see upcoming lectures (w/ filters) and choose one to attend.
@@ -102,9 +102,9 @@ As a user, I want to be able to see upcoming lectures (w/ filters) and choose on
 
 
 #### Value and effort
-Value: [ Must have / Should have / Could have / Will not have ]
+Value: Must have
 
-Effort: XS / S / M / L / XL
+Effort: L
 
 ### - User story #05: 
 As a lecturer, I can change the status of my presentation (Live/Finished)
@@ -121,9 +121,9 @@ As a lecturer, I can change the status of my presentation (Live/Finished)
 |14| The options regarding the status of the lecture| The current status is "Finished" __AND__ user presses any other state | The status should not change __AND__ an error message should be displayed
 
 #### Value and effort
-Value: [ Must have / Should have / Could have / Will not have ]
+Value: Should have
 
-Effort: XS / S / M / L / XL
+Effort: M
 
 ### - User story #06: 
 As a lecturer I can submit my presentation so that attendees can follow along my presentation.
@@ -137,9 +137,9 @@ As a lecturer I can submit my presentation so that attendees can follow along my
 |15|Lecturer is on the page of the Lecture | Lecturer presses the "Select File" button __AND__ chooses a file| The file should be uploaded
 
 #### Value and effort
-Value: [ Must have / Should have / Could have / Will not have ]
+Value: Must have
 
-Effort: XS / S / M / L / XL
+Effort: S
 
 ### - User story #07: 
 As an attendee, I can access the slides submitted by the lecturer to follow along
@@ -195,7 +195,7 @@ As a user, I can vote on which questions I like the most so that they are more l
 #### Value and effort
 Value: Must have
 
-Effort: XS / S / M / L / XL
+Effort: M
 
 
 ### - User story #10: 
@@ -211,9 +211,9 @@ Effort: XS / S / M / L / XL
 |26|Lecturer is on the "Manage Lecture" page | Lecturer presses "View Questions" __AND__ questions do not exist| A message should be displayed alerting that there are no questions
 
 #### Value and effort
-Value: [ Must have / Should have / Could have / Will not have ]
+Value: Must have
 
-Effort: XS / S / M / L / XL
+Effort: M
 
 ### - User story #11: 
 As a user I can reply to other user's questions after the lecture has ended so that more questions can get answered.
