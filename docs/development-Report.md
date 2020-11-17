@@ -131,7 +131,10 @@ As a lecturer I can submit my presentation so that attendees can follow along my
 <img src="./images/UserStory06.png" height="400" alt="User Story 06 Mockup">
 
 #### Acceptance tests
-For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+| Id |Given  |  When | Then
+|--|--|--|--|
+|15|User is on the page of the Lecture | User presses the "Select File" button __AND__ chooses a file| The file should be uploaded
 
 #### Value and effort
 Value: [ Must have / Should have / Could have / Will not have ]
