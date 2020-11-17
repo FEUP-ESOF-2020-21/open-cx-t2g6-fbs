@@ -112,7 +112,13 @@ As a lecturer, I can change the status of my presentation (Live/Finished)
 <img src="./images/UserStory05.png" height="400" alt="User Story 05 Mockup">
 
 #### Acceptance tests
-For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+| Id |Given  |  When | Then
+|--|--|--|--|
+|11|The options regarding the status of the lecture | The current status is "Not started yet" __AND__ user presses "Live" | The status should change to "Live"
+| 12 | The options regarding the status of the lecture | The current status is "Live" __AND__ user presses "Finished" | The status should change to "Finished"
+| 13 | The options regarding the status of the lecture | The current status is "Live" __AND__ user presses "Not started yet" | The status should not change __AND__ an error message should be displayed
+|14| The options regarding the status of the lecture| The current status is "Finished" __AND__ user presses any other state | The status should not change __AND__ an error message should be displayed
 
 #### Value and effort
 Value: [ Must have / Should have / Could have / Will not have ]
