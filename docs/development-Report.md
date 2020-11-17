@@ -204,7 +204,11 @@ Effort: XS / S / M / L / XL
 <img src="./images/UserStory10.png" height="400" alt="User Story 10 Mockup">
 
 #### Acceptance tests
-For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+| Id |Given  |  When | Then
+|--|--|--|--|
+|25|Lecturer is on the "Manage Lecture" page | Lecturer presses "View Questions" __AND__ questions exist| Questions should be displayed sorted by rating
+|26|Lecturer is on the "Manage Lecture" page | Lecturer presses "View Questions" __AND__ questions do not exist| A message should be displayed alerting that there are no questions
 
 #### Value and effort
 Value: [ Must have / Should have / Could have / Will not have ]
