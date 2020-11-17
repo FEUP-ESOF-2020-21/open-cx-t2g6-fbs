@@ -182,10 +182,18 @@ As a user, I can vote on which questions I like the most so that they are more l
 <img src="./images/UserStory09.png" height="400" alt="User Story 09 Mockup">
 
 #### Acceptance tests
-For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+| Id |Given  |  When | Then
+|--|--|--|--|
+|19| User is in the questions page of a lecture __AND__ questions were submitted | User presses the _up_ arrow next to the question | The rating should be incremented by one
+|20| User is in the questions page of a lecture __AND__ questions were submitted __AND__ User already pressed the _up_ arrow| User presses the _up_ arrow next to the question | The rating should stay the same
+|21| User is in the questions page of a lecture __AND__ questions were submitted __AND__ User already pressed the _up_ arrow| User presses the _down_ arrow next to the question | The rating should be decreased by 2
+|22| User is in the questions page of a lecture __AND__ questions were submitted | User presses the _down_ arrow next to the question | The rating should be decreased by one
+|23| User is in the questions page of a lecture __AND__ questions were submitted __AND__ User already pressed the _down_ arrow| User presses the _down_ arrow next to the question | The rating should stay the same
+|24| User is in the questions page of a lecture __AND__ questions were submitted __AND__ User already pressed the _down_ arrow| User presses the _up_ arrow next to the question | The rating should be increased by 2
 
 #### Value and effort
-Value: [ Must have / Should have / Could have / Will not have ]
+Value: Must have
 
 Effort: XS / S / M / L / XL
 
