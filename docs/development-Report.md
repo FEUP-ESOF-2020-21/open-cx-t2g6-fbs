@@ -165,12 +165,15 @@ As a user I can select which slide I have a doubt so that it is easier for the l
 <img src="./images/UserStory08.png" height="400" alt="User Story 08 Mockup">
 
 #### Acceptance tests
-For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+| Id |Given  |  When | Then
+|--|--|--|--|
+|18| User is in the process of submitting a question | The user selects the slide number of the question __AND__ submits it | The question description should have the correct slide number associated with it
 
 #### Value and effort
-Value: [ Must have / Should have / Could have / Will not have ]
+Value: Must have
 
-Effort: XS / S / M / L / XL
+Effort: M
 
 
 ### - User story #09: 
