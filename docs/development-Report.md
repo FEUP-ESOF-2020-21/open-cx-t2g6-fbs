@@ -54,7 +54,14 @@ As a user, I want to filter and view lectures that I have attended or will atten
 <img src="./images/UserStory02.png" height="400" alt="User Story 02 Mockup">
 
 #### Acceptance tests
-For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+| Id |Given  |  When | Then
+|--|--|--|--|
+|3 |A list of lectures associated with the user | User selects the "lecturer" filter | Only lectures where user was the lecturer are displayed
+|4 |A list of lectures associated with the user | User selects the "attendee" filter | Only lectures where user was an attendee are displayed
+|5 |A list of lectures associated with the user | User selects the "upcoming" filter | Only lectures that will be happening in the future are displayed
+|6 |A list of lectures associated with the user | User selects the "previous" filter |Only lectures that already happened will be displayed
+
+
 
 #### Value and effort
 Value: Must have
