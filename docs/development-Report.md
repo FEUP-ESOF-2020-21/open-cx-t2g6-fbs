@@ -142,17 +142,21 @@ Value: [ Must have / Should have / Could have / Will not have ]
 Effort: XS / S / M / L / XL
 
 ### - User story #07: 
-As an attendee, I can access the slides submitted by the lecturer to follow along (given lecturer submitted)
+As an attendee, I can access the slides submitted by the lecturer to follow along
 #### User interface mockups
 <img src="./images/UserStory07.png" height="400" alt="User Story 07 Mockup">
 
 #### Acceptance tests
-For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+| Id |Given  |  When | Then
+|--|--|--|--|
+|16|Lecturer submitted slides |The user is on the lecture page __AND__ User presses the name of the file | The presentation file should open
+|17| Lecturer did not submit the presentation |The user is on the lecture page | Message should be displayed that slides are not available
 
 #### Value and effort
-Value: [ Must have / Should have / Could have / Will not have ]
+Value: Must have
 
-Effort: XS / S / M / L / XL
+Effort: S
 
 
 ### - User story #08: 
