@@ -134,7 +134,7 @@ As a lecturer I can submit my presentation so that attendees can follow along my
 
 | Id |Given  |  When | Then
 |--|--|--|--|
-|15|User is on the page of the Lecture | User presses the "Select File" button __AND__ chooses a file| The file should be uploaded
+|15|Lecturer is on the page of the Lecture | Lecturer presses the "Select File" button __AND__ chooses a file| The file should be uploaded
 
 #### Value and effort
 Value: [ Must have / Should have / Could have / Will not have ]
