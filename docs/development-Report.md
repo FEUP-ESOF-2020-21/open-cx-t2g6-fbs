@@ -94,7 +94,12 @@ As a user, I want to be able to see upcoming lectures (w/ filters) and choose on
 <img src="./images/UserStory04.png" height="400" alt="User Story 04 Mockup">
 
 #### Acceptance tests
-For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+| Id |Given  |  When | Then
+|--|--|--|--|
+|9| A list of the upcoming lectures | User presses the lecture they want to attend __AND__ they press the _Join_ button | Lecture is added to the lectures list of the user with role "Attendee"
+|10 | A list of the upcoming lectures | User selects a lecture that is already at maximum capacity| Message is displayed to the user letting them know lecture is full
+
 
 #### Value and effort
 Value: [ Must have / Should have / Could have / Will not have ]
