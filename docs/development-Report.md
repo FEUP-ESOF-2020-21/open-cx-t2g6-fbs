@@ -1,4 +1,4 @@
-# Submit a Question
+# AskIt
 [Short description]
 
 Team members:
@@ -17,7 +17,7 @@ Team members:
 ## Elevator Pitch
 
 Conference attendees often feel frustrated by the quality (or the lack thereof) of questions taking up the very limited time at the end. 
-(productName) optimizes everyone's experience  by allowing all the attendees to vote on the best questions, leading to a better use of the time.
+AskIt optimizes everyone's experience  by allowing all the attendees to vote on the best questions, leading to a better use of the time.
 From now on you can attend any conference knowing that only the most pertinent questions will be asked, leading to more intriguing discussions.
 
 
@@ -31,7 +31,7 @@ From now on you can attend any conference knowing that only the most pertinent q
 
 ### - User story #01: 
 As a user, I want to log into the app.
-#### User interface mockups
+#### User interface mockup
 <img src="./images/UserStory01.png" height="400" alt="User Story 01 Mockup">
 
 #### Acceptance tests
@@ -50,136 +50,203 @@ Effort: M
 
 ### - User story #02: 
 As a user, I want to filter and view lectures that I have attended or will attend.
-#### User interface mockups
+#### User interface mockup
 <img src="./images/UserStory02.png" height="400" alt="User Story 02 Mockup">
 
 #### Acceptance tests
-For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+| Id |Given  |  When | Then
+|--|--|--|--|
+|3 |A list of lectures associated with the user | User selects the "lecturer" filter | Only lectures where user was the lecturer are displayed
+|4 |A list of lectures associated with the user | User selects the "attendee" filter | Only lectures where user was an attendee are displayed
+|5 |A list of lectures associated with the user | User selects the "upcoming" filter | Only lectures that will be happening in the future are displayed
+|6 |A list of lectures associated with the user | User selects the "previous" filter |Only lectures that already happened will be displayed
+
+
 
 #### Value and effort
 Value: Must have
 
-Effort: XS / S / M / L / XL
+Effort: S
 
 ### - User story #03: 
 As a lecturer, I can create a new lecture
-#### User interface mockups
+#### User interface mockup
 <img src="./images/UserStory03.png" height="400" alt="User Story 03 Mockup">
 
 #### Acceptance tests
-For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+| Id |Given  |  When | Then
+|--|--|--|--|
+|7 |The form for creating a new lecture | User fills all the fields |A new lecture is created and added to the user's lectures list with role "Lecturer"
+|8| The form for creating a new lecture | User selects a date in the past | The creation process fails and an error message is displayed
+
+
+
 
 #### Value and effort
-Value: [ Must have / Should have / Could have / Will not have ]
+Value: Must have
 
-Effort: XS / S / M / L / XL
+Effort: L
 
 ### - User story #04: 
 As a user, I want to be able to see upcoming lectures (w/ filters) and choose one to attend.
-#### User interface mockups
+#### User interface mockup
 <img src="./images/UserStory04.png" height="400" alt="User Story 04 Mockup">
 
 #### Acceptance tests
-For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+| Id |Given  |  When | Then
+|--|--|--|--|
+|9| A list of the upcoming lectures | User presses the lecture they want to attend __AND__ they press the _Join_ button | Lecture is added to the lectures list of the user with role "Attendee"
+|10 | A list of the upcoming lectures | User selects a lecture that is already at maximum capacity| Message is displayed to the user letting them know lecture is full
+
 
 #### Value and effort
-Value: [ Must have / Should have / Could have / Will not have ]
+Value: Must have
 
-Effort: XS / S / M / L / XL
+Effort: L
 
 ### - User story #05: 
 As a lecturer, I can change the status of my presentation (Live/Finished)
-#### User interface mockups
+#### User interface mockup
 <img src="./images/UserStory05.png" height="400" alt="User Story 05 Mockup">
 
 #### Acceptance tests
-For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+| Id |Given  |  When | Then
+|--|--|--|--|
+|11|The options regarding the status of the lecture | The current status is "Not started yet" __AND__ user presses "Live" | The status should change to "Live"
+| 12 | The options regarding the status of the lecture | The current status is "Live" __AND__ user presses "Finished" | The status should change to "Finished"
+| 13 | The options regarding the status of the lecture | The current status is "Live" __AND__ user presses "Not started yet" | The status should not change __AND__ an error message should be displayed
+|14| The options regarding the status of the lecture| The current status is "Finished" __AND__ user presses any other state | The status should not change __AND__ an error message should be displayed
 
 #### Value and effort
-Value: [ Must have / Should have / Could have / Will not have ]
+Value: Should have
 
-Effort: XS / S / M / L / XL
+Effort: M
 
 ### - User story #06: 
 As a lecturer I can submit my presentation so that attendees can follow along my presentation.
-#### User interface mockups
+#### User interface mockup
 <img src="./images/UserStory06.png" height="400" alt="User Story 06 Mockup">
 
 #### Acceptance tests
-For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+| Id |Given  |  When | Then
+|--|--|--|--|
+|15|Lecturer is on the page of the Lecture | Lecturer presses the "Select File" button __AND__ chooses a file| The file should be uploaded
 
 #### Value and effort
-Value: [ Must have / Should have / Could have / Will not have ]
+Value: Must have
 
-Effort: XS / S / M / L / XL
+Effort: S
 
 ### - User story #07: 
-As an attendee, I can access the slides submitted by the lecturer to follow along (given lecturer submitted)
-#### User interface mockups
+As an attendee, I can access the slides submitted by the lecturer to follow along
+#### User interface mockup
 <img src="./images/UserStory07.png" height="400" alt="User Story 07 Mockup">
 
 #### Acceptance tests
-For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+| Id |Given  |  When | Then
+|--|--|--|--|
+|16|Lecturer submitted slides |The user is on the lecture page __AND__ User presses the name of the file | The presentation file should open
+|17| Lecturer did not submit the presentation |The user is on the lecture page | Message should be displayed that slides are not available
 
 #### Value and effort
-Value: [ Must have / Should have / Could have / Will not have ]
+Value: Must have
 
-Effort: XS / S / M / L / XL
+Effort: S
 
 
 ### - User story #08: 
 As a user I can select which slide I have a doubt so that it is easier for the lecturer to  answer my question.
-#### User interface mockups
+#### User interface mockup
 <img src="./images/UserStory08.png" height="400" alt="User Story 08 Mockup">
 
 #### Acceptance tests
-For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+| Id |Given  |  When | Then
+|--|--|--|--|
+|18| User is in the process of submitting a question | The user selects the slide number of the question __AND__ submits it | The question description should have the correct slide number associated with it
 
 #### Value and effort
-Value: [ Must have / Should have / Could have / Will not have ]
+Value: Must have
 
-Effort: XS / S / M / L / XL
+Effort: M
 
 
 ### - User story #09: 
 As a user, I can vote on which questions I like the most so that they are more likely to get answered.
-#### User interface mockups
+#### User interface mockup
 <img src="./images/UserStory09.png" height="400" alt="User Story 09 Mockup">
 
 #### Acceptance tests
-For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+| Id |Given  |  When | Then
+|--|--|--|--|
+|19| User is in the questions page of a lecture __AND__ questions were submitted | User presses the _up_ arrow next to the question | The rating should be incremented by one
+|20| User is in the questions page of a lecture __AND__ questions were submitted __AND__ User already pressed the _up_ arrow| User presses the _up_ arrow next to the question | The rating should stay the same
+|21| User is in the questions page of a lecture __AND__ questions were submitted __AND__ User already pressed the _up_ arrow| User presses the _down_ arrow next to the question | The rating should be decreased by 2
+|22| User is in the questions page of a lecture __AND__ questions were submitted | User presses the _down_ arrow next to the question | The rating should be decreased by one
+|23| User is in the questions page of a lecture __AND__ questions were submitted __AND__ User already pressed the _down_ arrow| User presses the _down_ arrow next to the question | The rating should stay the same
+|24| User is in the questions page of a lecture __AND__ questions were submitted __AND__ User already pressed the _down_ arrow| User presses the _up_ arrow next to the question | The rating should be increased by 2
 
 #### Value and effort
-Value: [ Must have / Should have / Could have / Will not have ]
+Value: Must have
 
-Effort: XS / S / M / L / XL
+Effort: M
 
 
 ### - User story #10: 
  As a lecturer I can look at the highest rated questions so that I can answer the most wanted questions first.
-#### User interface mockups
+#### User interface mockup
 <img src="./images/UserStory10.png" height="400" alt="User Story 10 Mockup">
 
 #### Acceptance tests
-For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+| Id |Given  |  When | Then
+|--|--|--|--|
+|25|Lecturer is on the "Manage Lecture" page | Lecturer presses "View Questions" __AND__ questions exist| Questions should be displayed sorted by rating
+|26|Lecturer is on the "Manage Lecture" page | Lecturer presses "View Questions" __AND__ questions do not exist| A message should be displayed alerting that there are no questions
 
 #### Value and effort
-Value: [ Must have / Should have / Could have / Will not have ]
+Value: Must have
 
-Effort: XS / S / M / L / XL
+Effort: M
 
 ### - User story #11: 
 As a user I can reply to other user's questions after the lecture has ended so that more questions can get answered.
-#### User interface mockups
+#### User interface mockup
 <img src="./images/UserStory11.png" height="400" alt="User Story 11 Mockup">
 
 #### Acceptance tests
-For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+| Id |Given  |  When | Then
+|--|--|--|--|
+|27| User pressed in one of the questions present in the lecture's question list | User presses "Reply to this question" | User should be able to write their reply and post it
+#### Value and effort
+Value: Should have
+
+Effort: L
+
+### - User story #12: 
+As a user, I want to sort the existent questions by rating or by new.
+#### User interface mockup
+<img src="./images/UserStory12.png" height="400" alt="User Story 12 Mockup">
+
+#### Acceptance tests
+
+
+| Id |Given  |  When | Then
+|--|--|--|--|
+|28| User is in the lecture's question page __AND__ questions exist| User selects the "New" filter | Recent questions should appear first
+|29| User is in the lecture's question page __AND__ questions exist | User selects the "Rating" filter | Questions with the highest score should appear first
 
 #### Value and effort
-Value: [ Must have / Should have / Could have / Will not have ]  
+Value: Could have
 
-Effort: XS / S / M / L / XL
+Effort: M
 
 
 
