@@ -221,12 +221,14 @@ As a user I can reply to other user's questions after the lecture has ended so t
 <img src="./images/UserStory11.png" height="400" alt="User Story 11 Mockup">
 
 #### Acceptance tests
-For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
 
+| Id |Given  |  When | Then
+|--|--|--|--|
+|27| User pressed in one of the questions present in the lecture's question list | User presses "Reply to this question" | User should be able to write their reply and post it
 #### Value and effort
-Value: [ Must have / Should have / Could have / Will not have ]  
+Value: Should have
 
-Effort: XS / S / M / L / XL
+Effort: L
 
 
 
