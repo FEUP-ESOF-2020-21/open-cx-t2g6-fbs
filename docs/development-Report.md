@@ -74,7 +74,14 @@ As a lecturer, I can create a new lecture
 <img src="./images/UserStory03.png" height="400" alt="User Story 03 Mockup">
 
 #### Acceptance tests
-For each user story you should write also the acceptance tests (textually in Gherkin), i.e., a description of scenarios (situations) that will help to confirm that the system satisfies the requirements addressed by the user story.
+
+| Id |Given  |  When | Then
+|--|--|--|--|
+|7 |The form for creating a new lecture | User fills all the fields |A new lecture is created and added to the user's lectures list with role "Lecturer"
+|8| The form for creating a new lecture | User selects a date in the past | The creation process fails and an error message is displayed
+
+
+
 
 #### Value and effort
 Value: [ Must have / Should have / Could have / Will not have ]
