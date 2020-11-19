@@ -1,5 +1,4 @@
 # AskIt
-[Short description]
 
 Team members:
 <ul>
@@ -12,7 +11,7 @@ Team members:
 
 
 ## Product Vision
-
+AskIt, a platform to manage the very limited time to ask questions at the end of the lecture, ensuring the best ones get answered first.
 
 ## Elevator Pitch
 
