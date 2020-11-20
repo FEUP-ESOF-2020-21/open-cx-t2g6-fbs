@@ -1,6 +1,7 @@
 
 
-import 'package:askit/main.dart';
+import 'package:askit/login_page.dart';
+import 'package:askit/sign_in.dart';
 import 'package:flutter/material.dart';
 
 
@@ -65,6 +66,23 @@ class _ExampleWidgetState extends State<ExampleWidget> {
             },
             child: new Text('DONE'),
           ),
+          RaisedButton(
+            onPressed: () {
+              signOutGoogle();
+              Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) {return LoginPage();}), ModalRoute.withName('/'));
+            },
+            color: Colors.deepPurple,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Sign Out',
+                style: TextStyle(fontSize: 25, color: Colors.white),
+              ),
+            ),
+            elevation: 5,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(40)),
+          )
         ],
       ),
     );
