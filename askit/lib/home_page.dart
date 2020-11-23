@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 enum TypeOfLecture { previous, upcoming }
 bool filterLecturer = true;
 bool filterAttendee = true;
+int numberOfResults = 0;
+Widget temp = new Container();
 
 class HomePage extends StatefulWidget {
   @override
@@ -86,12 +88,27 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 _searchButton(),
+                temp,
                 _addLectureButton(),
               ],
             )));
   }
 
-  void _displayResults() {}
+  void _displayResults() {
+    setState(() {
+      if (numberOfResults % 2 == 0) {
+        temp = Container(
+            child: Text(
+                'You have no lectures that meet your criteria.\n Try refining your search filters, sign up for an upcoming lecture or even create your own! ',
+                style: TextStyle(fontSize: 15)),
+            padding: EdgeInsets.only(left: 35.0, top: 50.0, right: 20.0));
+      } else
+        temp = Container(
+            child: Text('You have lectures that meet your criteria! ',
+                style: TextStyle(fontSize: 15)),
+            padding: EdgeInsets.only(left: 35.0, top: 50.0, right: 20.0));
+    });
+  }
 
   Widget _searchButton() {
     return OutlineButton(
@@ -100,6 +117,8 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           //Must filter all lectures that match the filters
           //display
+          _displayResults();
+          numberOfResults++;
         },
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
         highlightElevation: 0,
