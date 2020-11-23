@@ -27,30 +27,34 @@ class _TestPageState extends State<TestPage> {
                   child: Text('MY LECTURES', style: TextStyle(fontSize: 20)),
                   padding: EdgeInsets.all(20.0),
                 ),
-                Column(
+                //!Important!
+                //To display widgets that don't have an intrinsic width inside a row, you must nest them inside a flexible widget
+                new Row(
                   children: [
-                    ListTile(
-                        title: const Text('Previous'),
-                        leading: Radio(
-                          value: TypeOfLecture.previous,
-                          groupValue: _type,
-                          onChanged: (TypeOfLecture value) {
-                            setState(() {
-                              _type = value;
-                            });
-                          },
-                        )),
-                    ListTile(
-                        title: const Text('Upcoming'),
-                        leading: Radio(
-                          value: TypeOfLecture.upcoming,
-                          groupValue: _type,
-                          onChanged: (TypeOfLecture value) {
-                            setState(() {
-                              _type = value;
-                            });
-                          },
-                        ))
+                    new Flexible(
+                        child: ListTile(
+                            title: const Text('Previous'),
+                            leading: Radio(
+                              value: TypeOfLecture.previous,
+                              groupValue: _type,
+                              onChanged: (TypeOfLecture value) {
+                                setState(() {
+                                  _type = value;
+                                });
+                              },
+                            ))),
+                    new Flexible(
+                        child: ListTile(
+                            title: const Text('Upcoming'),
+                            leading: Radio(
+                              value: TypeOfLecture.upcoming,
+                              groupValue: _type,
+                              onChanged: (TypeOfLecture value) {
+                                setState(() {
+                                  _type = value;
+                                });
+                              },
+                            )))
                   ],
                 )
               ],
