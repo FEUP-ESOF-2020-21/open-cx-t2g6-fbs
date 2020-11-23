@@ -20,10 +20,12 @@ class _AddLectureState extends State<AddLecturePage> {
                     title: Text('HOME', style: TextStyle(fontSize: 30)))),
             body: new Column(
               children: [
-                Container(
-                    child:
-                        Text('ADD A LECTURE', style: TextStyle(fontSize: 20)),
-                    padding: EdgeInsets.all(20.0)),
+                Align(
+                    alignment: Alignment.center,
+                    child: new Container(
+                        child: Text('ADD A LECTURE',
+                            style: TextStyle(fontSize: 20)),
+                        padding: EdgeInsets.only(top: 150.0, bottom: 20))),
                 _chooseALectureButton(),
                 _createALectureButton()
               ],
@@ -32,27 +34,32 @@ class _AddLectureState extends State<AddLecturePage> {
 
   Widget _chooseALectureButton() {
     //!!Expanded is needed so that Align uses the whole available space and not the space available within the row/column
-    return OutlineButton(
-        child: Text('Choose a Lecture'),
-        splashColor: Colors.grey,
-        onPressed: () {
-          //DO something
-        },
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-        highlightElevation: 0,
-        borderSide: BorderSide(color: Colors.grey));
+    return Container(
+        child: OutlineButton(
+            child: Text('Choose a Lecture'),
+            splashColor: Colors.grey,
+            onPressed: () {
+              //DO something
+            },
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+            highlightElevation: 0,
+            borderSide: BorderSide(color: Colors.grey)),
+        padding: EdgeInsets.only(top: 50, bottom: 20));
   }
 
   Widget _createALectureButton() {
     //!!Expanded is needed so that Align uses the whole available space and not the space available within the row/column
-    return OutlineButton(
-        child: Text('Create a Lecture'),
-        splashColor: Colors.grey,
-        onPressed: () {
-          //DO something
-        },
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-        highlightElevation: 0,
-        borderSide: BorderSide(color: Colors.grey));
+    return Container(
+        child: OutlineButton(
+            child: Text('Create a Lecture'),
+            splashColor: Colors.grey,
+            onPressed: () {
+              //DO something
+            },
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+            highlightElevation: 0,
+            borderSide: BorderSide(color: Colors.grey)));
   }
 }
