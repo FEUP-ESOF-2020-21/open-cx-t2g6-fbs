@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:askit/login_page.dart';
+import 'package:askit/test_page.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -38,15 +39,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       ),
       body: new Center(
           child: ElevatedButton(
-            child: Text('Log in'),
-            onPressed: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => LoginPage()),
-              );
-            },
-          )
-      ),
+        child: Text('Log in'),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => TestPage()),
+          );
+        },
+      )),
     );
   }
 }
