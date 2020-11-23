@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:askit/login_page.dart';
+import 'package:askit/add_lecture_page.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -38,15 +38,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       ),
       body: new Center(
           child: ElevatedButton(
-            child: Text('Log in'),
-            onPressed: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => LoginPage()),
-              );
-            },
-          )
-      ),
+        child: Text('Log in'),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddLecturePage()),
+          );
+        },
+      )),
     );
   }
 }
