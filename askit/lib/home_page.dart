@@ -130,7 +130,20 @@ class _HomePageState extends State<HomePage> {
 
   Future getData() async {
     print("Function was called!\n");
+    var timeFilter;
+    if (_type == TypeOfLecture.previous) {
+      timeFilter = "previous";
+    } else
+      timeFilter = "upcoming";
+
     var url = "https://web.fe.up.pt/~up201806296/database/get.php";
+    url = url +
+        "?timeFilter=" +
+        timeFilter +
+        "&Lecturer=" +
+        filterLecturer.toString() +
+        "&Attendee=" +
+        filterAttendee.toString();
     http.Response response = await http.get(url);
     print(response.body);
 
