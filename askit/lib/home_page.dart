@@ -1,6 +1,8 @@
 import 'package:askit/question.dart';
 import 'package:askit/sign_in.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 enum TypeOfLecture { previous, upcoming }
 bool filterLecturer = true;
@@ -117,12 +119,26 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           //Must filter all lectures that match the filters
           //display
-          _displayResults();
+          getData();
+          //_displayResults();
           numberOfResults++;
         },
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
         highlightElevation: 0,
         borderSide: BorderSide(color: Colors.grey));
+  }
+
+  Future getData() async {
+    print("Function was called!\n");
+    var url = "https://web.fe.up.pt/~up201806296/database/get.php";
+    http.Response response = await http.get(url);
+    print(response.body);
+
+    setState(() {
+      temp = Container(
+          child: Text(response.body, style: TextStyle(fontSize: 15)),
+          padding: EdgeInsets.only(left: 35.0, top: 50.0, right: 20.0));
+    });
   }
 }
 
