@@ -32,22 +32,6 @@ class _CreateLectureState extends State<CreateLecturePage> {
           ]),
         ));
   }
-
-  Widget _defaultButton() {
-    //!!Expanded is needed so that Align uses the whole available space and not the space available within the row/column
-    return Container(
-        child: OutlineButton(
-            child: Text('Button'),
-            splashColor: Colors.grey,
-            onPressed: () {
-              //DO something
-            },
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-            highlightElevation: 0,
-            borderSide: BorderSide(color: Colors.grey)),
-        padding: EdgeInsets.only(top: 50, bottom: 20));
-  }
 }
 
 class MyCustomForm extends StatefulWidget {
@@ -143,6 +127,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                   // If the form is valid, display a Snackbar.
                   Scaffold.of(context)
                       .showSnackBar(SnackBar(content: Text('Processing Data')));
+                  //Process data
                 }
               },
               child: Text('Submit'),
