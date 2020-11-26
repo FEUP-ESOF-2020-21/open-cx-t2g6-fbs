@@ -10,6 +10,7 @@ bool filterLecturer = true;
 bool filterAttendee = true;
 int numberOfResults = 0;
 Widget temp = new Container();
+List<Lecture> listOfLectures = new List();
 
 class HomePage extends StatefulWidget {
   @override
@@ -146,37 +147,41 @@ class _HomePageState extends State<HomePage> {
         "&Attendee=" +
         filterAttendee.toString();
     http.Response response = await http.get(url);
-    print(response.body);
+
+    listOfLectures = parseResults(response.body.toString());
 
     setState(() {
       /*temp = Container(
           child: Text(response.body, style: TextStyle(fontSize: 15)),
           padding: EdgeInsets.only(left: 35.0, top: 50.0, right: 20.0));*/
-      List<Lecture> litems = [
-        new Lecture(1, "Interesting lecture", "2020-10-20", "Attendee"),
-        new Lecture(2, "Interesting lecture2", "2020-10-21", "Attendee"),
-        new Lecture(3, "Interesting lecture3", "2020-10-22", "Lecturer"),
-        new Lecture(4, "Interesting lecture4", "2020-10-22", "Lecturer"),
-        new Lecture(5, "Interesting lecture5", "2020-10-26", "Attendee"),
-        new Lecture(6, "Interesting lecture6", "2020-10-22", "Lecturer")
-      ];
-      temp = Container(
-        padding: EdgeInsets.all(10.0),
-        height: 300.0,
-        child: new ListView.builder(
-            itemCount: litems.length,
-            itemBuilder: (BuildContext ctxt, int index) {
-              return new ListTile(
-                  title: Text("Lecture #" +
-                      litems[index].getId().toString() +
-                      "\nTitle: " +
-                      litems[index].title),
-                  subtitle: Text("Date: " +
-                      litems[index].date +
-                      "\nRole: " +
-                      litems[index].role));
-            }),
-      );
+
+      if (listOfLectures.isEmpty) {
+        temp = Container(
+            child: Text(
+                'You have no lectures that meet your criteria.\n Try refining your search filters, sign up for an upcoming lecture or even create your own! ',
+                style: TextStyle(fontSize: 15)),
+            padding: EdgeInsets.only(left: 35.0, top: 50.0, right: 20.0));
+      } else {
+        temp = Container(
+          padding: EdgeInsets.all(10.0),
+          height: 300.0,
+          child: new ListView.builder(
+              itemCount: listOfLectures.length,
+              itemBuilder: (BuildContext ctxt, int index) {
+                return new ListTile(
+                    title: Text("Lecture #" +
+                        listOfLectures[index].getId().toString() +
+                        "\nTitle: " +
+                        listOfLectures[index].title),
+                    subtitle: Text("Description: " +
+                        listOfLectures[index].description +
+                        "\nDate: " +
+                        listOfLectures[index].date +
+                        "\nCapacity: " +
+                        listOfLectures[index].maxCapacity.toString()));
+              }),
+        );
+      }
     });
   }
 }
@@ -196,4 +201,30 @@ Widget _addLectureButton() {
                   borderRadius: BorderRadius.circular(40)),
               highlightElevation: 0,
               borderSide: BorderSide(color: Colors.grey))));
+}
+
+//This function should return a list of Lectures
+List<Lecture> parseResults(String text) {
+  List<String> list = text.split("\n");
+  print(list);
+
+  List<Lecture> result = new List();
+  if (list.length == 0) return result;
+
+  int numberOfLectures = (list.length - 4) ~/ 5;
+  print(numberOfLectures);
+
+  int offset = 3;
+
+  //Extract ALL lectures
+  for (int i = 1; i <= numberOfLectures; i++, offset += 5) {
+    result.add(new Lecture(int.parse(list[offset]), list[offset + 1],
+        list[offset + 2], list[offset + 3], int.parse(list[offset + 4])));
+  }
+
+  //Must filter depending on filters.
+  //list[0] = previous/upcoming
+  //list[1] = Lecturer, if true
+  //list[2] = Attendee, if true
+  return result;
 }
