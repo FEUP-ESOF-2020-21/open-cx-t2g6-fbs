@@ -66,6 +66,7 @@ As a user, I want to filter and view lectures that I have attended or will atten
 Value: Must have
 
 Effort: S
+Effort estimation history (from oldest to newest): S, XL
 
 ### - User story #03: 
 As a lecturer, I can create a new lecture
@@ -86,6 +87,7 @@ As a lecturer, I can create a new lecture
 Value: Must have
 
 Effort: L
+
 
 ### - User story #04: 
 As a user, I want to be able to see upcoming lectures (w/ filters) and choose one to attend.
