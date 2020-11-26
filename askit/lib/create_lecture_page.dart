@@ -86,7 +86,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               capacity = int.parse(value);
               return null;
             },
-            decoration: new InputDecoration(labelText: "Enter your number"),
+            decoration: new InputDecoration(labelText: "Enter the capacity"),
             keyboardType: TextInputType.number,
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.digitsOnly
