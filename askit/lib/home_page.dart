@@ -1,6 +1,7 @@
 import 'package:askit/question.dart';
 import 'package:askit/sign_in.dart';
 import 'package:askit/Lecture.dart';
+import 'package:askit/add_lecture_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -93,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 _searchButton(),
                 temp,
-                _addLectureButton(),
+                _addLectureButton(context),
               ],
             )));
   }
@@ -186,7 +187,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-Widget _addLectureButton() {
+Widget _addLectureButton(BuildContext context) {
   //!!Expanded is needed so that Align uses the whole available space and not the space available within the row/column
   return Expanded(
       child: Align(
@@ -195,7 +196,8 @@ Widget _addLectureButton() {
               child: Text('Add Lecture'),
               splashColor: Colors.grey,
               onPressed: () {
-                //DO something
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AddLecturePage()));
               },
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(40)),
