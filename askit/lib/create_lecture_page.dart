@@ -27,7 +27,7 @@ class _CreateLectureState extends State<CreateLecturePage> {
               child: AppBar(
                   title:
                       Text('CREATE LECTURE', style: TextStyle(fontSize: 30)))),
-          body: new Column(children: [
+          body: new ListView(children: [
             MyCustomForm(),
           ]),
         ));
