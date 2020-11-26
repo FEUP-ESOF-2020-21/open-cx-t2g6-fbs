@@ -1,31 +1,37 @@
+import 'dart:core';
+
 class Lecture {
+  int id;
   String title;
   String date;
   String description;
   int maxCapacity;
-  int numberOfAttendees;
 
-  Lecture(String title, String date, String description, int capacity) {
+  Lecture(id, title, description, date, capacity) {
+    this.id = id;
     this.title = title;
-    this.date = date;
     this.description = description;
+    this.date = date;
     this.maxCapacity = capacity;
-    this.numberOfAttendees = 0;
+  }
+
+  int getId() {
+    return this.id;
   }
 
   String getTitle() {
     return this.title;
   }
 
-  String getDate() {
-    return this.date;
-  }
-
   String getDescription() {
     return this.description;
   }
 
-  int getMaxCapacity() {
+  String getDate() {
+    return this.date;
+  }
+
+  int getCapacity() {
     return this.maxCapacity;
   }
 }
