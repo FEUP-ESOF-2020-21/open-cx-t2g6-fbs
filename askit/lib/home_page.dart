@@ -99,22 +99,6 @@ class _HomePageState extends State<HomePage> {
             )));
   }
 
-  void _displayResults() {
-    setState(() {
-      if (numberOfResults % 2 == 0) {
-        temp = Container(
-            child: Text(
-                'You have no lectures that meet your criteria.\n Try refining your search filters, sign up for an upcoming lecture or even create your own! ',
-                style: TextStyle(fontSize: 15)),
-            padding: EdgeInsets.only(left: 35.0, top: 50.0, right: 20.0));
-      } else
-        temp = Container(
-            child: Text('You have lectures that meet your criteria! ',
-                style: TextStyle(fontSize: 15)),
-            padding: EdgeInsets.only(left: 35.0, top: 50.0, right: 20.0));
-    });
-  }
-
   Widget _searchButton() {
     return OutlineButton(
         child: Text('Search'),
