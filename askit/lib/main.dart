@@ -2,7 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'package:askit/add_lecture_page.dart';
+
 import 'package:askit/login_page.dart';
+import 'package:askit/home_page.dart';
+
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -34,19 +38,20 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
         title: Text('Welcome to Askit!'),
-        backgroundColor: Colors.black54,
+        backgroundColor: Colors.purple[900],
       ),
       body: new Center(
           child: ElevatedButton(
-            child: Text('Log in'),
-            onPressed: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => LoginPage()),
-              );
-            },
-          )
-      ),
+        child: Text('Log in'),
+        onPressed: () {
+          Navigator.push(
+            context,
+            //TODO: This should redirect to LoginPage and not Homepage. Did this so I could implement stuff while login isnt fixed
+            MaterialPageRoute(builder: (context) => HomePage()),
+
+          );
+        },
+      )),
     );
   }
 }
