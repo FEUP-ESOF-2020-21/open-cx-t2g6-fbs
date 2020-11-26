@@ -13,12 +13,12 @@ class CreateLecturePage extends StatefulWidget {
 String title;
 String description;
 int capacity;
-String date;
+
+String date = "2020-01-01";
 
 class _CreateLectureState extends State<CreateLecturePage> {
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
     return MaterialApp(
         theme: ThemeData(primaryColor: Colors.purple[900]),
         home: Scaffold(
