@@ -1,6 +1,7 @@
 import 'package:askit/question.dart';
 import 'package:askit/sign_in.dart';
 import 'package:flutter/material.dart';
+import 'package:askit/create_lecture_page.dart';
 
 class AddLecturePage extends StatefulWidget {
   @override
@@ -27,7 +28,7 @@ class _AddLectureState extends State<AddLecturePage> {
                             style: TextStyle(fontSize: 20)),
                         padding: EdgeInsets.only(top: 150.0, bottom: 20))),
                 _chooseALectureButton(),
-                _createALectureButton()
+                _createALectureButton(context)
               ],
             )));
   }
@@ -48,14 +49,17 @@ class _AddLectureState extends State<AddLecturePage> {
         padding: EdgeInsets.only(top: 50, bottom: 20));
   }
 
-  Widget _createALectureButton() {
+  Widget _createALectureButton(BuildContext context) {
     //!!Expanded is needed so that Align uses the whole available space and not the space available within the row/column
     return Container(
         child: OutlineButton(
             child: Text('Create a Lecture'),
             splashColor: Colors.grey,
             onPressed: () {
-              //DO something
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CreateLecturePage()),
+              );
             },
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
