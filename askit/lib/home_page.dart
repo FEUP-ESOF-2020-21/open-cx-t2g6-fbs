@@ -216,15 +216,11 @@ List<Lecture> parseResults(String text) {
 
   int offset = 3;
 
-  //Extract ALL lectures
+  //Extract lectures depending on the filters. Time filters are being applied in the .php file
   for (int i = 1; i <= numberOfLectures; i++, offset += 5) {
     result.add(new Lecture(int.parse(list[offset]), list[offset + 1],
         list[offset + 2], list[offset + 3], int.parse(list[offset + 4])));
   }
 
-  //Must filter depending on filters.
-  //list[0] = previous/upcoming
-  //list[1] = Lecturer, if true
-  //list[2] = Attendee, if true
   return result;
 }
