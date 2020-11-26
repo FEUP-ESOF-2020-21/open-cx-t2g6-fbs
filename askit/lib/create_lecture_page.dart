@@ -17,8 +17,8 @@ class _CreateLectureState extends State<CreateLecturePage> {
                 // Change this argument to customize the height of the app bar
                 preferredSize: Size.fromHeight(50.0),
                 child: AppBar(
-                    title:
-                        Text('ADD LECTURE', style: TextStyle(fontSize: 30)))),
+                    title: Text('CREATE LECTURE',
+                        style: TextStyle(fontSize: 30)))),
             body: new Column(
               children: [],
             )));
