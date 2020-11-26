@@ -2,6 +2,7 @@ import 'package:askit/question.dart';
 import 'package:askit/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/cupertino.dart';
 
 class CreateLecturePage extends StatefulWidget {
   @override
@@ -11,6 +12,7 @@ class CreateLecturePage extends StatefulWidget {
 String title;
 String description;
 int capacity;
+String date;
 
 class _CreateLectureState extends State<CreateLecturePage> {
   @override
@@ -106,6 +108,27 @@ class MyCustomFormState extends State<MyCustomForm> {
             ],
             // Only numbers can be entered
           ),
+          new Container(
+            child: Text("Choose the date:\n"),
+            padding: EdgeInsets.only(top: 20),
+          ),
+          new Container(
+            height: 60,
+            child: CupertinoDatePicker(
+              mode: CupertinoDatePickerMode.date,
+              initialDateTime: DateTime(2020, 1, 1),
+              onDateTimeChanged: (DateTime newDateTime) {
+                date = newDateTime.year.toString() + "-";
+                var month = newDateTime.month;
+                if (month < 10) date += "0";
+                date += month.toString() + "-";
+
+                var day = newDateTime.day;
+                if (day < 10) date += "0";
+                date += day.toString();
+              },
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
@@ -116,6 +139,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                   print(title);
                   print(description);
                   print(capacity);
+                  print(date);
                   // If the form is valid, display a Snackbar.
                   Scaffold.of(context)
                       .showSnackBar(SnackBar(content: Text('Processing Data')));
