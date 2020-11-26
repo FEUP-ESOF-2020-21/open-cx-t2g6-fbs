@@ -4,7 +4,6 @@ import 'package:askit/Lecture.dart';
 import 'package:askit/add_lecture_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 enum TypeOfLecture { previous, upcoming }
 bool filterLecturer = true;

@@ -3,6 +3,7 @@ import 'package:askit/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as http;
 
 class CreateLecturePage extends StatefulWidget {
   @override
@@ -127,6 +128,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                   // If the form is valid, display a Snackbar.
                   Scaffold.of(context)
                       .showSnackBar(SnackBar(content: Text('Processing Data')));
+                  sendData();
                   //Process data
                 }
               },
@@ -137,4 +139,26 @@ class MyCustomFormState extends State<MyCustomForm> {
       ),
     );
   }
+}
+
+Future sendData() async {
+  print("Function was called!\n");
+  var url = "https://web.fe.up.pt/~up201806296/database/add.php";
+
+  url = url +
+      "?title=" +
+      title +
+      "&description=" +
+      description +
+      "&capacity=" +
+      capacity.toString() +
+      "&date=" +
+      date;
+
+  var encoded = Uri.encodeFull(url);
+
+  print(encoded + "\n");
+
+  http.Response response = await http.get(encoded);
+  print(response.body.toString);
 }
