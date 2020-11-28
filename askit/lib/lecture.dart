@@ -40,4 +40,19 @@ class Lecture {
   int getAttendance() {
     return this.attendance;
   }
+
+  String printIdAndTitle() {
+    return "Lecture #" + this.getId().toString() + "\nTitle: " + this.title;
+  }
+
+  String printTheRest() {
+    return "Description: " +
+        this.description +
+        "\nDate: " +
+        this.date +
+        "\nCapacity: " +
+        this.attendance.toString() +
+        "/" +
+        this.maxCapacity.toString();
+  }
 }

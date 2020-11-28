@@ -155,18 +155,8 @@ class _HomePageState extends State<HomePage> {
               itemCount: listOfLectures.length,
               itemBuilder: (BuildContext ctxt, int index) {
                 return new ListTile(
-                    title: Text("Lecture #" +
-                        listOfLectures[index].getId().toString() +
-                        "\nTitle: " +
-                        listOfLectures[index].title),
-                    subtitle: Text("Description: " +
-                        listOfLectures[index].description +
-                        "\nDate: " +
-                        listOfLectures[index].date +
-                        "\nCapacity: " +
-                        listOfLectures[index].attendance.toString() +
-                        "/" +
-                        listOfLectures[index].maxCapacity.toString()));
+                    title: Text(listOfLectures[index].printIdAndTitle()),
+                    subtitle: Text(listOfLectures[index].printTheRest()));
               }),
         );
       }
@@ -200,7 +190,7 @@ List<Lecture> parseResults(String text) {
   List<Lecture> result = new List();
   if (list.length == 0) return result;
 
-  int numberOfLectures = (list.length - 4) ~/ 5;
+  int numberOfLectures = (list.length - 4) ~/ 6;
   print(numberOfLectures);
 
   int offset = 3;
