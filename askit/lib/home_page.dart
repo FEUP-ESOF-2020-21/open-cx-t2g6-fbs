@@ -1,6 +1,6 @@
 import 'package:askit/question.dart';
 import 'package:askit/sign_in.dart';
-import 'package:askit/Lecture.dart';
+import 'package:askit/lecture.dart';
 import 'package:askit/add_lecture_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -164,6 +164,8 @@ class _HomePageState extends State<HomePage> {
                         "\nDate: " +
                         listOfLectures[index].date +
                         "\nCapacity: " +
+                        listOfLectures[index].attendance.toString() +
+                        "/" +
                         listOfLectures[index].maxCapacity.toString()));
               }),
         );
@@ -204,9 +206,14 @@ List<Lecture> parseResults(String text) {
   int offset = 3;
 
   //Extract lectures depending on the filters. Time filters are being applied in the .php file
-  for (int i = 1; i <= numberOfLectures; i++, offset += 5) {
-    result.add(new Lecture(int.parse(list[offset]), list[offset + 1],
-        list[offset + 2], list[offset + 3], int.parse(list[offset + 4])));
+  for (int i = 1; i <= numberOfLectures; i++, offset += 6) {
+    result.add(new Lecture(
+        int.parse(list[offset]),
+        list[offset + 1],
+        list[offset + 2],
+        list[offset + 3],
+        int.parse(list[offset + 4]),
+        int.parse(list[offset + 5])));
   }
 
   return result;
