@@ -6,13 +6,15 @@ class Lecture {
   String date;
   String description;
   int maxCapacity;
+  int attendance;
 
-  Lecture(id, title, description, date, capacity) {
+  Lecture(id, title, description, date, capacity, attendance) {
     this.id = id;
     this.title = title;
     this.description = description;
     this.date = date;
     this.maxCapacity = capacity;
+    this.attendance = attendance;
   }
 
   int getId() {
@@ -33,5 +35,9 @@ class Lecture {
 
   int getCapacity() {
     return this.maxCapacity;
+  }
+
+  int getAttendance() {
+    return this.attendance;
   }
 }
