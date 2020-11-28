@@ -47,8 +47,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           Navigator.push(
             context,
             //TODO: This should redirect to LoginPage and not Homepage. Did this so I could implement stuff while login isnt fixed
-            MaterialPageRoute(builder: (context) => HomePage()),
-
+            MaterialPageRoute(builder: (context) => LoginPage()),
           );
         },
       )),

@@ -1,8 +1,7 @@
-
-
 import 'package:askit/question.dart';
 import 'package:askit/sign_in.dart';
 import 'package:flutter/material.dart';
+import 'package:askit/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -39,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) {
-                  return Question();
+                  return HomePage();
                 },
               ),
             );

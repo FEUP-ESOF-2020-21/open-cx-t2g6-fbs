@@ -22,6 +22,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    //TODO Add user to app, with name and email, global variables name, email
+
     return MaterialApp(
         theme: ThemeData(primaryColor: Colors.purple[900]),
         home: Scaffold(
