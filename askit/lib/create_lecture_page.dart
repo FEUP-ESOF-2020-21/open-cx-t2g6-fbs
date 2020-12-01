@@ -153,7 +153,9 @@ Future sendData() async {
       "&capacity=" +
       capacity.toString() +
       "&date=" +
-      date;
+      date +
+      "&email=" +
+      email;
 
   var encoded = Uri.encodeFull(url);
 
