@@ -142,7 +142,7 @@ class MyCustomFormState extends State<MyCustomForm> {
 
 Future sendData() async {
   print("Function was called!\n");
-  var url = "https://web.fe.up.pt/~up201806296/database/add.php";
+  var url = "https://web.fe.up.pt/~up201806296/database/addNewLecture.php";
 
   url = url +
       "?title=" +

@@ -2,6 +2,7 @@ import 'package:askit/lecture.dart';
 import 'package:askit/add_lecture_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:askit/sign_in.dart';
 
 enum TypeOfLecture { previous, upcoming }
 bool filterLecturer = true;
@@ -122,14 +123,16 @@ class _HomePageState extends State<HomePage> {
     } else
       timeFilter = "upcoming";
 
-    var url = "https://web.fe.up.pt/~up201806296/database/get.php";
+    var url = "https://web.fe.up.pt/~up201806296/database/getUserLectures.php";
     url = url +
         "?timeFilter=" +
         timeFilter +
         "&Lecturer=" +
         filterLecturer.toString() +
         "&Attendee=" +
-        filterAttendee.toString();
+        filterAttendee.toString() +
+        "&email=" +
+        email;
     http.Response response = await http.get(url);
 
     listOfLectures = parseResults(response.body.toString());
@@ -184,15 +187,17 @@ class _HomePageState extends State<HomePage> {
 //This function should return a list of Lectures
   List<Lecture> parseResults(String text) {
     List<String> list = text.split("\n");
-    print(list);
+    print(text);
 
     List<Lecture> result = new List();
     if (list.length == 0) return result;
+    print("List length: ");
+    print(list.length);
 
-    int numberOfLectures = (list.length - 4) ~/ 6;
+    int numberOfLectures = (list.length) ~/ 6;
     print(numberOfLectures);
 
-    int offset = 3;
+    int offset = 0;
 
     //Extract lectures depending on the filters. Time filters are being applied in the .php file
     for (int i = 1; i <= numberOfLectures; i++, offset += 6) {
