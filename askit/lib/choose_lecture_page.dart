@@ -120,7 +120,8 @@ class _ChooseLectureState extends State<ChooseLecturePage> {
                 return new ListTile(
                     title: Text(listOfLectures[index].printIdAndTitle()),
                     subtitle:
-                        Text(listOfLectures[index].printDateAndCapacity()));
+                        Text(listOfLectures[index].printDateAndCapacity()),
+                    onTap: () => print(index));
               }),
         );
       }
