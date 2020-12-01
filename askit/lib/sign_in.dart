@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:http/http.dart' as http;
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -44,6 +45,9 @@ Future<String> signInWithGoogle() async {
 
     print('signInWithGoogle succeeded: $user');
 
+    //Add user to database
+    addUserToDatabase(email, name);
+
     return '$user';
   }
 
@@ -54,4 +58,18 @@ Future<void> signOutGoogle() async {
   await googleSignIn.signOut();
 
   print("User Signed Out");
+}
+
+Future addUserToDatabase(String email, String name) async {
+  print("Function was called!\n");
+  var url = "https://web.fe.up.pt/~up201806296/database/addUser.php";
+
+  url = url + "?email=" + email + "&name=" + name;
+
+  var encoded = Uri.encodeFull(url);
+
+  print(encoded + "\n");
+
+  http.Response response = await http.get(encoded);
+  print(response.body.toString);
 }
