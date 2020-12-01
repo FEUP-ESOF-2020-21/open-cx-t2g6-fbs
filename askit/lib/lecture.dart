@@ -55,4 +55,13 @@ class Lecture {
         "/" +
         this.maxCapacity.toString();
   }
+
+  String printDateAndCapacity() {
+    return "Date: " +
+        this.date +
+        "\nCapacity: " +
+        this.attendance.toString() +
+        "/" +
+        this.maxCapacity.toString();
+  }
 }

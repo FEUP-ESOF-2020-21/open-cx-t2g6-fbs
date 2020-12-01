@@ -1,7 +1,6 @@
-import 'package:askit/question.dart';
-import 'package:askit/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:askit/create_lecture_page.dart';
+import 'package:askit/choose_lecture_page.dart';
 
 class AddLecturePage extends StatefulWidget {
   @override
@@ -27,20 +26,23 @@ class _AddLectureState extends State<AddLecturePage> {
                         child: Text('ADD A LECTURE',
                             style: TextStyle(fontSize: 20)),
                         padding: EdgeInsets.only(top: 150.0, bottom: 20))),
-                _chooseALectureButton(),
+                _chooseALectureButton(context),
                 _createALectureButton(context)
               ],
             )));
   }
 
-  Widget _chooseALectureButton() {
+  Widget _chooseALectureButton(BuildContext context) {
     //!!Expanded is needed so that Align uses the whole available space and not the space available within the row/column
     return Container(
         child: OutlineButton(
             child: Text('Choose a Lecture'),
             splashColor: Colors.grey,
             onPressed: () {
-              //DO something
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ChooseLecturePage()),
+              );
             },
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
