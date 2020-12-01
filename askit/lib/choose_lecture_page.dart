@@ -1,27 +1,22 @@
 import 'package:askit/lecture.dart';
-import 'package:askit/add_lecture_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:askit/sign_in.dart';
 
-enum TypeOfLecture { previous, upcoming }
-bool filterLecturer = true;
-bool filterAttendee = true;
+enum FilterAvailableLectures { all, available }
 int numberOfResults = 0;
 Widget temp = new Container();
 List<Lecture> listOfLectures = new List();
 
-class HomePage extends StatefulWidget {
+class ChooseLecturePage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _ChooseLectureState createState() => _ChooseLectureState();
 }
 
-class _HomePageState extends State<HomePage> {
-  TypeOfLecture _type = TypeOfLecture.previous;
-
+class _ChooseLectureState extends State<ChooseLecturePage> {
+  FilterAvailableLectures _filter = FilterAvailableLectures.available;
   @override
   Widget build(BuildContext context) {
-    //TODO Add user to app, with name and email, global variables name, email
-
     return MaterialApp(
         theme: ThemeData(primaryColor: Colors.purple[900]),
         home: Scaffold(
@@ -29,11 +24,13 @@ class _HomePageState extends State<HomePage> {
                 // Change this argument to customize the height of the app bar
                 preferredSize: Size.fromHeight(50.0),
                 child: AppBar(
-                    title: Text('HOME', style: TextStyle(fontSize: 30)))),
+                    title: Text('CHOOSE LECTURE',
+                        style: TextStyle(fontSize: 30)))),
             body: new Column(
               children: [
                 Container(
-                    child: Text('MY LECTURES', style: TextStyle(fontSize: 20)),
+                    child: Text('CHOOSE A LECTURE',
+                        style: TextStyle(fontSize: 20)),
                     padding: EdgeInsets.all(20.0)),
                 //!Important!
                 //To display widgets that don't have an intrinsic width inside a row, you must nest them inside a flexible widget
@@ -41,51 +38,25 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     new Flexible(
                         child: ListTile(
-                            title: const Text('Previous'),
+                            title: const Text('All'),
                             leading: Radio(
-                              value: TypeOfLecture.previous,
-                              groupValue: _type,
-                              onChanged: (TypeOfLecture value) {
+                              value: FilterAvailableLectures.all,
+                              groupValue: _filter,
+                              onChanged: (FilterAvailableLectures value) {
                                 setState(() {
-                                  _type = value;
+                                  _filter = value;
                                 });
                               },
                             ))),
                     new Flexible(
                         child: ListTile(
-                            title: const Text('Upcoming'),
+                            title: const Text('Available'),
                             leading: Radio(
-                              value: TypeOfLecture.upcoming,
-                              groupValue: _type,
-                              onChanged: (TypeOfLecture value) {
+                              value: FilterAvailableLectures.available,
+                              groupValue: _filter,
+                              onChanged: (FilterAvailableLectures value) {
                                 setState(() {
-                                  _type = value;
-                                });
-                              },
-                            )))
-                  ],
-                ),
-                new Row(
-                  children: [
-                    new Flexible(
-                        child: ListTile(
-                            title: const Text('Lecturer'),
-                            leading: Checkbox(
-                              value: filterLecturer,
-                              onChanged: (bool value) {
-                                setState(() {
-                                  filterLecturer = value;
-                                });
-                              },
-                            ))),
-                    new Flexible(
-                        child: ListTile(
-                            title: const Text('Attendee'),
-                            leading: Checkbox(
-                              value: filterAttendee,
-                              onChanged: (bool value) {
-                                setState(() {
-                                  filterAttendee = value;
+                                  _filter = value;
                                 });
                               },
                             )))
@@ -93,7 +64,6 @@ class _HomePageState extends State<HomePage> {
                 ),
                 _searchButton(),
                 temp,
-                _addLectureButton(context),
               ],
             )));
   }
@@ -116,22 +86,17 @@ class _HomePageState extends State<HomePage> {
 
   Future getData() async {
     print("Function was called!\n");
-    var timeFilter;
-    if (_type == TypeOfLecture.previous) {
-      timeFilter = "previous";
+    var availabilityFilter;
+    if (_filter == FilterAvailableLectures.all) {
+      availabilityFilter = "all";
     } else
-      timeFilter = "upcoming";
+      availabilityFilter = "available";
 
-    var url = "https://web.fe.up.pt/~up201806296/database/get.php";
-    url = url +
-        "?timeFilter=" +
-        timeFilter +
-        "&Lecturer=" +
-        filterLecturer.toString() +
-        "&Attendee=" +
-        filterAttendee.toString();
+    var url =
+        "https://web.fe.up.pt/~up201806296/database/getUpcomingLectures.php";
+    url = url + "?availabilityFilter=" + availabilityFilter + "&email=" + email;
     http.Response response = await http.get(url);
-
+    print("\n\nATTENTION:\n\n" + response.body.toString() + "\n");
     listOfLectures = parseResults(response.body.toString());
 
     setState(() {
@@ -142,7 +107,7 @@ class _HomePageState extends State<HomePage> {
       if (listOfLectures.isEmpty) {
         temp = Container(
             child: Text(
-                'You have no lectures that meet your criteria.\n Try refining your search filters, sign up for an upcoming lecture or even create your own! ',
+                'There are no lectures that meet your criteria! Please change them or try again later!',
                 style: TextStyle(fontSize: 15)),
             padding: EdgeInsets.only(left: 35.0, top: 50.0, right: 20.0));
       } else {
@@ -154,34 +119,14 @@ class _HomePageState extends State<HomePage> {
               itemBuilder: (BuildContext ctxt, int index) {
                 return new ListTile(
                     title: Text(listOfLectures[index].printIdAndTitle()),
-                    subtitle: Text(listOfLectures[index].printTheRest()));
+                    subtitle:
+                        Text(listOfLectures[index].printDateAndCapacity()));
               }),
         );
       }
     });
   }
 
-  Widget _addLectureButton(BuildContext context) {
-    //!!Expanded is needed so that Align uses the whole available space and not the space available within the row/column
-    return Expanded(
-        child: Align(
-            alignment: Alignment.bottomCenter,
-            child: OutlineButton(
-                child: Text('Add Lecture'),
-                splashColor: Colors.grey,
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AddLecturePage()));
-                },
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(40)),
-                highlightElevation: 0,
-                borderSide: BorderSide(color: Colors.grey))));
-  }
-
-//This function should return a list of Lectures
   List<Lecture> parseResults(String text) {
     List<String> list = text.split("\n");
     print(list);
@@ -192,7 +137,7 @@ class _HomePageState extends State<HomePage> {
     int numberOfLectures = (list.length - 4) ~/ 6;
     print(numberOfLectures);
 
-    int offset = 3;
+    int offset = 0;
 
     //Extract lectures depending on the filters. Time filters are being applied in the .php file
     for (int i = 1; i <= numberOfLectures; i++, offset += 6) {
