@@ -24,7 +24,35 @@ From now on you can attend any conference knowing that only the most pertinent q
 ### Use case diagram
 ![use case diagram](./docs/images/use_case_diagram.png "Use Case Diagram")
 
+#### Ask Questions
+**Actor**: Atendee  
+**Description**: User can post questions regarding the lecture he is attending. He can also mark the number of the slide relevant to his question.  
+**Normal Flow**: The user writes a question, selects the slide number and then submits the question.
 
+#### See Slides
+**Actor**: Atendee  
+**Description**: User can download the presentation if it has been made available by the speaker.  
+**Normal Flow**: User downloads the presentation file.
+
+#### Rate Questions
+**Actor**: Atendee  
+**Description**: User sees all questions in a list and may choose to rate any question.
+**Normal Flow**: User scrolls through the list and votes on the questions he desires.
+
+#### Submit Presentation
+**Actor**: Speaker  
+**Description**: User may choose a file from his device and upload it into the app.
+**Normal Flow**: User presses upload lecture, and navigates through his device to select the file to upload.
+
+#### See Questions
+**Actor**: Speaker  
+**Description**: User sees the list of questions ordered by their current rating.
+**Normal Flow**: User can scroll through the list of submitted questions.
+
+#### Answer Questions Post Lecture
+**Actor**: Speaker  
+**Description**: After the lecture has ended, the user may submit an answer to questions that there was no time for. 
+**Normal Flow**: User selects one question and may submit an answer.
 
 ### User stories
 
