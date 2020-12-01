@@ -133,7 +133,9 @@ class _HomePageState extends State<HomePage> {
         filterAttendee.toString() +
         "&email=" +
         email;
-    http.Response response = await http.get(url);
+
+    var encoded = Uri.encodeFull(url);
+    http.Response response = await http.get(encoded);
 
     listOfLectures = parseResults(response.body.toString());
 
