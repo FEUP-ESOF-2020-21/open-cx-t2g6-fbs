@@ -2,6 +2,7 @@ import 'package:askit/lecture.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:askit/sign_in.dart';
+import 'package:askit/join_specific_lecture_page.dart';
 
 enum FilterAvailableLectures { all, available }
 int numberOfResults = 0;
@@ -62,13 +63,13 @@ class _ChooseLectureState extends State<ChooseLecturePage> {
                             )))
                   ],
                 ),
-                _searchButton(),
+                _searchButton(context),
                 temp,
               ],
             )));
   }
 
-  Widget _searchButton() {
+  Widget _searchButton(BuildContext context) {
     return OutlineButton(
         child: Text('Search'),
         splashColor: Colors.grey,
@@ -121,7 +122,14 @@ class _ChooseLectureState extends State<ChooseLecturePage> {
                     title: Text(listOfLectures[index].printIdAndTitle()),
                     subtitle:
                         Text(listOfLectures[index].printDateAndCapacity()),
-                    onTap: () => print(index));
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                JoinSpecificLecturePage(listOfLectures[index])),
+                      );
+                    });
               }),
         );
       }
