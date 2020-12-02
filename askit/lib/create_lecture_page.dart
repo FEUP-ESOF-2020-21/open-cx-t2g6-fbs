@@ -1,8 +1,12 @@
 import 'package:askit/sign_in.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'dart:io';
+import 'package:path/path.dart' as Path;
 
 class CreateLecturePage extends StatefulWidget {
   @override
@@ -12,6 +16,9 @@ class CreateLecturePage extends StatefulWidget {
 String title;
 String description;
 int capacity;
+File _file;
+String _uploadedFileURL;
+
 
 String date = "2020-01-01";
 
@@ -98,6 +105,20 @@ class MyCustomFormState extends State<MyCustomForm> {
           ),
           new Container(
             height: 60,
+            child: ElevatedButton(
+              child: Text('Choose File'),
+              onPressed: chooseFile,
+            ),
+          ),
+          new Container(
+            height: 60,
+            child: ElevatedButton(
+              child: Text('Upload File'),
+              onPressed: uploadFile,
+            ),
+          ),
+          new Container(
+            height: 60,
             child: CupertinoDatePicker(
               mode: CupertinoDatePickerMode.date,
               initialDateTime: DateTime(2020, 1, 1),
@@ -113,6 +134,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               },
             ),
           ),
+
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
@@ -162,4 +184,22 @@ Future sendData() async {
 
   http.Response response = await http.get(encoded);
   print(response.body.toString);
+}
+
+Future chooseFile() async {
+  _file = await FilePicker.getFile();
+}
+
+Future uploadFile() async {
+  String fileName = Path.basename(_file.path);
+  firebase_storage.FirebaseStorage storage =
+      firebase_storage.FirebaseStorage.instance;
+  var storageRef = storage.ref().child('lectures/$fileName');
+
+
+  firebase_storage.UploadTask uploadTask = storageRef.putFile(_file);
+  uploadTask.whenComplete(() => {
+    storageRef.getDownloadURL().then((String result) => _uploadedFileURL = result)
+  });
+  print(_uploadedFileURL);
 }
