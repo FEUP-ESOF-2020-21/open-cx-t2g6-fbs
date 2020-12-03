@@ -17,8 +17,7 @@ String title;
 String description;
 int capacity;
 File _file;
-String _uploadedFileURL;
-
+String _uploadedFileURL = "NULL";
 
 String date = "2020-01-01";
 
@@ -55,7 +54,7 @@ class MyCustomFormState extends State<MyCustomForm> {
   // Note: This is a GlobalKey<FormState>,
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
-
+  bool _uploadedFile = false;
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
@@ -105,20 +104,6 @@ class MyCustomFormState extends State<MyCustomForm> {
           ),
           new Container(
             height: 60,
-            child: ElevatedButton(
-              child: Text('Choose File'),
-              onPressed: chooseFile,
-            ),
-          ),
-          new Container(
-            height: 60,
-            child: ElevatedButton(
-              child: Text('Upload File'),
-              onPressed: uploadFile,
-            ),
-          ),
-          new Container(
-            height: 60,
             child: CupertinoDatePicker(
               mode: CupertinoDatePickerMode.date,
               initialDateTime: DateTime(2020, 1, 1),
@@ -134,10 +119,28 @@ class MyCustomFormState extends State<MyCustomForm> {
               },
             ),
           ),
-
+          new Row(children: [
+            new Padding(
+                padding: const EdgeInsets.all(50),
+                child: new Container(
+                  height: 60,
+                  child: ElevatedButton(
+                    child: Text('Choose File'),
+                    onPressed: chooseFile,
+                  ),
+                )),
+            new Container(
+              height: 60,
+              child: ElevatedButton(
+                child: Text('Upload File'),
+                onPressed: !_uploadedFile ? null : () => uploadFile(),
+              ),
+            )
+          ]),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: ElevatedButton(
+            padding: const EdgeInsets.symmetric(vertical: 0.0),
+            child: Center(
+                child: ElevatedButton(
               onPressed: () {
                 // Validate returns true if the form is valid, or false
                 // otherwise.
@@ -154,52 +157,63 @@ class MyCustomFormState extends State<MyCustomForm> {
                 }
               },
               child: Text('Submit'),
-            ),
+            )),
           ),
         ],
       ),
     );
   }
-}
 
-Future sendData() async {
-  print("Function was called!\n");
-  var url = "https://web.fe.up.pt/~up201806296/database/addNewLecture.php";
+  Future chooseFile() async {
+    _file = await FilePicker.getFile();
+    setState(() {
+      _uploadedFile = true;
 
-  url = url +
-      "?title=" +
-      title +
-      "&description=" +
-      description +
-      "&capacity=" +
-      capacity.toString() +
-      "&date=" +
-      date +
-      "&email=" +
-      email;
+      print(_uploadedFile);
+    });
+  }
 
-  var encoded = Uri.encodeFull(url);
+  Future sendData() async {
+    print("Function was called!\n");
+    print("File url:" + _uploadedFileURL);
+    var url = "https://web.fe.up.pt/~up201806296/database/addNewLecture.php";
 
-  print(encoded + "\n");
+    url = url +
+        "?title=" +
+        title +
+        "&description=" +
+        description +
+        "&capacity=" +
+        capacity.toString() +
+        "&date=" +
+        date +
+        "&email=" +
+        email +
+        "&fileUrl=" +
+        _uploadedFileURL;
 
+    var encoded = Uri.encodeFull(url);
+
+    print(encoded + "\n");
+    /*
   http.Response response = await http.get(encoded);
-  print(response.body.toString);
-}
+  print(response.body.toString);*/
+  }
 
-Future chooseFile() async {
-  _file = await FilePicker.getFile();
-}
+  Future uploadFile() async {
+    print("Upload button pressed!");
+    String fileName = Path.basename(_file.path);
 
-Future uploadFile() async {
-  String fileName = Path.basename(_file.path);
-  firebase_storage.FirebaseStorage storage =
-      firebase_storage.FirebaseStorage.instance;
-  var storageRef = storage.ref().child('lectures/$fileName');
+    firebase_storage.FirebaseStorage storage =
+        firebase_storage.FirebaseStorage.instance;
+    var storageRef = storage.ref().child('lectures/$fileName');
 
-
-  firebase_storage.UploadTask uploadTask = storageRef.putFile(_file);
-  uploadTask.whenComplete(() => {
-    storageRef.getDownloadURL().then((String result) => _uploadedFileURL = result)
-  });
-  print(_uploadedFileURL);
+    firebase_storage.UploadTask uploadTask = storageRef.putFile(_file);
+    uploadTask.whenComplete(() => {
+          storageRef
+              .getDownloadURL()
+              .then((String result) => _uploadedFileURL = result),
+          print("INSIDE UPLOAD FUNCTION: " + _uploadedFileURL)
+        });
+  }
 }
