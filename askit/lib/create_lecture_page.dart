@@ -54,6 +54,7 @@ class MyCustomFormState extends State<MyCustomForm> {
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
   bool _uploadedFile = false;
+  bool _uploadingFile = false;
   String _uploadedFileURL = "NULL";
   @override
   Widget build(BuildContext context) {
@@ -141,21 +142,23 @@ class MyCustomFormState extends State<MyCustomForm> {
             padding: const EdgeInsets.symmetric(vertical: 0.0),
             child: Center(
                 child: ElevatedButton(
-              onPressed: () {
-                // Validate returns true if the form is valid, or false
-                // otherwise.
-                if (_formKey.currentState.validate()) {
-                  print(title);
-                  print(description);
-                  print(capacity);
-                  print(date);
-                  // If the form is valid, display a Snackbar.
-                  Scaffold.of(context)
-                      .showSnackBar(SnackBar(content: Text('Processing Data')));
-                  sendData();
-                  //Process data
-                }
-              },
+              onPressed: _uploadingFile
+                  ? null
+                  : () {
+                      // Validate returns true if the form is valid, or false
+                      // otherwise.
+                      if (_formKey.currentState.validate()) {
+                        print(title);
+                        print(description);
+                        print(capacity);
+                        print(date);
+                        // If the form is valid, display a Snackbar.
+                        Scaffold.of(context).showSnackBar(
+                            SnackBar(content: Text('Processing Data')));
+                        sendData();
+                        //Process data
+                      }
+                    },
               child: Text('Submit'),
             )),
           ),
@@ -201,7 +204,11 @@ class MyCustomFormState extends State<MyCustomForm> {
   }
 
   Future uploadFile() async {
+    setState(() {
+      _uploadingFile = true;
+    });
     print("Upload button pressed!");
+    print(_uploadingFile);
     String fileName = Path.basename(_file.path);
 
     firebase_storage.FirebaseStorage storage =
@@ -212,7 +219,11 @@ class MyCustomFormState extends State<MyCustomForm> {
     uploadTask.whenComplete(() => {
           storageRef.getDownloadURL().then((String result) => {
                 _uploadedFileURL = result,
-                print("INSIDE UPLOAD FUNCTION: " + _uploadedFileURL)
+                print("INSIDE UPLOAD FUNCTION: " + _uploadedFileURL),
+                setState(() {
+                  _uploadingFile = false;
+                }),
+                print(_uploadingFile)
               })
         });
   }
