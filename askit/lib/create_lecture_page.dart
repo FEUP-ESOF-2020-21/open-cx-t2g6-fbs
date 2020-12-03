@@ -1,8 +1,13 @@
+import 'package:askit/choose_lecture_page.dart';
 import 'package:askit/sign_in.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'dart:io';
+import 'package:path/path.dart' as Path;
 
 class CreateLecturePage extends StatefulWidget {
   @override
@@ -12,6 +17,7 @@ class CreateLecturePage extends StatefulWidget {
 String title;
 String description;
 int capacity;
+File _file;
 
 String date = "2020-01-01";
 
@@ -48,7 +54,10 @@ class MyCustomFormState extends State<MyCustomForm> {
   // Note: This is a GlobalKey<FormState>,
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
-
+  bool _uploadedFile = false;
+  bool _uploadingFile = false;
+  String _uploadedFileURL = "NULL";
+  Widget _tmpWidget = new Text("No file chosen: ");
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
@@ -113,53 +122,119 @@ class MyCustomFormState extends State<MyCustomForm> {
               },
             ),
           ),
+          new Row(children: [
+            new Padding(
+                padding: const EdgeInsets.only(
+                    top: 50, left: 50, right: 50, bottom: 10),
+                child: new Container(
+                  height: 60,
+                  child: ElevatedButton(
+                    child: Text('Choose File'),
+                    onPressed: chooseFile,
+                  ),
+                )),
+            new Padding(
+                padding: const EdgeInsets.only(top: 50),
+                child: new Container(
+                  height: 60,
+                  child: ElevatedButton(
+                    child: Text('Upload File'),
+                    onPressed: !_uploadedFile ? null : () => uploadFile(),
+                  ),
+                ))
+          ]),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                // Validate returns true if the form is valid, or false
-                // otherwise.
-                if (_formKey.currentState.validate()) {
-                  print(title);
-                  print(description);
-                  print(capacity);
-                  print(date);
-                  // If the form is valid, display a Snackbar.
-                  Scaffold.of(context)
-                      .showSnackBar(SnackBar(content: Text('Processing Data')));
-                  sendData();
-                  //Process data
-                }
-              },
+              padding: const EdgeInsets.only(left: 50, top: 10),
+              child: new Row(children: [_tmpWidget])),
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: Center(
+                child: ElevatedButton(
+              onPressed: _uploadingFile
+                  ? null
+                  : () {
+                      // Validate returns true if the form is valid, or false
+                      // otherwise.
+                      if (_formKey.currentState.validate()) {
+                        print(title);
+                        print(description);
+                        print(capacity);
+                        print(date);
+                        // If the form is valid, display a Snackbar.
+                        Scaffold.of(context).showSnackBar(
+                            SnackBar(content: Text('Processing Data')));
+                        sendData();
+                        //Process data
+                      }
+                    },
               child: Text('Submit'),
-            ),
+            )),
           ),
         ],
       ),
     );
   }
-}
 
-Future sendData() async {
-  print("Function was called!\n");
-  var url = "https://web.fe.up.pt/~up201806296/database/addNewLecture.php";
+  Future chooseFile() async {
+    _file = await FilePicker.getFile();
+    setState(() {
+      _uploadedFile = true;
+      List<String> list = _file.toString().split("/");
+      String fileName = list.last;
+      _tmpWidget = new Text("File chosen: " + fileName);
+      print(_uploadedFile);
+    });
+  }
 
-  url = url +
-      "?title=" +
-      title +
-      "&description=" +
-      description +
-      "&capacity=" +
-      capacity.toString() +
-      "&date=" +
-      date +
-      "&email=" +
-      email;
+  Future sendData() async {
+    print("Function was called!\n");
+    print("File url:" + _uploadedFileURL);
+    var url = "https://web.fe.up.pt/~up201806296/database/addNewLecture.php";
 
-  var encoded = Uri.encodeFull(url);
+    url = url +
+        "?title=" +
+        title +
+        "&description=" +
+        description +
+        "&capacity=" +
+        capacity.toString() +
+        "&date=" +
+        date +
+        "&email=" +
+        email +
+        "&fileUrl=" +
+        _uploadedFileURL;
 
-  print(encoded + "\n");
+    var encoded = Uri.encodeFull(url);
 
-  http.Response response = await http.get(encoded);
-  print(response.body.toString);
+    print(encoded + "\n");
+
+    http.Response response = await http.get(encoded);
+    print(response.body.toString);
+  }
+
+  Future uploadFile() async {
+    setState(() {
+      _uploadingFile = true;
+    });
+    print("Upload button pressed!");
+    print(_uploadingFile);
+    String fileName = Path.basename(_file.path);
+
+    firebase_storage.FirebaseStorage storage =
+        firebase_storage.FirebaseStorage.instance;
+    var storageRef = storage.ref().child('lectures/$fileName');
+
+    firebase_storage.UploadTask uploadTask = storageRef.putFile(_file);
+    uploadTask.whenComplete(() => {
+          storageRef.getDownloadURL().then((String result) => {
+                _uploadedFileURL = result,
+                print("INSIDE UPLOAD FUNCTION: " + _uploadedFileURL),
+                setState(() {
+                  _uploadingFile = false;
+                }),
+                print(_uploadingFile)
+              })
+        });
+  }
 }
