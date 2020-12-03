@@ -17,7 +17,6 @@ String title;
 String description;
 int capacity;
 File _file;
-String _uploadedFileURL = "NULL";
 
 String date = "2020-01-01";
 
@@ -55,6 +54,7 @@ class MyCustomFormState extends State<MyCustomForm> {
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
   bool _uploadedFile = false;
+  String _uploadedFileURL = "NULL";
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
@@ -195,9 +195,9 @@ class MyCustomFormState extends State<MyCustomForm> {
     var encoded = Uri.encodeFull(url);
 
     print(encoded + "\n");
-    /*
-  http.Response response = await http.get(encoded);
-  print(response.body.toString);*/
+
+    http.Response response = await http.get(encoded);
+    print(response.body.toString);
   }
 
   Future uploadFile() async {
@@ -210,10 +210,10 @@ class MyCustomFormState extends State<MyCustomForm> {
 
     firebase_storage.UploadTask uploadTask = storageRef.putFile(_file);
     uploadTask.whenComplete(() => {
-          storageRef
-              .getDownloadURL()
-              .then((String result) => _uploadedFileURL = result),
-          print("INSIDE UPLOAD FUNCTION: " + _uploadedFileURL)
+          storageRef.getDownloadURL().then((String result) => {
+                _uploadedFileURL = result,
+                print("INSIDE UPLOAD FUNCTION: " + _uploadedFileURL)
+              })
         });
   }
 }
