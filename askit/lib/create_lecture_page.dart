@@ -1,3 +1,4 @@
+import 'package:askit/choose_lecture_page.dart';
 import 'package:askit/sign_in.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -56,6 +57,7 @@ class MyCustomFormState extends State<MyCustomForm> {
   bool _uploadedFile = false;
   bool _uploadingFile = false;
   String _uploadedFileURL = "NULL";
+  Widget _tmpWidget = new Text("No file chosen: ");
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
@@ -122,7 +124,8 @@ class MyCustomFormState extends State<MyCustomForm> {
           ),
           new Row(children: [
             new Padding(
-                padding: const EdgeInsets.all(50),
+                padding: const EdgeInsets.only(
+                    top: 50, left: 50, right: 50, bottom: 10),
                 child: new Container(
                   height: 60,
                   child: ElevatedButton(
@@ -130,16 +133,21 @@ class MyCustomFormState extends State<MyCustomForm> {
                     onPressed: chooseFile,
                   ),
                 )),
-            new Container(
-              height: 60,
-              child: ElevatedButton(
-                child: Text('Upload File'),
-                onPressed: !_uploadedFile ? null : () => uploadFile(),
-              ),
-            )
+            new Padding(
+                padding: const EdgeInsets.only(top: 50),
+                child: new Container(
+                  height: 60,
+                  child: ElevatedButton(
+                    child: Text('Upload File'),
+                    onPressed: !_uploadedFile ? null : () => uploadFile(),
+                  ),
+                ))
           ]),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 0.0),
+              padding: const EdgeInsets.only(left: 50, top: 10),
+              child: new Row(children: [_tmpWidget])),
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0),
             child: Center(
                 child: ElevatedButton(
               onPressed: _uploadingFile
@@ -171,7 +179,9 @@ class MyCustomFormState extends State<MyCustomForm> {
     _file = await FilePicker.getFile();
     setState(() {
       _uploadedFile = true;
-
+      List<String> list = _file.toString().split("/");
+      String fileName = list.last;
+      _tmpWidget = new Text("File chosen: " + fileName);
       print(_uploadedFile);
     });
   }
