@@ -21,7 +21,7 @@ From now on you can attend any conference knowing that only the most pertinent q
 
 ## Requirements 
 ### Use case diagram
-![use case diagram](./images/use_case_diagram.png "Use Case Diagram")
+![use case diagram](./docs/images/use_case_diagram.png "Use Case Diagram")
 
 #### Ask Questions
 **Actor**: Atendee  
@@ -60,7 +60,7 @@ From now on you can attend any conference knowing that only the most pertinent q
 ### - User story #01(Login):
 As a user, I want to log into the app.
 #### User interface mockup
-<img src="./images/UserStory01.png" height="400" alt="User Story 01 Mockup">
+<img src="./docs/images/UserStory01.png" height="400" alt="User Story 01 Mockup">
 
 #### Acceptance tests
 
@@ -79,7 +79,7 @@ Effort: M
 ### - User story #02(See My Lectures):
 As a user, I want to filter and view lectures that I have attended or will attend.
 #### User interface mockup
-<img src="./images/UserStory02.png" height="400" alt="User Story 02 Mockup">
+<img src="./docs/images/UserStory02.png" height="400" alt="User Story 02 Mockup">
 
 #### Acceptance tests
 | Id |Given  |  When | Then
@@ -99,7 +99,7 @@ Effort: S
 ### - User story #03(Create Lecture):
 As a lecturer, I can create a new lecture
 #### User interface mockup
-<img src="./images/UserStory03.png" height="400" alt="User Story 03 Mockup">
+<img src="./docs/images/UserStory03.png" height="400" alt="User Story 03 Mockup">
 
 #### Acceptance tests
 
@@ -119,7 +119,7 @@ Effort: L
 ### - User story #04(Choose lecture to attend):
 As a user, I want to be able to see upcoming lectures (w/ filters) and choose one to attend.
 #### User interface mockup
-<img src="./images/UserStory04.png" height="400" alt="User Story 04 Mockup">
+<img src="./docs/images/UserStory04.png" height="400" alt="User Story 04 Mockup">
 
 #### Acceptance tests
 
@@ -137,7 +137,7 @@ Effort: L
 ### - User story #05(Update Status of Presentation):
 As a lecturer, I can change the status of my presentation (Live/Finished)
 #### User interface mockup
-<img src="./images/UserStory05.png" height="400" alt="User Story 05 Mockup">
+<img src="./docs/images/UserStory05.png" height="400" alt="User Story 05 Mockup">
 
 #### Acceptance tests
 
@@ -156,7 +156,7 @@ Effort: M
 ### - User story #06(Submit Presentation):
 As a lecturer I can submit my presentation so that attendees can follow along my presentation.
 #### User interface mockup
-<img src="./images/UserStory06.png" height="400" alt="User Story 06 Mockup">
+<img src="./docs/images/UserStory06.png" height="400" alt="User Story 06 Mockup">
 
 #### Acceptance tests
 
@@ -172,7 +172,7 @@ Effort: S
 ### - User story #07(Download Presentation):
 As an attendee, I can access the slides submitted by the lecturer to follow along
 #### User interface mockup
-<img src="./images/UserStory07.png" height="400" alt="User Story 07 Mockup">
+<img src="./docs/images/UserStory07.png" height="400" alt="User Story 07 Mockup">
 
 #### Acceptance tests
 
@@ -190,7 +190,7 @@ Effort: S
 ### - User story #08(Select Slide Number):
 As a user I can select which slide I have a doubt so that it is easier for the lecturer to answer my question.
 #### User interface mockup
-<img src="./images/UserStory08.png" height="400" alt="User Story 08 Mockup">
+<img src="./docs/images/UserStory08.png" height="400" alt="User Story 08 Mockup">
 
 #### Acceptance tests
 
@@ -207,7 +207,7 @@ Effort: M
 ### - User story #09(Vote on Questions):
 As a user, I can vote on which questions I like the most so that they are more likely to get answered.
 #### User interface mockup
-<img src="./images/UserStory09.png" height="400" alt="User Story 09 Mockup">
+<img src="./docs/images/UserStory09.png" height="400" alt="User Story 09 Mockup">
 
 #### Acceptance tests
 
@@ -229,7 +229,7 @@ Effort: M
 ### - User story #10(See Questions Sorted by Rating):
  As a lecturer I can look at the highest rated questions so that I can answer the most wanted questions first.
 #### User interface mockup
-<img src="./images/UserStory10.png" height="400" alt="User Story 10 Mockup">
+<img src="./docs/images/UserStory10.png" height="400" alt="User Story 10 Mockup">
 
 #### Acceptance tests
 
@@ -246,7 +246,7 @@ Effort: M
 ### - User story #11(Reply to Questions post Lecture):
 As a user I can reply to other user's questions after the lecture has ended so that more questions can get answered.
 #### User interface mockup
-<img src="./images/UserStory11.png" height="400" alt="User Story 11 Mockup">
+<img src="./docs/images/UserStory11.png" height="400" alt="User Story 11 Mockup">
 
 #### Acceptance tests
 
@@ -261,7 +261,7 @@ Effort: L
 ### - User story #12(Sort Questions):
 As a user, I want to sort the existent questions by rating or by new.
 #### User interface mockup
-<img src="./images/UserStory12.png" height="400" alt="User Story 12 Mockup">
+<img src="./docs/images/UserStory12.png" height="400" alt="User Story 12 Mockup">
 
 #### Acceptance tests
 
@@ -283,7 +283,7 @@ Effort: M
 
 
 ### Domain model
-To better understand the context of the software system, it is very useful to have a simple UML class diagram with all the key concepts (names, attributes) and relationships involved of the problem domain addressed by your module.
+<img src="./docs/images/problem_domain_uml.png" height="320" alt="Problem Domain UML">
 
 ## Architecture and Design
 The architecture of a software system encompasses the set of key decisions about its overall organization.
