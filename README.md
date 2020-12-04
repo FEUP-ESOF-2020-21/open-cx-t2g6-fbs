@@ -56,7 +56,7 @@ From now on you can attend any conference knowing that only the most pertinent q
 
 ### User stories
 
-### - User story #01: 
+### - User story #01(Login):
 As a user, I want to log into the app.
 #### User interface mockup
 <img src="./docs/images/UserStory01.png" height="400" alt="User Story 01 Mockup">
@@ -75,7 +75,7 @@ Value: Must have
 
 Effort: M
 
-### - User story #02: 
+### - User story #02(See My Lectures):
 As a user, I want to filter and view lectures that I have attended or will attend.
 #### User interface mockup
 <img src="./docs/images/UserStory02.png" height="400" alt="User Story 02 Mockup">
@@ -96,7 +96,7 @@ Value: Must have
 Effort: S
 Effort estimation history (from oldest to newest): S, XL
 
-### - User story #03: 
+### - User story #03(Create Lecture):
 As a lecturer, I can create a new lecture
 #### User interface mockup
 <img src="./docs/images/UserStory03.png" height="400" alt="User Story 03 Mockup">
@@ -117,7 +117,7 @@ Value: Must have
 Effort: L
 
 
-### - User story #04: 
+### - User story #04(Choose lecture to attend):
 As a user, I want to be able to see upcoming lectures (w/ filters) and choose one to attend.
 #### User interface mockup
 <img src="./docs/images/UserStory04.png" height="400" alt="User Story 04 Mockup">
@@ -135,7 +135,7 @@ Value: Must have
 
 Effort: L
 
-### - User story #05: 
+### - User story #05(Update Status of Presentation):
 As a lecturer, I can change the status of my presentation (Live/Finished)
 #### User interface mockup
 <img src="./docs/images/UserStory05.png" height="400" alt="User Story 05 Mockup">
@@ -154,7 +154,7 @@ Value: Should have
 
 Effort: M
 
-### - User story #06: 
+### - User story #06(Submit Presentation):
 As a lecturer I can submit my presentation so that attendees can follow along my presentation.
 #### User interface mockup
 <img src="./docs/images/UserStory06.png" height="400" alt="User Story 06 Mockup">
@@ -170,7 +170,7 @@ Value: Must have
 
 Effort: S
 
-### - User story #07: 
+### - User story #07(Download Presentation):
 As an attendee, I can access the slides submitted by the lecturer to follow along
 #### User interface mockup
 <img src="./docs/images/UserStory07.png" height="400" alt="User Story 07 Mockup">
@@ -188,7 +188,7 @@ Value: Must have
 Effort: S
 
 
-### - User story #08: 
+### - User story #08(Select Slide Number):
 As a user I can select which slide I have a doubt so that it is easier for the lecturer to  answer my question.
 #### User interface mockup
 <img src="./docs/images/UserStory08.png" height="400" alt="User Story 08 Mockup">
@@ -205,7 +205,7 @@ Value: Must have
 Effort: M
 
 
-### - User story #09: 
+### - User story #09(Vote on Questions):
 As a user, I can vote on which questions I like the most so that they are more likely to get answered.
 #### User interface mockup
 <img src="./docs/images/UserStory09.png" height="400" alt="User Story 09 Mockup">
@@ -227,7 +227,7 @@ Value: Must have
 Effort: M
 
 
-### - User story #10: 
+### - User story #10(See Questions Sorted by Rating):
  As a lecturer I can look at the highest rated questions so that I can answer the most wanted questions first.
 #### User interface mockup
 <img src="./docs/images/UserStory10.png" height="400" alt="User Story 10 Mockup">
@@ -244,7 +244,7 @@ Value: Must have
 
 Effort: M
 
-### - User story #11: 
+### - User story #11(Reply to Questions post Lecture):
 As a user I can reply to other user's questions after the lecture has ended so that more questions can get answered.
 #### User interface mockup
 <img src="./docs/images/UserStory11.png" height="400" alt="User Story 11 Mockup">
@@ -259,7 +259,7 @@ Value: Should have
 
 Effort: L
 
-### - User story #12: 
+### - User story #12(Sort Questions):
 As a user, I want to sort the existent questions by rating or by new.
 #### User interface mockup
 <img src="./docs/images/UserStory12.png" height="400" alt="User Story 12 Mockup">
