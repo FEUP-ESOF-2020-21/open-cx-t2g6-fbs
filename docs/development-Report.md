@@ -283,7 +283,7 @@ Effort: M
 
 
 ### Domain model
-To better understand the context of the software system, it is very useful to have a simple UML class diagram with all the key concepts (names, attributes) and relationships involved of the problem domain addressed by your module.
+<img src="./images/problem_domain_uml.png" height="320" alt="Problem Domain UML">
 
 ## Architecture and Design
 The architecture of a software system encompasses the set of key decisions about its overall organization.
