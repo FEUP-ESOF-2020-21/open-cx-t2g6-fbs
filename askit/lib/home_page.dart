@@ -3,6 +3,7 @@ import 'package:askit/add_lecture_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:askit/sign_in.dart';
+import 'package:askit/individual_lecture_page.dart';
 
 enum TypeOfLecture { previous, upcoming }
 bool filterLecturer = true;
@@ -159,7 +160,15 @@ class _HomePageState extends State<HomePage> {
               itemBuilder: (BuildContext ctxt, int index) {
                 return new ListTile(
                     title: Text(listOfLectures[index].printIdAndTitle()),
-                    subtitle: Text(listOfLectures[index].printTheRest()));
+                    subtitle: Text(listOfLectures[index].printTheRest()),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ViewSpecificUserLecturePage(
+                                listOfLectures[index])),
+                      );
+                    });
               }),
         );
       }
