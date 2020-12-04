@@ -277,6 +277,9 @@ Value: Could have
 Effort: M
 
 
+### User story map
+<img src="./images/storyMap.jpg" >
+
 
 
 
