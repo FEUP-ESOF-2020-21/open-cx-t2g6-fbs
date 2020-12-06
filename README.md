@@ -278,6 +278,15 @@ Effort: M
 
 
 
+### User story map
+<img src="./docs/images/storyMap.jpg" >
+
+
+
+
+
+
+
 
 
 
