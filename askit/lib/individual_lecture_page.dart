@@ -41,6 +41,14 @@ class _ViewSpecificUserLectureState extends State<ViewSpecificUserLecturePage> {
                       lecture.printTheRest() +
                       "\n")),
               tmp,
+              new OutlineButton(
+                  child: Text('Download files'),
+                  splashColor: Colors.grey,
+                  onPressed: () {},
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(40)),
+                  highlightElevation: 0,
+                  borderSide: BorderSide(color: Colors.grey))
             ])));
   }
 
