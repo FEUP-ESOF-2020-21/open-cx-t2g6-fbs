@@ -11,6 +11,7 @@ bool filterAttendee = true;
 int numberOfResults = 0;
 Widget temp = new Container();
 List<Lecture> listOfLectures = new List();
+Lecture selectedLecture;
 
 class HomePage extends StatefulWidget {
   @override
@@ -162,12 +163,11 @@ class _HomePageState extends State<HomePage> {
                     title: Text(listOfLectures[index].printIdAndTitle()),
                     subtitle: Text(listOfLectures[index].printTheRest()),
                     onTap: () {
+                      selectedLecture = listOfLectures[index];
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ViewSpecificUserLecturePage(
-                                listOfLectures[index])),
-                      );
+                            builder: (context) => ViewSpecificUserLecturePage()));
                     });
               }),
         );
