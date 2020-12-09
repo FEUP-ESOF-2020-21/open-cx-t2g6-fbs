@@ -6,7 +6,6 @@ import 'package:askit/sign_in.dart';
 import 'dart:core';
 
 class ViewSpecificUserLecturePage extends StatefulWidget {
-  
   @override
   _ViewSpecificUserLectureState createState() =>
       _ViewSpecificUserLectureState();
@@ -19,7 +18,7 @@ class _ViewSpecificUserLectureState extends State<ViewSpecificUserLecturePage> {
 
   _ViewSpecificUserLectureState() {
     this.lecture = selectedLecture;
-    getRole();
+    getRoleFromDatabase(this.lecture, email);
   }
   @override
   Widget build(BuildContext context) {
@@ -41,14 +40,8 @@ class _ViewSpecificUserLectureState extends State<ViewSpecificUserLecturePage> {
                       "\n" +
                       lecture.printTheRest() +
                       "\n")),
-                      
-                      tmp ,
-             
+              tmp,
             ])));
-  }
-
-  Widget getRole(){
-    getRoleFromDatabase(this.lecture, email);
   }
 
   Future getRoleFromDatabase(Lecture lecture, String email) async {
