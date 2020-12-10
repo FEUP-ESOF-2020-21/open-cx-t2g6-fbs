@@ -1,4 +1,5 @@
 import 'package:askit/lecture.dart';
+import 'package:askit/view_questions_attendee.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:askit/home_page.dart';
@@ -50,7 +51,12 @@ class _ViewSpecificUserLectureStateAsAttendee
               new OutlineButton(
                   child: Text('View Questions'),
                   splashColor: Colors.grey,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ViewQuestionsAsAttendee()));
+                  },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(40)),
                   highlightElevation: 0,

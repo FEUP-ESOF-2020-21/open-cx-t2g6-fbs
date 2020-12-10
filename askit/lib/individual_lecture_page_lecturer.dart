@@ -1,4 +1,5 @@
 import 'package:askit/lecture.dart';
+import 'package:askit/view_questions_lecturer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:askit/home_page.dart';
@@ -39,6 +40,7 @@ class _ViewSpecificUserLectureStateAsLecturer
                       lecture.printTheRest() +
                       "\n" +
                       "Role: Lecturer")),
+              //TODO Add option in same row to upload new file and let user know whether a file is already uploaded or not
               new OutlineButton(
                   child: Text('Download files'),
                   splashColor: Colors.grey,
@@ -50,7 +52,12 @@ class _ViewSpecificUserLectureStateAsLecturer
               new OutlineButton(
                   child: Text('View Questions'),
                   splashColor: Colors.grey,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ViewQuestionsAsLecturer()));
+                  },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(40)),
                   highlightElevation: 0,
