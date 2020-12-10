@@ -3,6 +3,8 @@ import 'package:askit/add_lecture_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:askit/sign_in.dart';
+import 'package:askit/individual_lecture_page_lecturer.dart';
+import 'package:askit/individual_lecture_page_attendee.dart';
 
 enum TypeOfLecture { previous, upcoming }
 bool filterLecturer = true;
@@ -10,6 +12,7 @@ bool filterAttendee = true;
 int numberOfResults = 0;
 Widget temp = new Container();
 List<Lecture> listOfLectures = new List();
+Lecture selectedLecture;
 
 class HomePage extends StatefulWidget {
   @override
@@ -21,8 +24,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    //TODO Add user to app, with name and email, global variables name, email
-
     return MaterialApp(
         theme: ThemeData(primaryColor: Colors.purple[900]),
         home: Scaffold(
@@ -159,7 +160,23 @@ class _HomePageState extends State<HomePage> {
               itemBuilder: (BuildContext ctxt, int index) {
                 return new ListTile(
                     title: Text(listOfLectures[index].printIdAndTitle()),
-                    subtitle: Text(listOfLectures[index].printTheRest()));
+                    subtitle: Text(listOfLectures[index].printTheRest()),
+                    onTap: () {
+                      selectedLecture = listOfLectures[index];
+                      getRoleFromDatabase(selectedLecture).then((role) => {
+                            role == "Lecturer"
+                                ? Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ViewSpecificUserLecturePageAsLecturer()))
+                                : Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ViewSpecificUserLecturePageAsAttendee()))
+                          });
+                    });
               }),
         );
       }
@@ -171,19 +188,21 @@ class _HomePageState extends State<HomePage> {
     return Expanded(
         child: Align(
             alignment: Alignment.bottomCenter,
-            child: OutlineButton(
-                child: Text('Add Lecture'),
-                splashColor: Colors.grey,
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AddLecturePage()));
-                },
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(40)),
-                highlightElevation: 0,
-                borderSide: BorderSide(color: Colors.grey))));
+            child: Padding(
+                padding: EdgeInsets.only(bottom: 20),
+                child: OutlineButton(
+                    child: Text('Add Lecture'),
+                    splashColor: Colors.grey,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AddLecturePage()));
+                    },
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(40)),
+                    highlightElevation: 0,
+                    borderSide: BorderSide(color: Colors.grey)))));
   }
 
 //This function should return a list of Lectures
@@ -213,5 +232,21 @@ class _HomePageState extends State<HomePage> {
     }
 
     return result;
+  }
+
+  Future<String> getRoleFromDatabase(Lecture lecture) async {
+    print("Function was called!\n");
+    String role;
+
+    var url =
+        "https://web.fe.up.pt/~up201806296/database/getRoleFromLecture.php";
+
+    url = url + "?email=" + email + "&lectureId=" + lecture.getId().toString();
+
+    var encoded = Uri.encodeFull(url);
+    http.Response response = await http.get(encoded);
+
+    role = response.body.toString();
+    return role;
   }
 }
