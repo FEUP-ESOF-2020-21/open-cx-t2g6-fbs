@@ -3,7 +3,8 @@ import 'package:askit/add_lecture_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:askit/sign_in.dart';
-import 'package:askit/individual_lecture_page.dart';
+import 'package:askit/individual_lecture_page_lecturer.dart';
+import 'package:askit/individual_lecture_page_attendee.dart';
 
 enum TypeOfLecture { previous, upcoming }
 bool filterLecturer = true;
@@ -164,10 +165,19 @@ class _HomePageState extends State<HomePage> {
                     subtitle: Text(listOfLectures[index].printTheRest()),
                     onTap: () {
                       selectedLecture = listOfLectures[index];
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ViewSpecificUserLecturePage()));
+                      getRoleFromDatabase(selectedLecture).then((role) => {
+                            role == "Lecturer"
+                                ? Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ViewSpecificUserLecturePageAsLecturer()))
+                                : Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ViewSpecificUserLecturePageAsAttendee()))
+                          });
                     });
               }),
         );
@@ -222,5 +232,21 @@ class _HomePageState extends State<HomePage> {
     }
 
     return result;
+  }
+
+  Future<String> getRoleFromDatabase(Lecture lecture) async {
+    print("Function was called!\n");
+    String role;
+
+    var url =
+        "https://web.fe.up.pt/~up201806296/database/getRoleFromLecture.php";
+
+    url = url + "?email=" + email + "&lectureId=" + lecture.getId().toString();
+
+    var encoded = Uri.encodeFull(url);
+    http.Response response = await http.get(encoded);
+
+    role = response.body.toString();
+    return role;
   }
 }

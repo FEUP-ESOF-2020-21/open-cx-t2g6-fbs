@@ -5,20 +5,18 @@ import 'package:askit/home_page.dart';
 import 'package:askit/sign_in.dart';
 import 'dart:core';
 
-class ViewSpecificUserLecturePage extends StatefulWidget {
+class ViewSpecificUserLecturePageAsLecturer extends StatefulWidget {
   @override
-  _ViewSpecificUserLectureState createState() =>
-      _ViewSpecificUserLectureState();
+  _ViewSpecificUserLectureStateAsLecturer createState() =>
+      _ViewSpecificUserLectureStateAsLecturer();
 }
 
-class _ViewSpecificUserLectureState extends State<ViewSpecificUserLecturePage> {
+class _ViewSpecificUserLectureStateAsLecturer
+    extends State<ViewSpecificUserLecturePageAsLecturer> {
   Lecture lecture;
-  String role = "";
-  Widget tmp = new Text("");
 
-  _ViewSpecificUserLectureState() {
+  _ViewSpecificUserLectureStateAsLecturer() {
     this.lecture = selectedLecture;
-    getRoleFromDatabase(this.lecture, email);
   }
   @override
   Widget build(BuildContext context) {
@@ -39,8 +37,8 @@ class _ViewSpecificUserLectureState extends State<ViewSpecificUserLecturePage> {
                   title: Text(lecture.printIdAndTitle() +
                       "\n" +
                       lecture.printTheRest() +
-                      "\n")),
-              tmp,
+                      "\n" +
+                      "Role: Lecturer")),
               new OutlineButton(
                   child: Text('Download files'),
                   splashColor: Colors.grey,
@@ -48,23 +46,15 @@ class _ViewSpecificUserLectureState extends State<ViewSpecificUserLecturePage> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(40)),
                   highlightElevation: 0,
+                  borderSide: BorderSide(color: Colors.grey)),
+              new OutlineButton(
+                  child: Text('View Questions'),
+                  splashColor: Colors.grey,
+                  onPressed: () {},
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(40)),
+                  highlightElevation: 0,
                   borderSide: BorderSide(color: Colors.grey))
             ])));
-  }
-
-  Future getRoleFromDatabase(Lecture lecture, String email) async {
-    print("Function was called!\n");
-
-    var url =
-        "https://web.fe.up.pt/~up201806296/database/getRoleFromLecture.php";
-
-    url = url + "?email=" + email + "&lectureId=" + lecture.getId().toString();
-
-    var encoded = Uri.encodeFull(url);
-    http.Response response = await http.get(encoded);
-    role = response.body.toString();
-    setState(() {
-      tmp = new Text("Role: " + role);
-    });
   }
 }
