@@ -1,4 +1,5 @@
 import 'package:askit/lecture.dart';
+import 'package:askit/submit_question.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:askit/home_page.dart';
@@ -158,7 +159,10 @@ class _ViewQuestionsAsAttendeeState extends State<ViewQuestionsAsAttendee> {
                     child: Text('Submit Question'),
                     splashColor: Colors.grey,
                     onPressed: () {
-                      //TODO NAvigator.push etc submit question
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SubmitQuestionPage()));
                     },
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(40)),
