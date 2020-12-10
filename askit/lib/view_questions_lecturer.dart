@@ -37,7 +37,7 @@ class _ViewQuestionsAsLecturerState extends State<ViewQuestionsAsLecturer> {
                       'Questions for Lecture #' +
                           selectedLecture.getId().toString(),
                       style: TextStyle(fontSize: 20)),
-                  padding: EdgeInsets.only(top: 80.0, bottom: 20)),
+                  padding: EdgeInsets.only(top: 20.0, bottom: 20)),
               temp_questions
             ])));
   }
