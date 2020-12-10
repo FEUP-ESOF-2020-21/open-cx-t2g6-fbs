@@ -188,19 +188,21 @@ class _HomePageState extends State<HomePage> {
     return Expanded(
         child: Align(
             alignment: Alignment.bottomCenter,
-            child: OutlineButton(
-                child: Text('Add Lecture'),
-                splashColor: Colors.grey,
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AddLecturePage()));
-                },
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(40)),
-                highlightElevation: 0,
-                borderSide: BorderSide(color: Colors.grey))));
+            child: Padding(
+                padding: EdgeInsets.only(bottom: 20),
+                child: OutlineButton(
+                    child: Text('Add Lecture'),
+                    splashColor: Colors.grey,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AddLecturePage()));
+                    },
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(40)),
+                    highlightElevation: 0,
+                    borderSide: BorderSide(color: Colors.grey)))));
   }
 
 //This function should return a list of Lectures
