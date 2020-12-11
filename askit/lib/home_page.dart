@@ -1,5 +1,6 @@
 import 'package:askit/lecture.dart';
 import 'package:askit/add_lecture_page.dart';
+import 'package:askit/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:askit/sign_in.dart';
@@ -95,7 +96,12 @@ class _HomePageState extends State<HomePage> {
                 ),
                 _searchButton(),
                 temp,
-                _addLectureButton(context),
+                new Row(
+                  children: [
+                    _addLectureButton(context),
+                    _signOutButton(context)
+                  ],
+                )
               ],
             )));
   }
@@ -189,7 +195,7 @@ class _HomePageState extends State<HomePage> {
         child: Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-                padding: EdgeInsets.only(bottom: 20),
+                padding: EdgeInsets.only(bottom: 0),
                 child: OutlineButton(
                     child: Text('Add Lecture'),
                     splashColor: Colors.grey,
@@ -248,5 +254,29 @@ class _HomePageState extends State<HomePage> {
 
     role = response.body.toString();
     return role;
+  }
+
+  Widget _signOutButton(BuildContext context) {
+    return Padding(
+        padding: EdgeInsets.only(right: 25),
+        child: RaisedButton(
+          onPressed: () {
+            signOutGoogle();
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) {
+              return LoginPage();
+            }), ModalRoute.withName('/'));
+          },
+          color: Colors.deepPurple,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'Sign Out',
+              style: TextStyle(fontSize: 25, color: Colors.white),
+            ),
+          ),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+        ));
   }
 }
