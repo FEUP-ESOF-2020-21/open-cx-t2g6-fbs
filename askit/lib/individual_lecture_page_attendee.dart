@@ -5,6 +5,9 @@ import 'package:http/http.dart' as http;
 import 'package:askit/home_page.dart';
 import 'package:askit/sign_in.dart';
 import 'dart:core';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'dart:io' as io;
+import 'package:ext_storage/ext_storage.dart';
 
 class ViewSpecificUserLecturePageAsAttendee extends StatefulWidget {
   @override
@@ -43,7 +46,7 @@ class _ViewSpecificUserLectureStateAsAttendee
               new OutlineButton(
                   child: Text('Download files'),
                   splashColor: Colors.grey,
-                  onPressed: () {},
+                  onPressed: () { downloadFile();},
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(40)),
                   highlightElevation: 0,
@@ -63,4 +66,26 @@ class _ViewSpecificUserLectureStateAsAttendee
                   borderSide: BorderSide(color: Colors.grey))
             ])));
   }
+
+
+  Future downloadFile() async {
+    firebase_storage.FirebaseStorage storage =
+        firebase_storage.FirebaseStorage.instance;
+
+    var title = lecture.getTitle();
+    //TODO: replace dummy.pdf to fileName.
+    var storageRef = storage.ref().child('lectures/$title/dummy.pdf');
+    
+    String path =
+    await ExtStorage.getExternalStoragePublicDirectory(
+        ExtStorage.DIRECTORY_DOWNLOADS);
+
+
+    String fullPath = "$path/lecture.pdf";
+
+    File file = new File(fullPath);
+    storageRef.writeToFile(file);
+  }
+
+
 }
