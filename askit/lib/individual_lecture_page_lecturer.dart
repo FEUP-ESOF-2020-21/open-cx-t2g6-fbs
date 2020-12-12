@@ -45,14 +45,30 @@ class _ViewSpecificUserLectureStateAsLecturer
                       ? "No file uploaded"
                       : lecture.getFileName())),
               //TODO Add option in same row to upload new file and let user know whether a file is already uploaded or not
-              new OutlineButton(
-                  child: Text('Download files'),
-                  splashColor: Colors.grey,
-                  onPressed: () {},
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(40)),
-                  highlightElevation: 0,
-                  borderSide: BorderSide(color: Colors.grey)),
+              new Row(children: [
+                new Padding(
+                    //TODO CENTER THIS PROPERLY
+
+                    padding: EdgeInsets.only(left: 60, right: 20),
+                    child: OutlineButton(
+                        child: Text('Replace file'),
+                        splashColor: Colors.grey,
+                        onPressed: () {
+                          /*TODO This must do something aka upload a file as if user was creating a lecture*/
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(40)),
+                        highlightElevation: 0,
+                        borderSide: BorderSide(color: Colors.grey))),
+                new OutlineButton(
+                    child: Text('Download files'),
+                    splashColor: Colors.grey,
+                    onPressed: () {},
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(40)),
+                    highlightElevation: 0,
+                    borderSide: BorderSide(color: Colors.grey))
+              ]),
               new OutlineButton(
                   child: Text('View Questions'),
                   splashColor: Colors.grey,
