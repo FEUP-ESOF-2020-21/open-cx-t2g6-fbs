@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:askit/lecture.dart';
 import 'package:askit/view_questions_attendee.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +47,9 @@ class _ViewSpecificUserLectureStateAsAttendee
               new OutlineButton(
                   child: Text('Download files'),
                   splashColor: Colors.grey,
-                  onPressed: () { downloadFile();},
+                  onPressed: () {
+                    downloadFile();
+                  },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(40)),
                   highlightElevation: 0,
@@ -67,7 +70,6 @@ class _ViewSpecificUserLectureStateAsAttendee
             ])));
   }
 
-
   Future downloadFile() async {
     firebase_storage.FirebaseStorage storage =
         firebase_storage.FirebaseStorage.instance;
@@ -75,17 +77,13 @@ class _ViewSpecificUserLectureStateAsAttendee
     var title = lecture.getTitle();
     //TODO: replace dummy.pdf to fileName.
     var storageRef = storage.ref().child('lectures/$title/dummy.pdf');
-    
-    String path =
-    await ExtStorage.getExternalStoragePublicDirectory(
-        ExtStorage.DIRECTORY_DOWNLOADS);
 
+    String path = await ExtStorage.getExternalStoragePublicDirectory(
+        ExtStorage.DIRECTORY_DOWNLOADS);
 
     String fullPath = "$path/lecture.pdf";
 
     File file = new File(fullPath);
     storageRef.writeToFile(file);
   }
-
-
 }

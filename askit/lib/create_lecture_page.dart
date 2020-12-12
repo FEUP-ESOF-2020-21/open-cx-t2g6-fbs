@@ -227,7 +227,10 @@ class MyCustomFormState extends State<MyCustomForm> {
 
     firebase_storage.UploadTask uploadTask = storageRef.putFile(_file);
     uploadTask.whenComplete(() => {
-        _uploadedFileURL = fileName
-      });
+          _uploadedFileURL = fileName,
+          setState(() {
+            _uploadingFile = false;
+          }),
+        });
   }
 }
