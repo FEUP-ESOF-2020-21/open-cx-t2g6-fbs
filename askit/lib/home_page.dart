@@ -214,20 +214,20 @@ class _HomePageState extends State<HomePage> {
 //This function should return a list of Lectures
   List<Lecture> parseResults(String text) {
     List<String> list = text.split("\n");
-    print(text);
-
+    print(list);
+    print("=============");
     List<Lecture> result = new List();
     if (list.length == 0) return result;
     print("List length: ");
     print(list.length);
 
-    int numberOfLectures = (list.length) ~/ 6;
+    int numberOfLectures = (list.length) ~/ 7;
     print(numberOfLectures);
 
     int offset = 0;
 
     //Extract lectures depending on the filters. Time filters are being applied in the .php file
-    for (int i = 1; i <= numberOfLectures; i++, offset += 6) {
+    for (int i = 1; i <= numberOfLectures; i++, offset += 7) {
       result.add(new Lecture(
           int.parse(list[offset]),
           list[offset + 1],

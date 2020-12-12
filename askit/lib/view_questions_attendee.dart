@@ -110,15 +110,30 @@ class _ViewQuestionsAsAttendeeState extends State<ViewQuestionsAsAttendee> {
                     itemCount: listOfQuestions.length,
                     itemBuilder: (BuildContext ctxt, int index) {
                       return new ListTile(
-                          title:
-                              Text(listOfQuestions[index].printIdAndQuestion()),
-                          subtitle: Text("Slide: " +
-                              listOfQuestions[index].getSlide().toString() +
-                              "\nRating: " +
-                              listOfQuestions[index].getRating().toString()),
-                          onTap: () {
-                            print(index);
-                          });
+                        title:
+                            Text(listOfQuestions[index].printIdAndQuestion()),
+                        subtitle: Text("Slide: " +
+                            listOfQuestions[index].getSlide().toString() +
+                            "\nRating: " +
+                            listOfQuestions[index].getRating().toString()),
+                        onTap: () {
+                          print(index);
+                        },
+                        leading: new IconButton(
+                            icon: new Icon(Icons.arrow_downward,
+                                color: Colors.blueAccent[200]),
+                            onPressed: () {
+                              print("DOWNVOTED QUESTION WITH INDEX " +
+                                  index.toString());
+                            }),
+                        trailing: new IconButton(
+                            icon: new Icon(Icons.arrow_upward,
+                                color: Colors.orange),
+                            onPressed: () {
+                              print("UPVOTED QUESTION WITH INDEX " +
+                                  index.toString());
+                            }),
+                      );
                     }),
               );
             }
