@@ -40,6 +40,10 @@ class _ViewSpecificUserLectureStateAsLecturer
                       lecture.printTheRest() +
                       "\n" +
                       "Role: Lecturer")),
+              new Text("File uploaded: " +
+                  (lecture.getFileName() == ""
+                      ? "No file uploaded"
+                      : lecture.getFileName())),
               //TODO Add option in same row to upload new file and let user know whether a file is already uploaded or not
               new OutlineButton(
                   child: Text('Download files'),

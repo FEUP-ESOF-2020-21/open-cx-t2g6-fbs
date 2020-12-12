@@ -44,6 +44,10 @@ class _ViewSpecificUserLectureStateAsAttendee
                       lecture.printTheRest() +
                       "\n" +
                       "Role: Attendee")),
+              new Text("File uploaded: " +
+                  (lecture.getFileName() == ""
+                      ? "No file uploaded"
+                      : lecture.getFileName())),
               new OutlineButton(
                   child: Text('Download files'),
                   splashColor: Colors.grey,
