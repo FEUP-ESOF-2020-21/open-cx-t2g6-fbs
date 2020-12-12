@@ -47,9 +47,11 @@ class _ViewSpecificUserLectureStateAsAttendee
               new OutlineButton(
                   child: Text('Download files'),
                   splashColor: Colors.grey,
-                  onPressed: () {
-                    downloadFile();
-                  },
+                  onPressed: lecture.getFileName() == ""
+                      ? null
+                      : () {
+                          downloadFile();
+                        },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(40)),
                   highlightElevation: 0,

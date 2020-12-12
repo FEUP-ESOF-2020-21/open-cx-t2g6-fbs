@@ -143,7 +143,7 @@ class _ChooseLectureState extends State<ChooseLecturePage> {
     List<Lecture> result = new List();
     if (list.length == 0) return result;
 
-    int numberOfLectures = (list.length - 4) ~/ 7;
+    int numberOfLectures = (list.length) ~/ 7;
     print(numberOfLectures);
 
     int offset = 0;
