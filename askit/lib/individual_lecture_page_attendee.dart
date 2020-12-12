@@ -81,8 +81,9 @@ class _ViewSpecificUserLectureStateAsAttendee
         firebase_storage.FirebaseStorage.instance;
 
     var title = lecture.getTitle();
-    //TODO: replace dummy.pdf to fileName.
-    var storageRef = storage.ref().child('lectures/$title/dummy.pdf');
+    var fileName = lecture.getFileName();
+    print('lectures/$title/$fileName');
+    var storageRef = storage.ref().child('lectures/$title/$fileName');
 
     String path = await ExtStorage.getExternalStoragePublicDirectory(
         ExtStorage.DIRECTORY_DOWNLOADS);

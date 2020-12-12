@@ -223,6 +223,7 @@ class MyCustomFormState extends State<MyCustomForm> {
 
     firebase_storage.FirebaseStorage storage =
         firebase_storage.FirebaseStorage.instance;
+    _formKey.currentState.validate();
     var storageRef = storage.ref().child('lectures/$title/$fileName');
 
     firebase_storage.UploadTask uploadTask = storageRef.putFile(_file);
