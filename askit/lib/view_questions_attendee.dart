@@ -123,15 +123,13 @@ class _ViewQuestionsAsAttendeeState extends State<ViewQuestionsAsAttendee> {
                             icon: new Icon(Icons.arrow_downward,
                                 color: Colors.blueAccent[200]),
                             onPressed: () {
-                              print("DOWNVOTED QUESTION WITH INDEX " +
-                                  index.toString());
+                              downvoteQuestion(listOfQuestions[index].getId());
                             }),
                         trailing: new IconButton(
                             icon: new Icon(Icons.arrow_upward,
                                 color: Colors.orange),
                             onPressed: () {
-                              print("UPVOTED QUESTION WITH INDEX " +
-                                  index.toString());
+                              upvoteQuestion(listOfQuestions[index].getId());
                             }),
                       );
                     }),
@@ -183,5 +181,41 @@ class _ViewQuestionsAsAttendeeState extends State<ViewQuestionsAsAttendee> {
                         borderRadius: BorderRadius.circular(40)),
                     highlightElevation: 0,
                     borderSide: BorderSide(color: Colors.grey)))));
+  }
+
+  Future upvoteQuestion(int questionId) async {
+    print("Function was called!\n");
+
+    var url = "https://web.fe.up.pt/~up201806296/database/upvoteQuestion.php";
+
+    url = url + "?email=" + email + "&questionId=" + questionId.toString();
+
+    var encoded = Uri.encodeFull(url);
+
+    print(encoded);
+
+    http.get(encoded).then((response) => {
+          setState(() {
+            getQuestions();
+          })
+        });
+  }
+
+  Future downvoteQuestion(int questionId) async {
+    print("Function was called!\n");
+
+    var url = "https://web.fe.up.pt/~up201806296/database/downvoteQuestion.php";
+
+    url = url + "?email=" + email + "&questionId=" + questionId.toString();
+
+    var encoded = Uri.encodeFull(url);
+
+    print(encoded);
+
+    http.get(encoded).then((response) => {
+          setState(() {
+            getQuestions();
+          })
+        });
   }
 }
