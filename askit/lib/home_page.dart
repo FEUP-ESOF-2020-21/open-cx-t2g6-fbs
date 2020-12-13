@@ -214,8 +214,8 @@ class _HomePageState extends State<HomePage> {
 //This function should return a list of Lectures
   List<Lecture> parseResults(String text) {
     List<String> list = text.split("\n");
-    print(text);
-
+    print(list);
+    print("=============");
     List<Lecture> result = new List();
     if (list.length == 0) return result;
     print("List length: ");

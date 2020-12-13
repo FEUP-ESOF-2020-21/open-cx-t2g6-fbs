@@ -110,15 +110,28 @@ class _ViewQuestionsAsAttendeeState extends State<ViewQuestionsAsAttendee> {
                     itemCount: listOfQuestions.length,
                     itemBuilder: (BuildContext ctxt, int index) {
                       return new ListTile(
-                          title:
-                              Text(listOfQuestions[index].printIdAndQuestion()),
-                          subtitle: Text("Slide: " +
-                              listOfQuestions[index].getSlide().toString() +
-                              "\nRating: " +
-                              listOfQuestions[index].getRating().toString()),
-                          onTap: () {
-                            print(index);
-                          });
+                        title:
+                            Text(listOfQuestions[index].printIdAndQuestion()),
+                        subtitle: Text("Slide: " +
+                            listOfQuestions[index].getSlide().toString() +
+                            "\nRating: " +
+                            listOfQuestions[index].getRating().toString()),
+                        onTap: () {
+                          print(index);
+                        },
+                        leading: new IconButton(
+                            icon: new Icon(Icons.arrow_downward,
+                                color: Colors.blueAccent[200]),
+                            onPressed: () {
+                              downvoteQuestion(listOfQuestions[index].getId());
+                            }),
+                        trailing: new IconButton(
+                            icon: new Icon(Icons.arrow_upward,
+                                color: Colors.orange),
+                            onPressed: () {
+                              upvoteQuestion(listOfQuestions[index].getId());
+                            }),
+                      );
                     }),
               );
             }
@@ -168,5 +181,41 @@ class _ViewQuestionsAsAttendeeState extends State<ViewQuestionsAsAttendee> {
                         borderRadius: BorderRadius.circular(40)),
                     highlightElevation: 0,
                     borderSide: BorderSide(color: Colors.grey)))));
+  }
+
+  Future upvoteQuestion(int questionId) async {
+    print("Function was called!\n");
+
+    var url = "https://web.fe.up.pt/~up201806296/database/upvoteQuestion.php";
+
+    url = url + "?email=" + email + "&questionId=" + questionId.toString();
+
+    var encoded = Uri.encodeFull(url);
+
+    print(encoded);
+
+    http.get(encoded).then((response) => {
+          setState(() {
+            getQuestions();
+          })
+        });
+  }
+
+  Future downvoteQuestion(int questionId) async {
+    print("Function was called!\n");
+
+    var url = "https://web.fe.up.pt/~up201806296/database/downvoteQuestion.php";
+
+    url = url + "?email=" + email + "&questionId=" + questionId.toString();
+
+    var encoded = Uri.encodeFull(url);
+
+    print(encoded);
+
+    http.get(encoded).then((response) => {
+          setState(() {
+            getQuestions();
+          })
+        });
   }
 }
