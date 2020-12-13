@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:askit/lecture.dart';
 import 'package:askit/view_questions_attendee.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,9 @@ import 'package:http/http.dart' as http;
 import 'package:askit/home_page.dart';
 import 'package:askit/sign_in.dart';
 import 'dart:core';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'dart:io' as io;
+import 'package:ext_storage/ext_storage.dart';
 
 class ViewSpecificUserLecturePageAsAttendee extends StatefulWidget {
   @override
@@ -40,10 +44,18 @@ class _ViewSpecificUserLectureStateAsAttendee
                       lecture.printTheRest() +
                       "\n" +
                       "Role: Attendee")),
+              new Text("File uploaded: " +
+                  (lecture.getFileName() == ""
+                      ? "No file uploaded"
+                      : lecture.getFileName())),
               new OutlineButton(
                   child: Text('Download files'),
                   splashColor: Colors.grey,
-                  onPressed: () {},
+                  onPressed: lecture.getFileName() == ""
+                      ? null
+                      : () {
+                          downloadFile();
+                        },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(40)),
                   highlightElevation: 0,
@@ -62,5 +74,23 @@ class _ViewSpecificUserLectureStateAsAttendee
                   highlightElevation: 0,
                   borderSide: BorderSide(color: Colors.grey))
             ])));
+  }
+
+  Future downloadFile() async {
+    firebase_storage.FirebaseStorage storage =
+        firebase_storage.FirebaseStorage.instance;
+
+    var title = lecture.getTitle();
+    var fileName = lecture.getFileName();
+    print('lectures/$title/$fileName');
+    var storageRef = storage.ref().child('lectures/$title/$fileName');
+
+    String path = await ExtStorage.getExternalStoragePublicDirectory(
+        ExtStorage.DIRECTORY_DOWNLOADS);
+
+    String fullPath = "$path/lecture.pdf";
+
+    File file = new File(fullPath);
+    storageRef.writeToFile(file);
   }
 }

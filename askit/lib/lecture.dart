@@ -7,18 +7,24 @@ class Lecture {
   String description;
   int maxCapacity;
   int attendance;
+  String fileName;
 
-  Lecture(id, title, description, date, capacity, attendance) {
+  Lecture(id, title, description, date, capacity, attendance, fileName) {
     this.id = id;
     this.title = title;
     this.description = description;
     this.date = date;
     this.maxCapacity = capacity;
     this.attendance = attendance;
+    this.fileName = fileName;
   }
 
   int getId() {
     return this.id;
+  }
+
+  String getFileName() {
+    return this.fileName;
   }
 
   String getTitle() {
