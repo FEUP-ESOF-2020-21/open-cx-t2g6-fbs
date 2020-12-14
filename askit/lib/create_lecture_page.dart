@@ -1,4 +1,3 @@
-import 'package:askit/choose_lecture_page.dart';
 import 'package:askit/sign_in.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -24,19 +23,16 @@ String date = "2020-01-01";
 class _CreateLectureState extends State<CreateLecturePage> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData(primaryColor: Colors.purple[900]),
-        home: Scaffold(
-          appBar: PreferredSize(
-              // Change this argument to customize the height of the app bar
-              preferredSize: Size.fromHeight(50.0),
-              child: AppBar(
-                  title:
-                      Text('CREATE LECTURE', style: TextStyle(fontSize: 30)))),
-          body: new ListView(children: [
-            MyCustomForm(),
-          ]),
-        ));
+    return Scaffold(
+      appBar: PreferredSize(
+          // Change this argument to customize the height of the app bar
+          preferredSize: Size.fromHeight(50.0),
+          child: AppBar(
+              title: Text('CREATE LECTURE', style: TextStyle(fontSize: 30)))),
+      body: new ListView(children: [
+        MyCustomForm(),
+      ]),
+    );
   }
 }
 
@@ -156,14 +152,12 @@ class MyCustomFormState extends State<MyCustomForm> {
                       // Validate returns true if the form is valid, or false
                       // otherwise.
                       if (_formKey.currentState.validate()) {
-                        print(title);
-                        print(description);
-                        print(capacity);
-                        print(date);
                         // If the form is valid, display a Snackbar.
                         Scaffold.of(context).showSnackBar(
-                            SnackBar(content: Text('Processing Data')));
-                        sendData();
+                            SnackBar(content: Text('Creating lecture...')));
+                        sendData().then((result) {
+                          Navigator.pop(context);
+                        });
                         //Process data
                       }
                     },
@@ -182,13 +176,10 @@ class MyCustomFormState extends State<MyCustomForm> {
       List<String> list = _file.toString().split("/");
       String fileName = list.last;
       _tmpWidget = new Text("File chosen: " + fileName);
-      print(_uploadedFile);
     });
   }
 
   Future sendData() async {
-    print("Function was called!\n");
-    print("File url:" + _uploadedFileURL);
     var url = "https://web.fe.up.pt/~up201806296/database/addNewLecture.php";
 
     url = url +
@@ -207,18 +198,13 @@ class MyCustomFormState extends State<MyCustomForm> {
 
     var encoded = Uri.encodeFull(url);
 
-    print(encoded + "\n");
-
     http.Response response = await http.get(encoded);
-    print(response.body.toString);
   }
 
   Future uploadFile() async {
     setState(() {
       _uploadingFile = true;
     });
-    print("Upload button pressed!");
-    print(_uploadingFile);
     String fileName = Path.basename(_file.path);
 
     firebase_storage.FirebaseStorage storage =

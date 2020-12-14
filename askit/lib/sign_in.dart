@@ -61,15 +61,11 @@ Future<void> signOutGoogle() async {
 }
 
 Future addUserToDatabase(String email, String name) async {
-  print("Function was called!\n");
   var url = "https://web.fe.up.pt/~up201806296/database/addUser.php";
 
   url = url + "?email=" + email + "&name=" + name;
 
   var encoded = Uri.encodeFull(url);
 
-  print(encoded + "\n");
-
-  http.Response response = await http.get(encoded);
-  print(response.body.toString);
+  await http.get(encoded);
 }
