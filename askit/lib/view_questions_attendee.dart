@@ -22,64 +22,57 @@ class _ViewQuestionsAsAttendeeState extends State<ViewQuestionsAsAttendee> {
   List<Question> listOfQuestions = new List();
 
   _ViewQuestionsAsAttendeeState() {
-    getQuestions();
     this.lecture = selectedLecture;
   }
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData(primaryColor: Colors.purple[900]),
-        home: Scaffold(
-            appBar: PreferredSize(
-                // Change this argument to customize the height of the app bar
-                preferredSize: Size.fromHeight(50.0),
-                child: AppBar(
-                    title: Text('HOME', style: TextStyle(fontSize: 30)))),
-            body: new Column(children: [
-              new Container(
-                  child: Text(
-                      'Questions for Lecture #' +
-                          selectedLecture.getId().toString(),
-                      style: TextStyle(fontSize: 20)),
-                  padding: EdgeInsets.only(top: 20.0, bottom: 20)),
-              new Row(
-                children: [
-                  new Flexible(
-                      child: ListTile(
-                          title: const Text('New'),
-                          leading: Radio(
-                            value: SortingType.byNew,
-                            groupValue: _type,
-                            onChanged: (SortingType value) {
-                              setState(() {
-                                _type = value;
-                                getQuestions();
-                              });
-                            },
-                          ))),
-                  new Flexible(
-                      child: ListTile(
-                          title: const Text('Rating'),
-                          leading: Radio(
-                            value: SortingType.byHot,
-                            groupValue: _type,
-                            onChanged: (SortingType value) {
-                              setState(() {
-                                _type = value;
-                                getQuestions();
-                              });
-                            },
-                          )))
-                ],
-              ),
-              temp_questions,
-              _submitQuestionButton(context),
-            ])));
+    getQuestions();
+    return Scaffold(
+        appBar: PreferredSize(
+            // Change this argument to customize the height of the app bar
+            preferredSize: Size.fromHeight(50.0),
+            child: AppBar(title: Text('HOME', style: TextStyle(fontSize: 30)))),
+        body: new Column(children: [
+          new Container(
+              child: Text(
+                  'Questions for Lecture #' +
+                      selectedLecture.getId().toString(),
+                  style: TextStyle(fontSize: 20)),
+              padding: EdgeInsets.only(top: 20.0, bottom: 20)),
+          new Row(
+            children: [
+              new Flexible(
+                  child: ListTile(
+                      title: const Text('New'),
+                      leading: Radio(
+                        value: SortingType.byNew,
+                        groupValue: _type,
+                        onChanged: (SortingType value) {
+                          setState(() {
+                            _type = value;
+                          });
+                        },
+                      ))),
+              new Flexible(
+                  child: ListTile(
+                      title: const Text('Rating'),
+                      leading: Radio(
+                        value: SortingType.byHot,
+                        groupValue: _type,
+                        onChanged: (SortingType value) {
+                          setState(() {
+                            _type = value;
+                          });
+                        },
+                      )))
+            ],
+          ),
+          temp_questions,
+          _submitQuestionButton(context),
+        ]));
   }
 
   Future getQuestions() async {
-    print("Function was called!\n");
-
     var url =
         "https://web.fe.up.pt/~up201806296/database/getQuestionsFromLecture.php";
     url = url + "?lectureId=" + selectedLecture.getId().toString();
@@ -91,8 +84,6 @@ class _ViewQuestionsAsAttendeeState extends State<ViewQuestionsAsAttendee> {
     }
 
     var encoded = Uri.encodeFull(url);
-
-    print(encoded);
 
     http.get(encoded).then((response) => {
           listOfQuestions = parseQuestions(response.body.toString()),
@@ -116,9 +107,7 @@ class _ViewQuestionsAsAttendeeState extends State<ViewQuestionsAsAttendee> {
                             listOfQuestions[index].getSlide().toString() +
                             "\nRating: " +
                             listOfQuestions[index].getRating().toString()),
-                        onTap: () {
-                          print(index);
-                        },
+                        onTap: () {},
                         leading: new IconButton(
                             icon: new Icon(Icons.arrow_downward,
                                 color: Colors.blueAccent[200]),
@@ -141,15 +130,11 @@ class _ViewQuestionsAsAttendeeState extends State<ViewQuestionsAsAttendee> {
 
   List<Question> parseQuestions(String text) {
     List<String> list = text.split("\n");
-    print(text);
 
     List<Question> result = new List();
     if (list.length == 0) return result;
-    print("List length: ");
-    print(list.length);
 
     int numberOfQuestions = (list.length) ~/ 4;
-    print(numberOfQuestions);
 
     int offset = 0;
 
@@ -184,15 +169,11 @@ class _ViewQuestionsAsAttendeeState extends State<ViewQuestionsAsAttendee> {
   }
 
   Future upvoteQuestion(int questionId) async {
-    print("Function was called!\n");
-
     var url = "https://web.fe.up.pt/~up201806296/database/upvoteQuestion.php";
 
     url = url + "?email=" + email + "&questionId=" + questionId.toString();
 
     var encoded = Uri.encodeFull(url);
-
-    print(encoded);
 
     http.get(encoded).then((response) => {
           setState(() {
@@ -202,15 +183,11 @@ class _ViewQuestionsAsAttendeeState extends State<ViewQuestionsAsAttendee> {
   }
 
   Future downvoteQuestion(int questionId) async {
-    print("Function was called!\n");
-
     var url = "https://web.fe.up.pt/~up201806296/database/downvoteQuestion.php";
 
     url = url + "?email=" + email + "&questionId=" + questionId.toString();
 
     var encoded = Uri.encodeFull(url);
-
-    print(encoded);
 
     http.get(encoded).then((response) => {
           setState(() {

@@ -10,7 +10,6 @@ import 'package:askit/individual_lecture_page_attendee.dart';
 enum TypeOfLecture { previous, upcoming }
 bool filterLecturer = true;
 bool filterAttendee = true;
-int numberOfResults = 0;
 Widget temp = new Container();
 List<Lecture> listOfLectures = new List();
 Lecture selectedLecture;
@@ -25,105 +24,82 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData(primaryColor: Colors.purple[900]),
-        home: Scaffold(
-            appBar: PreferredSize(
-                // Change this argument to customize the height of the app bar
-                preferredSize: Size.fromHeight(50.0),
-                child: AppBar(
-                    title: Text('HOME', style: TextStyle(fontSize: 30)))),
-            body: new Column(
+    getData();
+    return Scaffold(
+        appBar: PreferredSize(
+            // Change this argument to customize the height of the app bar
+            preferredSize: Size.fromHeight(50.0),
+            child: AppBar(title: Text('HOME', style: TextStyle(fontSize: 30)))),
+        body: new Column(
+          children: [
+            Container(
+                child: Text('MY LECTURES', style: TextStyle(fontSize: 20)),
+                padding: EdgeInsets.all(20.0)),
+            //!Important!
+            //To display widgets that don't have an intrinsic width inside a row, you must nest them inside a flexible widget
+            new Row(
               children: [
-                Container(
-                    child: Text('MY LECTURES', style: TextStyle(fontSize: 20)),
-                    padding: EdgeInsets.all(20.0)),
-                //!Important!
-                //To display widgets that don't have an intrinsic width inside a row, you must nest them inside a flexible widget
-                new Row(
-                  children: [
-                    new Flexible(
-                        child: ListTile(
-                            title: const Text('Previous'),
-                            leading: Radio(
-                              value: TypeOfLecture.previous,
-                              groupValue: _type,
-                              onChanged: (TypeOfLecture value) {
-                                setState(() {
-                                  _type = value;
-                                });
-                              },
-                            ))),
-                    new Flexible(
-                        child: ListTile(
-                            title: const Text('Upcoming'),
-                            leading: Radio(
-                              value: TypeOfLecture.upcoming,
-                              groupValue: _type,
-                              onChanged: (TypeOfLecture value) {
-                                setState(() {
-                                  _type = value;
-                                });
-                              },
-                            )))
-                  ],
-                ),
-                new Row(
-                  children: [
-                    new Flexible(
-                        child: ListTile(
-                            title: const Text('Lecturer'),
-                            leading: Checkbox(
-                              value: filterLecturer,
-                              onChanged: (bool value) {
-                                setState(() {
-                                  filterLecturer = value;
-                                });
-                              },
-                            ))),
-                    new Flexible(
-                        child: ListTile(
-                            title: const Text('Attendee'),
-                            leading: Checkbox(
-                              value: filterAttendee,
-                              onChanged: (bool value) {
-                                setState(() {
-                                  filterAttendee = value;
-                                });
-                              },
-                            )))
-                  ],
-                ),
-                _searchButton(),
-                temp,
-                new Row(
-                  children: [
-                    _addLectureButton(context),
-                    _signOutButton(context)
-                  ],
-                )
+                new Flexible(
+                    child: ListTile(
+                        title: const Text('Previous'),
+                        leading: Radio(
+                          value: TypeOfLecture.previous,
+                          groupValue: _type,
+                          onChanged: (TypeOfLecture value) {
+                            setState(() {
+                              _type = value;
+                            });
+                          },
+                        ))),
+                new Flexible(
+                    child: ListTile(
+                        title: const Text('Upcoming'),
+                        leading: Radio(
+                          value: TypeOfLecture.upcoming,
+                          groupValue: _type,
+                          onChanged: (TypeOfLecture value) {
+                            setState(() {
+                              _type = value;
+                            });
+                          },
+                        )))
               ],
-            )));
-  }
-
-  Widget _searchButton() {
-    return OutlineButton(
-        child: Text('Search'),
-        splashColor: Colors.grey,
-        onPressed: () {
-          //Must filter all lectures that match the filters
-          //display
-          getData();
-          //_displayResults();
-          numberOfResults++;
-        },
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-        highlightElevation: 0,
-        borderSide: BorderSide(color: Colors.grey));
+            ),
+            new Row(
+              children: [
+                new Flexible(
+                    child: ListTile(
+                        title: const Text('Lecturer'),
+                        leading: Checkbox(
+                          value: filterLecturer,
+                          onChanged: (bool value) {
+                            setState(() {
+                              filterLecturer = value;
+                            });
+                          },
+                        ))),
+                new Flexible(
+                    child: ListTile(
+                        title: const Text('Attendee'),
+                        leading: Checkbox(
+                          value: filterAttendee,
+                          onChanged: (bool value) {
+                            setState(() {
+                              filterAttendee = value;
+                            });
+                          },
+                        )))
+              ],
+            ),
+            temp,
+            new Row(
+              children: [_addLectureButton(context), _signOutButton(context)],
+            )
+          ],
+        ));
   }
 
   Future getData() async {
-    print("Function was called!\n");
     var timeFilter;
     if (_type == TypeOfLecture.previous) {
       timeFilter = "previous";
@@ -147,10 +123,6 @@ class _HomePageState extends State<HomePage> {
     listOfLectures = parseResults(response.body.toString());
 
     setState(() {
-      /*temp = Container(
-          child: Text(response.body, style: TextStyle(fontSize: 15)),
-          padding: EdgeInsets.only(left: 35.0, top: 50.0, right: 20.0));*/
-
       if (listOfLectures.isEmpty) {
         temp = Container(
             child: Text(
@@ -214,15 +186,9 @@ class _HomePageState extends State<HomePage> {
 //This function should return a list of Lectures
   List<Lecture> parseResults(String text) {
     List<String> list = text.split("\n");
-    print(list);
-    print("=============");
     List<Lecture> result = new List();
     if (list.length == 0) return result;
-    print("List length: ");
-    print(list.length);
-
     int numberOfLectures = (list.length) ~/ 7;
-    print(numberOfLectures);
 
     int offset = 0;
 
@@ -242,7 +208,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<String> getRoleFromDatabase(Lecture lecture) async {
-    print("Function was called!\n");
     String role;
 
     var url =
