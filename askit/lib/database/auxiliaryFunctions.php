@@ -34,6 +34,7 @@
     echo $row["Date"] . "\n";
     echo $row["Capacity"] . "\n";
     echo $row["Attendance"] . "\n";
+    echo $row["Slides"] . "\n";
   }
 
   function printPreviousLectures($results){
@@ -48,6 +49,7 @@
     foreach($results as $row){
       if ($row["Date"] >= date("Y-m-d")){
         printLecture($row);
+        //Print role here 
       }
     }
   }
@@ -67,5 +69,18 @@
     }
 
     return $listOfIds;
+  }
+
+
+  function invertVoting($db, $email, $questionId, $new_type){
+    //Remove from table UserVotedQuestion where email=$email and questionId=$questionId
+    $remove_query = "DELETE FROM UserVotedQuestion Where UserEmail='" . addslashes($email) . "' AND QuestionId=$questionId;";
+    $remove_stm = $db->prepare($remove_query);
+    $remove_stm->execute();
+
+    //Insert into UserVotedQuestion(...) VALUES ($email, $questionId, $new_type)
+    $insert_query = "INSERT INTO UserVotedQuestion(UserEmail, QuestionId, Type) VALUES ('" . addslashes($email) . "', $questionId, '$new_type');";
+    $insert_stm = $db->prepare($insert_query);
+    $insert_stm->execute();
   }
 ?>
