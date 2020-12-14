@@ -10,26 +10,23 @@ class AddLecturePage extends StatefulWidget {
 class _AddLectureState extends State<AddLecturePage> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData(primaryColor: Colors.purple[900]),
-        home: Scaffold(
-            appBar: PreferredSize(
-                // Change this argument to customize the height of the app bar
-                preferredSize: Size.fromHeight(50.0),
-                child: AppBar(
-                    title: Text('HOME', style: TextStyle(fontSize: 30)))),
-            body: new Column(
-              children: [
-                Align(
-                    alignment: Alignment.center,
-                    child: new Container(
-                        child: Text('ADD A LECTURE',
-                            style: TextStyle(fontSize: 20)),
-                        padding: EdgeInsets.only(top: 150.0, bottom: 20))),
-                _chooseALectureButton(context),
-                _createALectureButton(context)
-              ],
-            )));
+    return Scaffold(
+        appBar: PreferredSize(
+            // Change this argument to customize the height of the app bar
+            preferredSize: Size.fromHeight(50.0),
+            child: AppBar(title: Text('HOME', style: TextStyle(fontSize: 30)))),
+        body: new Column(
+          children: [
+            Align(
+                alignment: Alignment.center,
+                child: new Container(
+                    child:
+                        Text('ADD A LECTURE', style: TextStyle(fontSize: 20)),
+                    padding: EdgeInsets.only(top: 150.0, bottom: 20))),
+            _chooseALectureButton(context),
+            _createALectureButton(context)
+          ],
+        ));
   }
 
   Widget _chooseALectureButton(BuildContext context) {

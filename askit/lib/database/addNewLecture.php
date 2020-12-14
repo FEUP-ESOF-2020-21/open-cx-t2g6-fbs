@@ -7,15 +7,23 @@
   $description = $_GET['description'];
   $capacity = $_GET['capacity'];
   $date = $_GET['date'];
+  $url = $_GET['fileUrl'];
 
-  $query = "INSERT INTO Lecture (Id, Title, Description, Capacity, Date, Attendance)
+  $query = "INSERT INTO Lecture (Id, Title, Description, Capacity, Date, Attendance, Slides)
    VALUES (NULL, '";
-  $query = $query . addslashes($title) . "', '" . addslashes($description) . "', " . $capacity . ", '" . $date . "', 0);";
+  $query = $query . addslashes($title) . "', '" . addslashes($description) . "', " . $capacity . ", '" . $date . "', 0,";
+  
+  if ($url == "NULL"){
+    $query = $query . " NULL);";
+  }
+  else{
+    $query = $query . " '" . addslashes($url) . "');";
+  }
   
 
-  echo $query;
+  //echo $query;
   
-
+  
   
   $stm = $db->prepare($query);
   $stm->execute();

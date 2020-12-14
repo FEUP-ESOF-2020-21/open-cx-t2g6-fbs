@@ -2,7 +2,6 @@ import 'package:askit/lecture.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:askit/home_page.dart';
-import 'package:askit/sign_in.dart';
 import 'dart:core';
 import 'package:askit/question.dart';
 
@@ -23,36 +22,29 @@ class _ViewQuestionsAsLecturerState extends State<ViewQuestionsAsLecturer> {
   }
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData(primaryColor: Colors.purple[900]),
-        home: Scaffold(
-            appBar: PreferredSize(
-                // Change this argument to customize the height of the app bar
-                preferredSize: Size.fromHeight(50.0),
-                child: AppBar(
-                    title: Text('HOME', style: TextStyle(fontSize: 30)))),
-            body: new Column(children: [
-              new Container(
-                  child: Text(
-                      'Questions for Lecture #' +
-                          selectedLecture.getId().toString(),
-                      style: TextStyle(fontSize: 20)),
-                  padding: EdgeInsets.only(top: 20.0, bottom: 20)),
-              temp_questions
-            ])));
+    return Scaffold(
+        appBar: PreferredSize(
+            // Change this argument to customize the height of the app bar
+            preferredSize: Size.fromHeight(50.0),
+            child: AppBar(title: Text('HOME', style: TextStyle(fontSize: 30)))),
+        body: new Column(children: [
+          new Container(
+              child: Text(
+                  'Questions for Lecture #' +
+                      selectedLecture.getId().toString(),
+                  style: TextStyle(fontSize: 20)),
+              padding: EdgeInsets.only(top: 20.0, bottom: 20)),
+          temp_questions
+        ]));
   }
 
   Future getQuestions() async {
-    print("Function was called!\n");
-
     var url =
         "https://web.fe.up.pt/~up201806296/database/getQuestionsFromLecture.php";
     url =
         url + "?lectureId=" + selectedLecture.getId().toString() + "&sort=hot";
 
     var encoded = Uri.encodeFull(url);
-
-    print(encoded);
 
     http.get(encoded).then((response) => {
           listOfQuestions = parseQuestions(response.body.toString()),
@@ -76,9 +68,7 @@ class _ViewQuestionsAsLecturerState extends State<ViewQuestionsAsLecturer> {
                               listOfQuestions[index].getSlide().toString() +
                               "\nRating: " +
                               listOfQuestions[index].getRating().toString()),
-                          onTap: () {
-                            print(index);
-                          });
+                          onTap: () {});
                     }),
               );
             }
@@ -88,15 +78,11 @@ class _ViewQuestionsAsLecturerState extends State<ViewQuestionsAsLecturer> {
 
   List<Question> parseQuestions(String text) {
     List<String> list = text.split("\n");
-    print(text);
 
     List<Question> result = new List();
     if (list.length == 0) return result;
-    print("List length: ");
-    print(list.length);
 
     int numberOfQuestions = (list.length) ~/ 4;
-    print(numberOfQuestions);
 
     int offset = 0;
 

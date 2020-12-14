@@ -1,13 +1,8 @@
-import 'package:askit/choose_lecture_page.dart';
 import 'package:askit/sign_in.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'dart:io';
-import 'package:path/path.dart' as Path;
 import 'package:askit/home_page.dart'; //for selectedLecture
 
 class SubmitQuestionPage extends StatefulWidget {
@@ -21,19 +16,16 @@ int slide;
 class _SubmitQuestionState extends State<SubmitQuestionPage> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData(primaryColor: Colors.purple[900]),
-        home: Scaffold(
-          appBar: PreferredSize(
-              // Change this argument to customize the height of the app bar
-              preferredSize: Size.fromHeight(50.0),
-              child: AppBar(
-                  title:
-                      Text('SUBMIT QUESTION', style: TextStyle(fontSize: 30)))),
-          body: new ListView(children: [
-            MyCustomForm(),
-          ]),
-        ));
+    return Scaffold(
+      appBar: PreferredSize(
+          // Change this argument to customize the height of the app bar
+          preferredSize: Size.fromHeight(50.0),
+          child: AppBar(
+              title: Text('SUBMIT QUESTION', style: TextStyle(fontSize: 30)))),
+      body: new ListView(children: [
+        MyCustomForm(),
+      ]),
+    );
   }
 }
 
@@ -94,13 +86,12 @@ class MyCustomFormState extends State<MyCustomForm> {
                 // Validate returns true if the form is valid, or false
                 // otherwise.
                 if (_formKey.currentState.validate()) {
-                  print(question);
-                  print(slide);
                   // If the form is valid, display a Snackbar.
-                  Scaffold.of(context)
-                      .showSnackBar(SnackBar(content: Text('Processing Data')));
-                  sendData();
-                  //Process data
+                  Scaffold.of(context).showSnackBar(
+                      SnackBar(content: Text('Submitting question...')));
+                  sendData().then((result) {
+                    Navigator.pop(context);
+                  });
                 }
               },
               child: Text('Submit'),
@@ -112,8 +103,6 @@ class MyCustomFormState extends State<MyCustomForm> {
   }
 
   Future sendData() async {
-    print("Function was called!\n");
-
     var url = "https://web.fe.up.pt/~up201806296/database/submitQuestion.php";
 
     url = url +
@@ -127,10 +116,6 @@ class MyCustomFormState extends State<MyCustomForm> {
         slide.toString();
 
     var encoded = Uri.encodeFull(url);
-
-    print(encoded + "\n");
-
-    http.Response response = await http.get(encoded);
-    print(response.body.toString);
+    await http.get(encoded);
   }
 }
