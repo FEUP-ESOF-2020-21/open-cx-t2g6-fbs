@@ -289,10 +289,21 @@ As an attendee, I can access the slides submitted by the lecturer to follow alon
 
 #### Acceptance tests
 
-| Id  | Given                                    | When                                                                      | Then                                                      |
-| --- | ---------------------------------------- | ------------------------------------------------------------------------- | --------------------------------------------------------- |
-| 16  | Lecturer submitted slides                | The user is on the lecture page **AND** User presses the name of the file | The presentation file should open                         |
-| 17  | Lecturer did not submit the presentation | The user is on the lecture page                                           | Message should be displayed that slides are not available |
+```gherkin
+  Scenario:
+  Given Lecturer submitted slides
+  When The user is on the lecture page
+  And User presses the name of the file
+  Then The presentation file should open
+
+```
+
+```gherkin
+  Scenario:
+  Given Lecturer did not submit the presentation
+  When The user is on the lecture page
+  Then Message should be displayed that slides are not available
+```
 
 #### Value and effort
 
