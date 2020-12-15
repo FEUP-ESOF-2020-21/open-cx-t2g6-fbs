@@ -470,10 +470,21 @@ As a user, I want to sort the existent questions by rating or by new.
 
 #### Acceptance tests
 
-| Id  | Given                                                          | When                             | Then                                                 |
-| --- | -------------------------------------------------------------- | -------------------------------- | ---------------------------------------------------- |
-| 28  | User is in the lecture's question page **AND** questions exist | User selects the "New" filter    | Recent questions should appear first                 |
-| 29  | User is in the lecture's question page **AND** questions exist | User selects the "Rating" filter | Questions with the highest score should appear first |
+```gherkin
+  Scenario:
+  Given User is in the lecture's question page
+  And Questions exist
+  When User selects the "New" filter
+  Then Recent questions should appear first
+```
+
+```gherkin
+  Scenario:
+  Given User is in the lecture's question page
+  And Questions exist
+  When User selects the "Rating" filter
+  Then Questions with the highest score should appear first
+```
 
 #### Value and effort
 
