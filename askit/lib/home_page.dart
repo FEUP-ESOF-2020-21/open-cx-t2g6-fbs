@@ -26,73 +26,105 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     getData();
     return Scaffold(
-        appBar: PreferredSize(
-            // Change this argument to customize the height of the app bar
-            preferredSize: Size.fromHeight(50.0),
-            child: AppBar(title: Text('HOME', style: TextStyle(fontSize: 30)))),
+        backgroundColor: new Color.fromARGB(255, 190, 180, 255),
         body: new Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          verticalDirection: VerticalDirection.down,
           children: [
+            SizedBox(height: 45),
             Container(
-                child: Text('MY LECTURES', style: TextStyle(fontSize: 20)),
+                child: _titleText("My Lectures"),
                 padding: EdgeInsets.all(20.0)),
             //!Important!
             //To display widgets that don't have an intrinsic width inside a row, you must nest them inside a flexible widget
+            SizedBox(height: 15),
             new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              verticalDirection: VerticalDirection.down,
               children: [
-                new Flexible(
-                    child: ListTile(
-                        title: const Text('Previous'),
-                        leading: Radio(
-                          value: TypeOfLecture.previous,
-                          groupValue: _type,
-                          onChanged: (TypeOfLecture value) {
-                            setState(() {
-                              _type = value;
-                            });
-                          },
-                        ))),
-                new Flexible(
-                    child: ListTile(
-                        title: const Text('Upcoming'),
-                        leading: Radio(
-                          value: TypeOfLecture.upcoming,
-                          groupValue: _type,
-                          onChanged: (TypeOfLecture value) {
-                            setState(() {
-                              _type = value;
-                            });
-                          },
-                        )))
-              ],
+                Text("What lectures do you want to view?", style: TextStyle(fontSize: 17, color: Colors.purple[900])),
+                SizedBox(width: 80),
+              ]
             ),
             new Row(
               children: [
                 new Flexible(
-                    child: ListTile(
-                        title: const Text('Lecturer'),
-                        leading: Checkbox(
-                          value: filterLecturer,
-                          onChanged: (bool value) {
-                            setState(() {
-                              filterLecturer = value;
-                            });
-                          },
-                        ))),
+                    child: RadioListTile(
+                      title: Text('Previous', style: TextStyle(color: Colors.purple[900], fontWeight: FontWeight.bold)),
+                      activeColor: Colors.purple[900],
+                      value: TypeOfLecture.previous,
+                      groupValue: _type,
+                      onChanged: (TypeOfLecture value) {
+                        setState(() {
+                          _type = value;
+                        });
+                      },
+                    )),
                 new Flexible(
-                    child: ListTile(
-                        title: const Text('Attendee'),
-                        leading: Checkbox(
-                          value: filterAttendee,
-                          onChanged: (bool value) {
-                            setState(() {
-                              filterAttendee = value;
-                            });
-                          },
-                        )))
+                    child: RadioListTile(
+                      title: Text('Upcoming', style: TextStyle(color: Colors.purple[900], fontWeight: FontWeight.bold)),
+                      activeColor: Colors.purple[900],
+                      value: TypeOfLecture.upcoming,
+                      groupValue: _type,
+                      onChanged: (TypeOfLecture value) {
+                        setState(() {
+                          _type = value;
+                        });
+                      },
+                    ))
+              ],
+            ),
+            SizedBox(height: 30),
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              verticalDirection: VerticalDirection.down,
+              children: [
+                Text("Who do you want to search as?", style: TextStyle(fontSize: 17, color: Colors.purple[900])),
+                SizedBox(width: 115),
+              ]
+            ),
+            new Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              verticalDirection: VerticalDirection.down,
+              children: [
+                new Flexible(
+                  child: CheckboxListTile(
+                    title: Text('Lecturer', style: TextStyle(color: Colors.purple[900], fontWeight: FontWeight.bold)),
+                    activeColor: Colors.purple[900],
+                    value: filterLecturer,
+                    onChanged: (bool value) {
+                      setState(() {
+                        filterLecturer = value;
+                      });
+                    },
+                  )
+                ),
+                new Flexible(
+                  child: CheckboxListTile(
+                    title: Text('Attendee', style: TextStyle(color: Colors.purple[900], fontWeight: FontWeight.bold)),
+                    activeColor: Colors.purple[900],
+                    value: filterAttendee,
+                    onChanged: (bool value) {
+                      setState(() {
+                        filterAttendee = value;
+                      });
+                    },
+                  )
+                ),
               ],
             ),
             temp,
+            SizedBox(height: 20),
             new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [_addLectureButton(context), _signOutButton(context)],
             )
           ],
@@ -131,8 +163,8 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.only(left: 35.0, top: 50.0, right: 20.0));
       } else {
         temp = Container(
-          padding: EdgeInsets.all(10.0),
-          height: 300.0,
+          padding: EdgeInsets.only(left: 10.0, right: 10.0),
+          height: 220.0,
           child: new ListView.builder(
               itemCount: listOfLectures.length,
               itemBuilder: (BuildContext ctxt, int index) {
@@ -161,26 +193,41 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  Widget _addLectureButton(BuildContext context) {
-    //!!Expanded is needed so that Align uses the whole available space and not the space available within the row/column
-    return Expanded(
-        child: Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-                padding: EdgeInsets.only(bottom: 0),
-                child: OutlineButton(
-                    child: Text('Add Lecture'),
-                    splashColor: Colors.grey,
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AddLecturePage()));
-                    },
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(40)),
-                    highlightElevation: 0,
-                    borderSide: BorderSide(color: Colors.grey)))));
+Widget _addLectureButton(BuildContext context) {
+    return OutlineButton(
+      splashColor: Colors.grey,
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => AddLecturePage()
+          )
+        );
+      },
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+      highlightElevation: 0,
+      borderSide: BorderSide(color: Colors.purple[900]),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Image(image: AssetImage("assets/google_logo.png"), height: 35.0),
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(
+                'Add Lecture',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.purple[900],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 
 //This function should return a list of Lectures
@@ -245,4 +292,36 @@ class _HomePageState extends State<HomePage> {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
         ));
   }
+}
+
+Widget _titleText(String text) {
+  return Center(
+    child: 
+      Stack(
+        children: [
+          Text(text,
+            style: TextStyle(
+              fontSize: 50,
+              foreground: Paint()
+                ..style = PaintingStyle.stroke
+                ..strokeWidth = 6
+                ..color = Colors.purple[900]
+              ),
+            ),
+          Text(text,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 50,
+              shadows: <Shadow>[
+                Shadow(
+                  offset: Offset(6.0, 6.0),
+                  blurRadius: 8.0,
+                  color: Colors.purple[900],
+                ), 
+              ],
+            ),
+          ),
+        ],
+      )
+  );
 }
