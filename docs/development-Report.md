@@ -78,7 +78,7 @@ As a user, I want to log into the app.
   Scenario:
   Given There are fields for user to input email and password
   When User fills those fields
-  And The information os correct
+  And The information is correct
   Then The user is logged in
 ```
 
@@ -109,28 +109,28 @@ As a user, I want to filter and view lectures that I have attended or will atten
 ```gherkin
   Scenario:
   Given A list of lectures associated with the user
-  When User selects the 'lecturer' filter
+  When User selects the "lecturer" filter
   Then Only lectures where user was the lecturer are displayed
 ```
 
 ```gherkin
   Scenario:
   Given A list of lectures associated with the user
-  When User selects the 'attendee' filter
+  When User selects the "attendee" filter
   Then Only lectures where user was an attendee are displayed
 ```
 
 ```gherkin
   Scenario:
   Given A list of lectures associated with the user
-  When User selects the 'upcoming' filter
+  When User selects the "upcoming" filter
   Then Only lectures that will be happening in the future are displayed
 ```
 
 ```gherkin
   Scenario:
   Given A list of lectures associated with the user
-  When User selects the 'previous' filter
+  When User selects the "previous" filter
   Then Only lectures that already happened will be displayed
 ```
 
@@ -154,7 +154,7 @@ As a lecturer, I can create a new lecture
   Scenario:
   Given The form for creating a new lecture
   When User fills all the fields
-  Then A new lecture is created and added to the user's lectures list with role 'Lecturer'
+  Then A new lecture is created and added to the user's lectures list with role "Lecturer"
 ```
 
 ```gherkin
@@ -185,8 +185,8 @@ As a user, I want to be able to see upcoming lectures (w/ filters) and choose on
   Scenario:
   Given A list of the upcoming lectures
   When User presses the lecture they want to attend
-  And They press the 'Join' button
-  Then Lecture is added to the lectures list of the user with role 'Attendee'
+  And They press the "Join" button
+  Then Lecture is added to the lectures list of the user with role "Attendee"
 ```
 
 ```gherkin
@@ -212,12 +212,41 @@ As a lecturer, I can change the status of my presentation (Live/Finished)
 
 #### Acceptance tests
 
-| Id  | Given                                           | When                                                                  | Then                                                                      |
-| --- | ----------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| 11  | The options regarding the status of the lecture | The current status is "Not started yet" **AND** user presses "Live"   | The status should change to "Live"                                        |
-| 12  | The options regarding the status of the lecture | The current status is "Live" **AND** user presses "Finished"          | The status should change to "Finished"                                    |
-| 13  | The options regarding the status of the lecture | The current status is "Live" **AND** user presses "Not started yet"   | The status should not change **AND** an error message should be displayed |
-| 14  | The options regarding the status of the lecture | The current status is "Finished" **AND** user presses any other state | The status should not change **AND** an error message should be displayed |
+```gherkin
+  Scenario:
+  Given The options regarding the status of the lecture
+  When The current status is "Not started yet"
+  And User presses "Live"
+  Then The status should change to "Live"
+
+```
+
+```gherkin
+  Scenario:
+  Given The options regarding the status of the lecture
+  When The current status is "Live"
+  And User presses "Finished"
+  Then The status should change to "Finished"
+```
+
+```gherkin
+  Scenario:
+  Given The options regarding the status of the lecture
+  When The current status is "Live"
+  And User presses "Not started yet"
+  Then The status should not change
+  And An error message should be displayed
+
+```
+
+```gherkin
+  Scenario:
+  Given The options regarding the status of the lecture
+  When The current status is "Finished"
+  And User presses any other state
+  Then The status should not change
+  And An error message should be displayed
+```
 
 #### Value and effort
 
