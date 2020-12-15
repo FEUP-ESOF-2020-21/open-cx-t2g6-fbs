@@ -150,10 +150,20 @@ As a lecturer, I can create a new lecture
 
 #### Acceptance tests
 
-| Id  | Given                               | When                            | Then                                                                                |
-| --- | ----------------------------------- | ------------------------------- | ----------------------------------------------------------------------------------- |
-| 7   | The form for creating a new lecture | User fills all the fields       | A new lecture is created and added to the user's lectures list with role "Lecturer" |
-| 8   | The form for creating a new lecture | User selects a date in the past | The creation process fails and an error message is displayed                        |
+```gherkin
+  Scenario:
+  Given The form for creating a new lecture
+  When User fills all the fields
+  Then A new lecture is created and added to the user's lectures list with role 'Lecturer'
+```
+
+```gherkin
+  Scenario:
+  Given The form for creating a new lecture
+  When User selects a date in the past
+  Then The creation process fails and an error message is displayed
+
+```
 
 #### Value and effort
 
