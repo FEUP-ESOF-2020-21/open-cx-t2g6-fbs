@@ -16,7 +16,7 @@ AskIt, a platform to manage the very limited time to ask questions at the end of
 
 ## Elevator Pitch
 
-Conference attendees often feel frustrated by the lack of quality of questions taking up the very limited time at the end.
+Have you ever felt frustrated by the lack of quality of the questions taking up the very limited time at the end of lectures?
 AskIt optimizes everyone's experience by allowing all the attendees to vote on the best questions, leading to a better use of the time.
 From now on you can attend any conference knowing that only the most pertinent questions will be asked, leading to more intriguing discussions.
 
