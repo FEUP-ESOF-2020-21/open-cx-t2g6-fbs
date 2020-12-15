@@ -74,10 +74,21 @@ As a user, I want to log into the app.
 
 #### Acceptance tests
 
-| Id  | Given                                                 | When                                                         | Then                                                            |
-| --- | ----------------------------------------------------- | ------------------------------------------------------------ | --------------------------------------------------------------- |
-| 1   | There are fields for user to input email and password | User fills those fields **AND** the information is correct   | The user is logged in                                           |
-| 2   | There are fields for user to input email and password | User fills those fields **AND** the information is incorrect | The user is not logged in **AND** an error message is displayed |
+```gherkin
+  Scenario:
+  Given There are fields for user to input email and password
+  When User fills those fields
+  And The information os correct
+  Then The user is logged in
+```
+
+```gherkin
+  Scenario:
+  Given There are fields for user to input email and password
+  When User fills those fields
+  And The information is incorrect
+  Then The user is not logged in
+```
 
 #### Value and effort
 
