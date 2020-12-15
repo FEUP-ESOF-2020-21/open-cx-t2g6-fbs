@@ -39,46 +39,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           crossAxisAlignment: CrossAxisAlignment.center,
           verticalDirection: VerticalDirection.down,
           children: [
-            new Center(
-              child: 
-                Stack(
-                  children: [
-                    Text("ASKIT",
-                      style: TextStyle(
-                        fontSize: 50,
-                        foreground: Paint()
-                          ..style = PaintingStyle.stroke
-                          ..strokeWidth = 6
-                          ..color = Colors.purple[900]
-                        ),
-                      ),
-                    Text("ASKIT",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 50,
-                        shadows: <Shadow>[
-                          Shadow(
-                            offset: Offset(6.0, 6.0),
-                            blurRadius: 8.0,
-                            color: Colors.purple[900],
-                          ), 
-                        ],
-                        ),
-                      ),
-                  ],
-                )
-              ) ,
+            _titleText("ASKIT"),
             SizedBox(height: 45),
-            new ElevatedButton(
-              child: Text('Log In', style: new TextStyle(fontSize: 25)),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoginPage()),
-                  );
-                },
-              style: ElevatedButton.styleFrom(primary: Colors.purple[900], minimumSize: Size(120, 70), side: BorderSide(width: 3.0, color: Colors.white), shadowColor: Colors.black)
-            )
+            _logInButton(context)
           ],
         ),
           ),
@@ -86,4 +49,55 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       ),
     );
   }
+}
+
+Widget _titleText(String text) {
+  return Center(
+    child: 
+      Stack(
+        children: [
+          Text(text,
+            style: TextStyle(
+              fontSize: 50,
+              foreground: Paint()
+                ..style = PaintingStyle.stroke
+                ..strokeWidth = 6
+                ..color = Colors.purple[900]
+              ),
+            ),
+          Text(text,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 50,
+              shadows: <Shadow>[
+                Shadow(
+                  offset: Offset(6.0, 6.0),
+                  blurRadius: 8.0,
+                  color: Colors.purple[900],
+                ), 
+              ],
+            ),
+          ),
+        ],
+      )
+  );
+}
+
+Widget _logInButton(BuildContext context) {
+  return ElevatedButton(
+    child: Text('Log In', style: new TextStyle(fontSize: 25)),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LoginPage()),
+        );
+      },
+    style: 
+    ElevatedButton.styleFrom(
+      primary: Colors.purple[900],
+      minimumSize: Size(120, 70),
+      side: BorderSide(width: 3.0, color: Colors.white),
+      shadowColor: Colors.black
+    )
+  );
 }
