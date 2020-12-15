@@ -446,9 +446,13 @@ As a user I can reply to other user's questions after the lecture has ended so t
 
 #### Acceptance tests
 
-| Id  | Given                                                                       | When                                  | Then                                                 |
-| --- | --------------------------------------------------------------------------- | ------------------------------------- | ---------------------------------------------------- |
-| 27  | User pressed in one of the questions present in the lecture's question list | User presses "Reply to this question" | User should be able to write their reply and post it |
+```gherkin
+  Scenario:
+  Given User pressed in one of the questions present in the lecture's question list
+  When User presses "Reply to this question"
+  Then User should be able to write their reply and post it
+
+```
 
 #### Value and effort
 
