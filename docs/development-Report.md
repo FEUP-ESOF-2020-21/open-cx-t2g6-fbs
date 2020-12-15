@@ -181,10 +181,20 @@ As a user, I want to be able to see upcoming lectures (w/ filters) and choose on
 
 #### Acceptance tests
 
-| Id  | Given                           | When                                                                              | Then                                                                   |
-| --- | ------------------------------- | --------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| 9   | A list of the upcoming lectures | User presses the lecture they want to attend **AND** they press the _Join_ button | Lecture is added to the lectures list of the user with role "Attendee" |
-| 10  | A list of the upcoming lectures | User selects a lecture that is already at maximum capacity                        | Message is displayed to the user letting them know lecture is full     |
+```gherkin
+  Scenario:
+  Given A list of the upcoming lectures
+  When User presses the lecture they want to attend
+  And They press the 'Join' button
+  Then Lecture is added to the lectures list of the user with role 'Attendee'
+```
+
+```gherkin
+  Scenario:
+  Given A list of the upcoming lectures
+  When User selects a lecture that is already at maximum capacity
+  Then Message is displayed to the user letting them know lecture is full
+```
 
 #### Value and effort
 
