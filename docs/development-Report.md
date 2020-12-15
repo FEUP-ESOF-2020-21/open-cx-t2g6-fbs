@@ -321,9 +321,13 @@ As a user I can select which slide I have a doubt so that it is easier for the l
 
 #### Acceptance tests
 
-| Id  | Given                                           | When                                                                 | Then                                                                             |
-| --- | ----------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| 18  | User is in the process of submitting a question | The user selects the slide number of the question **AND** submits it | The question description should have the correct slide number associated with it |
+```gherkin
+  Scenario:
+  Given User is in the process of submitting a question
+  When The user selects the slide number of the question
+  And Submits it
+  Then The question description should have the correct slide number associated with it
+```
 
 #### Value and effort
 
