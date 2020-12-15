@@ -28,7 +28,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       home: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/question_mark.jfif"), fit: BoxFit.cover)),
+                image: AssetImage("assets/question_mark.png"), fit: BoxFit.cover)),
         child: Scaffold(
           backgroundColor: Colors.transparent,
         body: new Center(
