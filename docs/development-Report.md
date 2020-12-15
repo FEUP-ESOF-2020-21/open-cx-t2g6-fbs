@@ -264,9 +264,14 @@ As a lecturer I can submit my presentation so that attendees can follow along my
 
 #### Acceptance tests
 
-| Id  | Given                                  | When                                                             | Then                        |
-| --- | -------------------------------------- | ---------------------------------------------------------------- | --------------------------- |
-| 15  | Lecturer is on the page of the Lecture | Lecturer presses the "Select File" button **AND** chooses a file | The file should be uploaded |
+```gherkin
+  Scenario:
+  Given Lecturer is on the page of the Lecture
+  When Lecturer presses the "Select File" button
+  And Chooses a file
+  Then The file should be uploaded
+
+```
 
 #### Value and effort
 
