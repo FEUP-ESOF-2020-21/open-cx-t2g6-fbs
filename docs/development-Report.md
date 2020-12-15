@@ -498,7 +498,7 @@ Effort: M
 
 ### Domain model
 
-<img src="./images/problem_domain_uml.png" height="320" alt="Problem Domain UML">
+<img src="./images/problem_domain_uml.jpg" height="320" alt="Problem Domain UML">
 
 ## Architecture and Design
 
