@@ -106,12 +106,33 @@ As a user, I want to filter and view lectures that I have attended or will atten
 
 #### Acceptance tests
 
-| Id  | Given                                       | When                               | Then                                                             |
-| --- | ------------------------------------------- | ---------------------------------- | ---------------------------------------------------------------- |
-| 3   | A list of lectures associated with the user | User selects the "lecturer" filter | Only lectures where user was the lecturer are displayed          |
-| 4   | A list of lectures associated with the user | User selects the "attendee" filter | Only lectures where user was an attendee are displayed           |
-| 5   | A list of lectures associated with the user | User selects the "upcoming" filter | Only lectures that will be happening in the future are displayed |
-| 6   | A list of lectures associated with the user | User selects the "previous" filter | Only lectures that already happened will be displayed            |
+```gherkin
+  Scenario:
+  Given A list of lectures associated with the user
+  When User selects the 'lecturer' filter
+  Then Only lectures where user was the lecturer are displayed
+```
+
+```gherkin
+  Scenario:
+  Given A list of lectures associated with the user
+  When User selects the 'attendee' filter
+  Then Only lectures where user was an attendee are displayed
+```
+
+```gherkin
+  Scenario:
+  Given A list of lectures associated with the user
+  When User selects the 'upcoming' filter
+  Then Only lectures that will be happening in the future are displayed
+```
+
+```gherkin
+  Scenario:
+  Given A list of lectures associated with the user
+  When User selects the 'previous' filter
+  Then Only lectures that already happened will be displayed
+```
 
 #### Value and effort
 
