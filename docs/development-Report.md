@@ -500,6 +500,8 @@ Effort: M
 
 <img src="./images/problem_domain_uml.jpg" height="320" alt="Problem Domain UML">
 
+Each user of the app can attend several lectures, either as the Host or as an Attendee. Aditionally, attendees can ask questions in a specific lecture and vote on other existing questions, asked by other attendees.
+
 ## Architecture and Design
 
 The architecture of a software system encompasses the set of key decisions about its overall organization.
