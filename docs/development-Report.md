@@ -413,10 +413,22 @@ As a lecturer I can look at the highest rated questions so that I can answer the
 
 #### Acceptance tests
 
-| Id  | Given                                    | When                                                             | Then                                                               |
-| --- | ---------------------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------ |
-| 25  | Lecturer is on the "Manage Lecture" page | Lecturer presses "View Questions" **AND** questions exist        | Questions should be displayed sorted by rating                     |
-| 26  | Lecturer is on the "Manage Lecture" page | Lecturer presses "View Questions" **AND** questions do not exist | A message should be displayed alerting that there are no questions |
+```gherkin
+  Scenario:
+  Given Lecturer is in the "Manage Lecture" page
+  When Lecturer presses "View Questions"
+  And Questions exist
+  Then Questions should be displayed sorted by rating
+```
+
+```gherkin
+  Scenario:
+  Given Lecturer is in the "Manage Lecture" page
+  When Lecturer presses "View Questions"
+  And Questions do not exist
+  Then A message should be displayed alerting that there are no questions
+
+```
 
 #### Value and effort
 
