@@ -345,14 +345,57 @@ As a user, I can vote on which questions I like the most so that they are more l
 
 #### Acceptance tests
 
-| Id  | Given                                                                                                                     | When                                               | Then                                    |
-| --- | ------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- | --------------------------------------- |
-| 19  | User is in the questions page of a lecture **AND** questions were submitted                                               | User presses the _up_ arrow next to the question   | The rating should be incremented by one |
-| 20  | User is in the questions page of a lecture **AND** questions were submitted **AND** User already pressed the _up_ arrow   | User presses the _up_ arrow next to the question   | The rating should stay the same         |
-| 21  | User is in the questions page of a lecture **AND** questions were submitted **AND** User already pressed the _up_ arrow   | User presses the _down_ arrow next to the question | The rating should be decreased by 2     |
-| 22  | User is in the questions page of a lecture **AND** questions were submitted                                               | User presses the _down_ arrow next to the question | The rating should be decreased by one   |
-| 23  | User is in the questions page of a lecture **AND** questions were submitted **AND** User already pressed the _down_ arrow | User presses the _down_ arrow next to the question | The rating should stay the same         |
-| 24  | User is in the questions page of a lecture **AND** questions were submitted **AND** User already pressed the _down_ arrow | User presses the _up_ arrow next to the question   | The rating should be increased by 2     |
+```gherkin
+  Scenario:
+  Given User is in the questions page of a lecture
+  And Qestions were submitted
+  When User presses the up arrow next to the question
+  Then The rating should be incremented by one
+```
+
+```gherkin
+  Scenario:
+  Given User is in the questions page of a lecture
+  And Questions were submitted
+  And User already pressed the up arrow
+  When User presses the up arrow next to the question
+  Then The rating should stay the same
+```
+
+```gherkin
+  Scenario:
+  Given User is in the questions page of a lecture
+  And Questions were submitted
+  And User already pressed the up arrow
+  When User presses the down arrow next to the question
+  Then The rating should be decreased by 2
+```
+
+```gherkin
+  Scenario:
+  Given User is in the questions page of a lecture
+  And Questions were submitted
+  When User presses the down arrow next to the question
+  Then The rating should be decreased by one
+```
+
+```gherkin
+  Scenario:
+  Given User is in the questions page of a lecture
+  And Questions were submitted
+  And User already pressed the down arrow
+  When User presses the down arrow next to the question
+  Then The rating should stay the same
+```
+
+```gherkin
+  Scenario:
+  Given User is in the questions page of a lecture
+  And Questions were submitted
+  And User already pressed the down arrow
+  When User presses the up arrow next to the question
+  Then The rating should be increased by 2
+```
 
 #### Value and effort
 
