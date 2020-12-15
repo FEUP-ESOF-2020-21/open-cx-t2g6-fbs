@@ -500,7 +500,8 @@ Effort: M
 
 <img src="./images/problem_domain_uml.jpg" height="320" alt="Problem Domain UML">
 
-Each user of the app can attend several lectures, either as the Host or as an Attendee. Aditionally, attendees can ask questions in a specific lecture and vote on other existing questions, asked by other attendees.
+Each lecture has a title, description, date, current attendance and a maximum capacity. Aditionally, the lecturer can also upload the presentation so that the attendees can follow along.  
+Each user of the app can attend several lectures, either as the _Lecturer_ or as an _Attendee_. Furthermore, attendees can ask questions in a specific lecture and vote on other existing questions.
 
 ## Architecture and Design
 
