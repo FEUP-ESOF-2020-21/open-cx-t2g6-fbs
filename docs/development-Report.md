@@ -494,7 +494,7 @@ Effort: M
 
 ### User story map
 
-<img src="./images/storyMap.jpg" >
+<img src="./images/storyMap.png" >
 
 ### Domain model
 
