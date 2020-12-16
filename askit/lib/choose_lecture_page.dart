@@ -20,44 +20,40 @@ class _ChooseLectureState extends State<ChooseLecturePage> {
   Widget build(BuildContext context) {
     getData();
     return Scaffold(
-        appBar: PreferredSize(
-            // Change this argument to customize the height of the app bar
-            preferredSize: Size.fromHeight(50.0),
-            child: AppBar(
-                title: Text('CHOOSE LECTURE', style: TextStyle(fontSize: 30)))),
+        backgroundColor: new Color.fromARGB(255, 190, 180, 255),
         body: new Column(
           children: [
-            Container(
-                child: Text('CHOOSE A LECTURE', style: TextStyle(fontSize: 20)),
-                padding: EdgeInsets.all(20.0)),
+            SizedBox(height: 35),
+            _titleText("Choose a Lecture", 40),
+            SizedBox(height: 35),
             //!Important!
             //To display widgets that don't have an intrinsic width inside a row, you must nest them inside a flexible widget
             new Row(
               children: [
                 new Flexible(
-                    child: ListTile(
-                        title: const Text('All'),
-                        leading: Radio(
-                          value: FilterAvailableLectures.all,
-                          groupValue: _filter,
-                          onChanged: (FilterAvailableLectures value) {
-                            setState(() {
-                              _filter = value;
-                            });
-                          },
-                        ))),
+                    child: RadioListTile(
+                      title: Text('All', style: TextStyle(color: Colors.purple[900], fontWeight: FontWeight.bold)),
+                      activeColor: Colors.purple[900],
+                      value: FilterAvailableLectures.all,
+                      groupValue: _filter,
+                      onChanged: (FilterAvailableLectures value) {
+                        setState(() {
+                          _filter = value;
+                        });
+                      },
+                    )),
                 new Flexible(
-                    child: ListTile(
-                        title: const Text('Available'),
-                        leading: Radio(
-                          value: FilterAvailableLectures.available,
-                          groupValue: _filter,
-                          onChanged: (FilterAvailableLectures value) {
-                            setState(() {
-                              _filter = value;
-                            });
-                          },
-                        )))
+                    child: RadioListTile(
+                      title: Text('Available', style: TextStyle(color: Colors.purple[900], fontWeight: FontWeight.bold)),
+                      activeColor: Colors.purple[900],
+                      value: FilterAvailableLectures.available,
+                      groupValue: _filter,
+                      onChanged: (FilterAvailableLectures value) {
+                        setState(() {
+                          _filter = value;
+                        });
+                      },
+                    ))
               ],
             ),
             temp,
@@ -88,7 +84,7 @@ class _ChooseLectureState extends State<ChooseLecturePage> {
       } else {
         temp = Container(
           padding: EdgeInsets.all(10.0),
-          height: 300.0,
+          height: 400.0,
           child: new ListView.builder(
               itemCount: listOfLectures.length,
               itemBuilder: (BuildContext ctxt, int index) {
@@ -133,4 +129,36 @@ class _ChooseLectureState extends State<ChooseLecturePage> {
 
     return result;
   }
+}
+
+Widget _titleText(String text, double size) {
+  return Center(
+    child: 
+      Stack(
+        children: [
+          Text(text,
+            style: TextStyle(
+              fontSize: size,
+              foreground: Paint()
+                ..style = PaintingStyle.stroke
+                ..strokeWidth = 6
+                ..color = Colors.purple[900]
+              ),
+            ),
+          Text(text,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: size,
+              shadows: <Shadow>[
+                Shadow(
+                  offset: Offset(6.0, 6.0),
+                  blurRadius: 8.0,
+                  color: Colors.purple[900],
+                ), 
+              ],
+            ),
+          ),
+        ],
+      )
+  );
 }
