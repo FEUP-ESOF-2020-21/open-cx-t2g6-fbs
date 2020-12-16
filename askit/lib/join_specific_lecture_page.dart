@@ -21,39 +21,33 @@ class _JoinSpecificLectureState extends State<JoinSpecificLecturePage> {
   @override
   Widget build(BuildContext context) {
     final snackBar = SnackBar(content: Text('Joining lecture...'));
-    return new Scaffold(
-        backgroundColor: new Color.fromARGB(255, 190, 180, 255),
-        body: Builder(builder: (BuildContext context) {
-          return new Column(
-            children: [
-               SizedBox(height: 35),
-              _titleText("Selected Lecture", 40),
-               SizedBox(height: 35),
-              new ListTile(
-                title: Text(lecture.printIdAndTitle() +
-                    "\n\n" +
-                    lecture.printTheRest()),
-              ),
-              SizedBox(height: 35),
-              ElevatedButton(
-                child: Text('Join', style: new TextStyle(fontSize: 25)),
-                  onPressed: () {
-                    Scaffold.of(context).showSnackBar(snackBar);
-                    associateLectureWithUser().then((result) {
-                      Navigator.pop(context);
-                    });
-                  },
-                style: 
-                ElevatedButton.styleFrom(
+    return new Scaffold(body: Builder(builder: (BuildContext context) {
+      return new Column(
+        children: [
+          SizedBox(height: 35),
+          _titleText("Selected Lecture", 40),
+          SizedBox(height: 35),
+          new ListTile(
+            title: Text(
+                lecture.printIdAndTitle() + "\n\n" + lecture.printTheRest()),
+          ),
+          SizedBox(height: 35),
+          ElevatedButton(
+              child: Text('Join', style: new TextStyle(fontSize: 25)),
+              onPressed: () {
+                Scaffold.of(context).showSnackBar(snackBar);
+                associateLectureWithUser().then((result) {
+                  Navigator.pop(context);
+                });
+              },
+              style: ElevatedButton.styleFrom(
                   primary: Colors.purple[900],
                   minimumSize: Size(120, 70),
                   side: BorderSide(width: 3.0, color: Colors.white),
-                  shadowColor: Colors.black
-                )
-              ),
-            ],
-          );
-        }));
+                  shadowColor: Colors.black)),
+        ],
+      );
+    }));
   }
 
   Future associateLectureWithUser() async {
@@ -68,32 +62,31 @@ class _JoinSpecificLectureState extends State<JoinSpecificLecturePage> {
 
 Widget _titleText(String text, double size) {
   return Center(
-    child: 
-      Stack(
-        children: [
-          Text(text,
-            style: TextStyle(
-              fontSize: size,
-              foreground: Paint()
-                ..style = PaintingStyle.stroke
-                ..strokeWidth = 6
-                ..color = Colors.purple[900]
-              ),
+      child: Stack(
+    children: [
+      Text(
+        text,
+        style: TextStyle(
+            fontSize: size,
+            foreground: Paint()
+              ..style = PaintingStyle.stroke
+              ..strokeWidth = 6
+              ..color = Colors.purple[900]),
+      ),
+      Text(
+        text,
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: size,
+          shadows: <Shadow>[
+            Shadow(
+              offset: Offset(6.0, 6.0),
+              blurRadius: 8.0,
+              color: Colors.purple[900],
             ),
-          Text(text,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: size,
-              shadows: <Shadow>[
-                Shadow(
-                  offset: Offset(6.0, 6.0),
-                  blurRadius: 8.0,
-                  color: Colors.purple[900],
-                ), 
-              ],
-            ),
-          ),
-        ],
-      )
-  );
+          ],
+        ),
+      ),
+    ],
+  ));
 }

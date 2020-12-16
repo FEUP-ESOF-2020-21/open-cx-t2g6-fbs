@@ -20,45 +20,48 @@ class _ChooseLectureState extends State<ChooseLecturePage> {
   Widget build(BuildContext context) {
     getData();
     return Scaffold(
-        backgroundColor: new Color.fromARGB(255, 190, 180, 255),
         body: new Column(
+      children: [
+        SizedBox(height: 35),
+        _titleText("Choose a Lecture", 40),
+        SizedBox(height: 35),
+        //!Important!
+        //To display widgets that don't have an intrinsic width inside a row, you must nest them inside a flexible widget
+        new Row(
           children: [
-            SizedBox(height: 35),
-            _titleText("Choose a Lecture", 40),
-            SizedBox(height: 35),
-            //!Important!
-            //To display widgets that don't have an intrinsic width inside a row, you must nest them inside a flexible widget
-            new Row(
-              children: [
-                new Flexible(
-                    child: RadioListTile(
-                      title: Text('All', style: TextStyle(color: Colors.purple[900], fontWeight: FontWeight.bold)),
-                      activeColor: Colors.purple[900],
-                      value: FilterAvailableLectures.all,
-                      groupValue: _filter,
-                      onChanged: (FilterAvailableLectures value) {
-                        setState(() {
-                          _filter = value;
-                        });
-                      },
-                    )),
-                new Flexible(
-                    child: RadioListTile(
-                      title: Text('Available', style: TextStyle(color: Colors.purple[900], fontWeight: FontWeight.bold)),
-                      activeColor: Colors.purple[900],
-                      value: FilterAvailableLectures.available,
-                      groupValue: _filter,
-                      onChanged: (FilterAvailableLectures value) {
-                        setState(() {
-                          _filter = value;
-                        });
-                      },
-                    ))
-              ],
-            ),
-            temp,
+            new Flexible(
+                child: RadioListTile(
+              title: Text('All',
+                  style: TextStyle(
+                      color: Colors.purple[900], fontWeight: FontWeight.bold)),
+              activeColor: Colors.purple[900],
+              value: FilterAvailableLectures.all,
+              groupValue: _filter,
+              onChanged: (FilterAvailableLectures value) {
+                setState(() {
+                  _filter = value;
+                });
+              },
+            )),
+            new Flexible(
+                child: RadioListTile(
+              title: Text('Available',
+                  style: TextStyle(
+                      color: Colors.purple[900], fontWeight: FontWeight.bold)),
+              activeColor: Colors.purple[900],
+              value: FilterAvailableLectures.available,
+              groupValue: _filter,
+              onChanged: (FilterAvailableLectures value) {
+                setState(() {
+                  _filter = value;
+                });
+              },
+            ))
           ],
-        ));
+        ),
+        temp,
+      ],
+    ));
   }
 
   Future getData() async {
@@ -133,32 +136,31 @@ class _ChooseLectureState extends State<ChooseLecturePage> {
 
 Widget _titleText(String text, double size) {
   return Center(
-    child: 
-      Stack(
-        children: [
-          Text(text,
-            style: TextStyle(
-              fontSize: size,
-              foreground: Paint()
-                ..style = PaintingStyle.stroke
-                ..strokeWidth = 6
-                ..color = Colors.purple[900]
-              ),
+      child: Stack(
+    children: [
+      Text(
+        text,
+        style: TextStyle(
+            fontSize: size,
+            foreground: Paint()
+              ..style = PaintingStyle.stroke
+              ..strokeWidth = 6
+              ..color = Colors.purple[900]),
+      ),
+      Text(
+        text,
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: size,
+          shadows: <Shadow>[
+            Shadow(
+              offset: Offset(6.0, 6.0),
+              blurRadius: 8.0,
+              color: Colors.purple[900],
             ),
-          Text(text,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: size,
-              shadows: <Shadow>[
-                Shadow(
-                  offset: Offset(6.0, 6.0),
-                  blurRadius: 8.0,
-                  color: Colors.purple[900],
-                ), 
-              ],
-            ),
-          ),
-        ],
-      )
-  );
+          ],
+        ),
+      ),
+    ],
+  ));
 }

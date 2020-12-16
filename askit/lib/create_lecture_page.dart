@@ -24,7 +24,6 @@ class _CreateLectureState extends State<CreateLecturePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: new Color.fromARGB(255, 190, 180, 255),
       body: new ListView(children: [
         SizedBox(height: 35),
         _titleText("Create Lecture", 45),
@@ -65,10 +64,11 @@ class MyCustomFormState extends State<MyCustomForm> {
           new TextFormField(
             cursorColor: Colors.purple[900],
             decoration: InputDecoration(
-              labelText: 'Enter the title',
-              labelStyle: TextStyle(color: Colors.purple[900]),
-              focusedBorder: UnderlineInputBorder(borderSide: BorderSide(width: 2, color: Colors.purple[900]))
-            ),
+                labelText: 'Enter the title',
+                labelStyle: TextStyle(color: Colors.purple[900]),
+                focusedBorder: UnderlineInputBorder(
+                    borderSide:
+                        BorderSide(width: 2, color: Colors.purple[900]))),
             validator: (value) {
               if (value.isEmpty) {
                 return 'Please enter some text';
@@ -80,10 +80,11 @@ class MyCustomFormState extends State<MyCustomForm> {
           new TextFormField(
             cursorColor: Colors.purple[900],
             decoration: InputDecoration(
-              labelText: 'Enter the description',
-              labelStyle: TextStyle(color: Colors.purple[900]),
-              focusedBorder: UnderlineInputBorder(borderSide: BorderSide(width: 2, color: Colors.purple[900]))
-            ),
+                labelText: 'Enter the description',
+                labelStyle: TextStyle(color: Colors.purple[900]),
+                focusedBorder: UnderlineInputBorder(
+                    borderSide:
+                        BorderSide(width: 2, color: Colors.purple[900]))),
             validator: (value) {
               if (value.isEmpty) {
                 return 'Please enter some text';
@@ -102,10 +103,11 @@ class MyCustomFormState extends State<MyCustomForm> {
               return null;
             },
             decoration: InputDecoration(
-              labelText: 'Enter the capacity',
-              labelStyle: TextStyle(color: Colors.purple[900]),
-              focusedBorder: UnderlineInputBorder(borderSide: BorderSide(width: 2, color: Colors.purple[900]))
-            ),
+                labelText: 'Enter the capacity',
+                labelStyle: TextStyle(color: Colors.purple[900]),
+                focusedBorder: UnderlineInputBorder(
+                    borderSide:
+                        BorderSide(width: 2, color: Colors.purple[900]))),
             keyboardType: TextInputType.number,
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.digitsOnly
@@ -113,7 +115,8 @@ class MyCustomFormState extends State<MyCustomForm> {
             // Only numbers can be entered
           ),
           new Container(
-            child: Text("Choose the date:\n", style: TextStyle(color: Colors.purple[900])),
+            child: Text("Choose the date:\n",
+                style: TextStyle(color: Colors.purple[900])),
             padding: EdgeInsets.only(top: 20),
           ),
           new Container(
@@ -133,74 +136,68 @@ class MyCustomFormState extends State<MyCustomForm> {
               },
             ),
           ),
-          new Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+          new Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             new Padding(
-                padding: const EdgeInsets.only(top: 50, left: 30, right: 50, bottom: 10),
+                padding: const EdgeInsets.only(
+                    top: 50, left: 30, right: 50, bottom: 10),
                 child: new Container(
-                  height: 60,
-                  child: ElevatedButton(
-                    child: Text('Choose File', style: new TextStyle(fontSize: 15)),
-                      onPressed: () {
-                        chooseFile();
-                      },
-                    style: 
-                    ElevatedButton.styleFrom(
-                      primary: Colors.purple[900],
-                      minimumSize: Size(50, 50),
-                      side: BorderSide(width: 3.0, color: Colors.white),
-                      shadowColor: Colors.black
-                    )))),
+                    height: 60,
+                    child: ElevatedButton(
+                        child: Text('Choose File',
+                            style: new TextStyle(fontSize: 15)),
+                        onPressed: () {
+                          chooseFile();
+                        },
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.purple[900],
+                            minimumSize: Size(50, 50),
+                            side: BorderSide(width: 3.0, color: Colors.white),
+                            shadowColor: Colors.black)))),
             new Padding(
-                padding: const EdgeInsets.only(top: 50,  left: 30, right: 30, bottom: 10),
+                padding: const EdgeInsets.only(
+                    top: 50, left: 30, right: 30, bottom: 10),
                 child: new Container(
-                  height: 60,
-                  child: ElevatedButton(
-                    child: Text('Upload File', style: new TextStyle(fontSize: 15)),
-                      onPressed: !_uploadedFile ? null : () => uploadFile(),
-                    style: 
-                    ElevatedButton.styleFrom(
-                      primary: Colors.purple[900],
-                      minimumSize: Size(50, 50),
-                      side: BorderSide(width: 3.0, color: Colors.white),
-                      shadowColor: Colors.black
-                    ))
-                )),
+                    height: 60,
+                    child: ElevatedButton(
+                        child: Text('Upload File',
+                            style: new TextStyle(fontSize: 15)),
+                        onPressed: !_uploadedFile ? null : () => uploadFile(),
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.purple[900],
+                            minimumSize: Size(50, 50),
+                            side: BorderSide(width: 3.0, color: Colors.white),
+                            shadowColor: Colors.black)))),
           ]),
           Padding(
               padding: const EdgeInsets.only(left: 10, top: 10),
               child: new Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [_tmpWidget])
-                ),
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [_tmpWidget])),
           Padding(
             padding: const EdgeInsets.only(top: 20.0),
             child: Center(
                 child: ElevatedButton(
-                    child: Text('Submit', style: new TextStyle(fontSize: 15)),
-                      onPressed: _uploadingFile
-                        ? null
-                        : () {
-                            // Validate returns true if the form is valid, or false
-                            // otherwise.
-                            if (_formKey.currentState.validate()) {
-                              // If the form is valid, display a Snackbar.
-                              Scaffold.of(context).showSnackBar(
-                                  SnackBar(content: Text('Creating lecture...')));
-                              sendData().then((result) {
-                                Navigator.pop(context);
-                              });
-                              //Process data
-                            }
-                          },
-                    style: 
-                    ElevatedButton.styleFrom(
-                      primary: Colors.purple[900],
-                      minimumSize: Size(50, 50),
-                      side: BorderSide(width: 3.0, color: Colors.white),
-                      shadowColor: Colors.black
-                    ),
+              child: Text('Submit', style: new TextStyle(fontSize: 15)),
+              onPressed: _uploadingFile
+                  ? null
+                  : () {
+                      // Validate returns true if the form is valid, or false
+                      // otherwise.
+                      if (_formKey.currentState.validate()) {
+                        // If the form is valid, display a Snackbar.
+                        Scaffold.of(context).showSnackBar(
+                            SnackBar(content: Text('Creating lecture...')));
+                        sendData().then((result) {
+                          Navigator.pop(context);
+                        });
+                        //Process data
+                      }
+                    },
+              style: ElevatedButton.styleFrom(
+                  primary: Colors.purple[900],
+                  minimumSize: Size(50, 50),
+                  side: BorderSide(width: 3.0, color: Colors.white),
+                  shadowColor: Colors.black),
             )),
           ),
         ],
@@ -215,9 +212,7 @@ class MyCustomFormState extends State<MyCustomForm> {
       List<String> list = _file.toString().split("/");
       String fileName = list.last;
       _tmpWidget = FittedBox(
-              fit: BoxFit.fitWidth,
-              child: new Text("File chosen: " + fileName)
-            );
+          fit: BoxFit.fitWidth, child: new Text("File chosen: " + fileName));
     });
   }
 
@@ -266,32 +261,31 @@ class MyCustomFormState extends State<MyCustomForm> {
 
 Widget _titleText(String text, double size) {
   return Center(
-    child: 
-      Stack(
-        children: [
-          Text(text,
-            style: TextStyle(
-              fontSize: size,
-              foreground: Paint()
-                ..style = PaintingStyle.stroke
-                ..strokeWidth = 6
-                ..color = Colors.purple[900]
-              ),
+      child: Stack(
+    children: [
+      Text(
+        text,
+        style: TextStyle(
+            fontSize: size,
+            foreground: Paint()
+              ..style = PaintingStyle.stroke
+              ..strokeWidth = 6
+              ..color = Colors.purple[900]),
+      ),
+      Text(
+        text,
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: size,
+          shadows: <Shadow>[
+            Shadow(
+              offset: Offset(6.0, 6.0),
+              blurRadius: 8.0,
+              color: Colors.purple[900],
             ),
-          Text(text,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: size,
-              shadows: <Shadow>[
-                Shadow(
-                  offset: Offset(6.0, 6.0),
-                  blurRadius: 8.0,
-                  color: Colors.purple[900],
-                ), 
-              ],
-            ),
-          ),
-        ],
-      )
-  );
+          ],
+        ),
+      ),
+    ],
+  ));
 }

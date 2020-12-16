@@ -23,16 +23,16 @@ class _ViewQuestionsAsLecturerState extends State<ViewQuestionsAsLecturer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: new Color.fromARGB(255, 190, 180, 255),
         body: new Column(children: [
-          SizedBox(height: 35),
-          FittedBox(
-              fit: BoxFit.fitWidth,
-              child:  _titleText("Questions for Lecture #" + selectedLecture.getId().toString(), 50),
-            ),
-          SizedBox(height: 35),
-          temp_questions
-        ]));
+      SizedBox(height: 35),
+      FittedBox(
+        fit: BoxFit.fitWidth,
+        child: _titleText(
+            "Questions for Lecture #" + selectedLecture.getId().toString(), 50),
+      ),
+      SizedBox(height: 35),
+      temp_questions
+    ]));
   }
 
   Future getQuestions() async {
@@ -94,32 +94,31 @@ class _ViewQuestionsAsLecturerState extends State<ViewQuestionsAsLecturer> {
 
 Widget _titleText(String text, double size) {
   return Center(
-    child: 
-      Stack(
-        children: [
-          Text(text,
-            style: TextStyle(
-              fontSize: size,
-              foreground: Paint()
-                ..style = PaintingStyle.stroke
-                ..strokeWidth = 6
-                ..color = Colors.purple[900]
-              ),
+      child: Stack(
+    children: [
+      Text(
+        text,
+        style: TextStyle(
+            fontSize: size,
+            foreground: Paint()
+              ..style = PaintingStyle.stroke
+              ..strokeWidth = 6
+              ..color = Colors.purple[900]),
+      ),
+      Text(
+        text,
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: size,
+          shadows: <Shadow>[
+            Shadow(
+              offset: Offset(6.0, 6.0),
+              blurRadius: 8.0,
+              color: Colors.purple[900],
             ),
-          Text(text,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: size,
-              shadows: <Shadow>[
-                Shadow(
-                  offset: Offset(6.0, 6.0),
-                  blurRadius: 8.0,
-                  color: Colors.purple[900],
-                ), 
-              ],
-            ),
-          ),
-        ],
-      )
-  );
+          ],
+        ),
+      ),
+    ],
+  ));
 }

@@ -28,45 +28,49 @@ class _ViewQuestionsAsAttendeeState extends State<ViewQuestionsAsAttendee> {
   Widget build(BuildContext context) {
     getQuestions();
     return Scaffold(
-        backgroundColor: new Color.fromARGB(255, 190, 180, 255),
         body: new Column(children: [
-          SizedBox(height: 35),
-          FittedBox(
-              fit: BoxFit.fitWidth,
-              child:  _titleText("Questions for Lecture #" + selectedLecture.getId().toString(), 50),
-            ),
-          SizedBox(height: 35),
-          new Row(
-            children: [
-              new Flexible(
-                child: RadioListTile(
-                  title: Text('New', style: TextStyle(color: Colors.purple[900], fontWeight: FontWeight.bold)),
-                  activeColor: Colors.purple[900],
-                  value: SortingType.byNew,
-                  groupValue: _type,
-                  onChanged: (SortingType value) {
-                    setState(() {
-                      _type = value;
-                    });
-                  },
-                )),
-                new Flexible(
-                child: RadioListTile(
-                  title: Text('Rating', style: TextStyle(color: Colors.purple[900], fontWeight: FontWeight.bold)),
-                  activeColor: Colors.purple[900],
-                  value: SortingType.byHot,
-                  groupValue: _type,
-                  onChanged: (SortingType value) {
-                    setState(() {
-                      _type = value;
-                    });
-                  },
-                )),
-            ],
-          ),
-          temp_questions,
-          _submitQuestionButton(context),
-        ]));
+      SizedBox(height: 35),
+      FittedBox(
+        fit: BoxFit.fitWidth,
+        child: _titleText(
+            "Questions for Lecture #" + selectedLecture.getId().toString(), 50),
+      ),
+      SizedBox(height: 35),
+      new Row(
+        children: [
+          new Flexible(
+              child: RadioListTile(
+            title: Text('New',
+                style: TextStyle(
+                    color: Colors.purple[900], fontWeight: FontWeight.bold)),
+            activeColor: Colors.purple[900],
+            value: SortingType.byNew,
+            groupValue: _type,
+            onChanged: (SortingType value) {
+              setState(() {
+                _type = value;
+              });
+            },
+          )),
+          new Flexible(
+              child: RadioListTile(
+            title: Text('Rating',
+                style: TextStyle(
+                    color: Colors.purple[900], fontWeight: FontWeight.bold)),
+            activeColor: Colors.purple[900],
+            value: SortingType.byHot,
+            groupValue: _type,
+            onChanged: (SortingType value) {
+              setState(() {
+                _type = value;
+              });
+            },
+          )),
+        ],
+      ),
+      temp_questions,
+      _submitQuestionButton(context),
+    ]));
   }
 
   Future getQuestions() async {
@@ -150,24 +154,20 @@ class _ViewQuestionsAsAttendeeState extends State<ViewQuestionsAsAttendee> {
             alignment: Alignment.bottomCenter,
             child: Padding(
                 padding: EdgeInsets.only(bottom: 50),
-                child: 
-                new OutlineButton(
-                child: Text('Submit Question', style: TextStyle(color: Colors.purple[900])),
-                  splashColor: Color.fromARGB(255, 190, 180, 255),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                      builder: (context) => SubmitQuestionPage()));
-                    },    
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(40)),
-                highlightElevation: 0,
-                borderSide: BorderSide(color: Colors.purple[900])
-                )
-            )
-          )
-        );
+                child: new OutlineButton(
+                    child: Text('Submit Question',
+                        style: TextStyle(color: Colors.purple[900])),
+                    splashColor: Color.fromARGB(255, 190, 180, 255),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SubmitQuestionPage()));
+                    },
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(40)),
+                    highlightElevation: 0,
+                    borderSide: BorderSide(color: Colors.purple[900])))));
   }
 
   Future upvoteQuestion(int questionId) async {
@@ -201,32 +201,31 @@ class _ViewQuestionsAsAttendeeState extends State<ViewQuestionsAsAttendee> {
 
 Widget _titleText(String text, double size) {
   return Center(
-    child: 
-      Stack(
-        children: [
-          Text(text,
-            style: TextStyle(
-              fontSize: size,
-              foreground: Paint()
-                ..style = PaintingStyle.stroke
-                ..strokeWidth = 6
-                ..color = Colors.purple[900]
-              ),
+      child: Stack(
+    children: [
+      Text(
+        text,
+        style: TextStyle(
+            fontSize: size,
+            foreground: Paint()
+              ..style = PaintingStyle.stroke
+              ..strokeWidth = 6
+              ..color = Colors.purple[900]),
+      ),
+      Text(
+        text,
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: size,
+          shadows: <Shadow>[
+            Shadow(
+              offset: Offset(6.0, 6.0),
+              blurRadius: 8.0,
+              color: Colors.purple[900],
             ),
-          Text(text,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: size,
-              shadows: <Shadow>[
-                Shadow(
-                  offset: Offset(6.0, 6.0),
-                  blurRadius: 8.0,
-                  color: Colors.purple[900],
-                ), 
-              ],
-            ),
-          ),
-        ],
-      )
-  );
+          ],
+        ),
+      ),
+    ],
+  ));
 }
