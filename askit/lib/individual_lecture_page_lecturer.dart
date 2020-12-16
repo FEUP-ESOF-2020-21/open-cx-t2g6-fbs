@@ -43,10 +43,13 @@ class _ViewSpecificUserLectureStateAsLecturer
                   "Role: Lecturer")
           ),
           SizedBox(height: 35),
-          new Text("File uploaded: " +
+          FittedBox(
+              fit: BoxFit.fitWidth,
+              child: new Text("File uploaded: " +
               (lecture.getFileName() == ""
                   ? "No file uploaded"
                   : lecture.getFileName())),
+            ),
           //TODO Add option in same row to upload new file and let user know whether a file is already uploaded or not
           SizedBox(height: 35),
           new Row(children: [
@@ -55,7 +58,7 @@ class _ViewSpecificUserLectureStateAsLecturer
 
                 padding: EdgeInsets.only(left: 60, right: 20),
                 child: OutlineButton(
-                    child: Text('Replace file'),
+                    child: Text('Replace file', style: TextStyle(color: Colors.purple[900])),
                     splashColor: Colors.grey,
                     onPressed: () {
                       /*TODO This must do something aka upload a file as if user was creating a lecture*/
@@ -65,7 +68,7 @@ class _ViewSpecificUserLectureStateAsLecturer
                     highlightElevation: 0,
                     borderSide: BorderSide(color: Colors.purple[900]))),
             new OutlineButton(
-                child: Text('Download files'),
+                child: Text('Download files', style: TextStyle(color: _color)),
                 splashColor: Colors.grey,
                 onPressed: lecture.getFileName() == ""
                     ? null
@@ -78,7 +81,7 @@ class _ViewSpecificUserLectureStateAsLecturer
                 borderSide: BorderSide(color: Colors.purple[900]))
           ]),
           new OutlineButton(
-              child: Text('View Questions'),
+              child: Text('View Questions', style: TextStyle(color: Colors.purple[900])),
               splashColor: Colors.grey,
               onPressed: () {
                 Navigator.push(
