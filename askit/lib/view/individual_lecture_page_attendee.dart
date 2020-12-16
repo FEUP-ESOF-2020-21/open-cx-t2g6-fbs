@@ -1,9 +1,9 @@
 import 'dart:io';
-import 'package:askit/lecture.dart';
-import 'package:askit/view_questions_attendee.dart';
+import 'package:askit/model/lecture.dart';
+import 'package:askit/view/view_questions_attendee.dart';
 import 'package:downloads_path_provider/downloads_path_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:askit/home_page.dart';
+import 'package:askit/view/home_page.dart';
 import 'dart:core';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:permission_handler/permission_handler.dart';

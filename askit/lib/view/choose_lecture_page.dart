@@ -1,8 +1,8 @@
-import 'package:askit/lecture.dart';
+import 'package:askit/model/lecture.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:askit/sign_in.dart';
-import 'package:askit/join_specific_lecture_page.dart';
+import 'package:askit/controller/sign_in.dart';
+import 'package:askit/view/join_specific_lecture_page.dart';
 
 enum FilterAvailableLectures { all, available }
 int numberOfResults = 0;

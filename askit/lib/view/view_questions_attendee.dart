@@ -1,11 +1,11 @@
-import 'package:askit/lecture.dart';
-import 'package:askit/submit_question.dart';
+import 'package:askit/model/lecture.dart';
+import 'package:askit/view/submit_question.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:askit/home_page.dart';
-import 'package:askit/sign_in.dart';
+import 'package:askit/view/home_page.dart';
+import 'package:askit/controller/sign_in.dart';
 import 'dart:core';
-import 'package:askit/question.dart';
+import 'package:askit/model/question.dart';
 
 enum SortingType { byNew, byHot }
 

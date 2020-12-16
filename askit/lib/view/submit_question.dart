@@ -1,9 +1,9 @@
-import 'package:askit/sign_in.dart';
+import 'package:askit/controller/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'package:askit/home_page.dart'; //for selectedLecture
+import 'package:askit/view/home_page.dart'; //for selectedLecture
 
 class SubmitQuestionPage extends StatefulWidget {
   @override
