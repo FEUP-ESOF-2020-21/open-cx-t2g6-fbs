@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           verticalDirection: VerticalDirection.down,
           children: [
-            SizedBox(height: 45),
+            SizedBox(height: 35),
             Container(
                 child: _titleText("My Lectures"),
                 padding: EdgeInsets.all(20.0)),
@@ -122,11 +122,13 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             temp,
-            SizedBox(height: 20),
-            new Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [_addLectureButton(context), _signOutButton(context)],
-            )
+            new Expanded(
+              child: new Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [_addLectureButton(context), _signOutButton(context)],
+              )
+            ),
           ],
         ));
   }
@@ -157,14 +159,16 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       if (listOfLectures.isEmpty) {
         temp = Container(
-            child: Text(
-                'You have no lectures that meet your criteria.\n Try refining your search filters, sign up for an upcoming lecture or even create your own! ',
-                style: TextStyle(fontSize: 15)),
-            padding: EdgeInsets.only(left: 35.0, top: 50.0, right: 20.0));
+          height: 240.0,
+          child: Text(
+            'You have no lectures that meet your criteria.\n Try refining your search filters, sign up for an upcoming lecture or even create your own! ',
+            style: TextStyle(fontSize: 15)
+          ),
+        padding: EdgeInsets.only(left: 35.0, top: 50.0, right: 20.0));
       } else {
         temp = Container(
           padding: EdgeInsets.only(left: 10.0, right: 10.0),
-          height: 220.0,
+          height: 240.0,
           child: new ListView.builder(
               itemCount: listOfLectures.length,
               itemBuilder: (BuildContext ctxt, int index) {
@@ -194,39 +198,42 @@ class _HomePageState extends State<HomePage> {
   }
 
 Widget _addLectureButton(BuildContext context) {
-    return OutlineButton(
-      splashColor: Colors.grey,
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => AddLecturePage()
-          )
-        );
-      },
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-      highlightElevation: 0,
-      borderSide: BorderSide(color: Colors.purple[900]),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image(image: AssetImage("assets/google_logo.png"), height: 35.0),
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Text(
-                'Add Lecture',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.purple[900],
-                ),
-              ),
+    return Padding(
+      padding: EdgeInsets.all(10),
+      child: OutlineButton(
+        splashColor: Colors.grey,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AddLecturePage()
             )
-          ],
+          );
+        },
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+        highlightElevation: 0,
+        borderSide: BorderSide(color: Colors.purple[900]),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image(image: AssetImage("assets/google_logo.png"), height: 35.0),
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Text(
+                  'Add Lecture',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.purple[900],
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
-      ),
+      )
     );
   }
 
@@ -271,7 +278,7 @@ Widget _addLectureButton(BuildContext context) {
 
   Widget _signOutButton(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.only(right: 25),
+        padding: EdgeInsets.all(10),
         child: RaisedButton(
           onPressed: () {
             signOutGoogle();
