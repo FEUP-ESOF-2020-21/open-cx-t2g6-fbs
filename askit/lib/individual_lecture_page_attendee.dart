@@ -53,6 +53,8 @@ class _ViewSpecificUserLectureStateAsAttendee
           onPressed: lecture.getFileName() == ""
               ? null
               : () {
+                  Scaffold.of(context).showSnackBar(
+                      SnackBar(content: Text('Downloading file...')));
                   downloadFile();
                 },
           shape:
@@ -86,13 +88,11 @@ class _ViewSpecificUserLectureStateAsAttendee
     var storageRef = storage.ref().child('lectures/$title/$fileName');
 
     final directory = await DownloadsPathProvider.downloadsDirectory;
-    final path ='${directory.path}/lecture.pdf';
-
+    final path = '${directory.path}/lecture.pdf';
 
     String url = await storageRef.getDownloadURL();
     var data = await http.get(url);
     var bytes = data.bodyBytes;
-
 
     var status = await Permission.storage.status;
     if (!status.isGranted) {

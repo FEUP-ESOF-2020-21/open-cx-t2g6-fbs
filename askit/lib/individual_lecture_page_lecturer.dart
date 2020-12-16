@@ -47,7 +47,6 @@ class _ViewSpecificUserLectureStateAsLecturer
                 ? "No file uploaded"
                 : lecture.getFileName())),
       ),
-      //TODO Add option in same row to upload new file and let user know whether a file is already uploaded or not
       SizedBox(height: 35),
       new Row(children: [
         new Padding(
@@ -71,6 +70,8 @@ class _ViewSpecificUserLectureStateAsLecturer
             onPressed: lecture.getFileName() == ""
                 ? null
                 : () {
+                    Scaffold.of(context).showSnackBar(
+                        SnackBar(content: Text('Downloading file...')));
                     downloadFile();
                   },
             shape:
