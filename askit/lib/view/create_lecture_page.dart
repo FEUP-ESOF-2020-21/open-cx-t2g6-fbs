@@ -1,4 +1,4 @@
-import 'package:askit/sign_in.dart';
+import 'package:askit/controller/sign_in.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';

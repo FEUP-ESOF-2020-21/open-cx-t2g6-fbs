@@ -1,11 +1,11 @@
-import 'package:askit/lecture.dart';
-import 'package:askit/add_lecture_page.dart';
-import 'package:askit/login_page.dart';
+import 'package:askit/model/lecture.dart';
+import 'package:askit/view/add_lecture_page.dart';
+import 'package:askit/view/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:askit/sign_in.dart';
-import 'package:askit/individual_lecture_page_lecturer.dart';
-import 'package:askit/individual_lecture_page_attendee.dart';
+import 'package:askit/controller/sign_in.dart';
+import 'package:askit/view/individual_lecture_page_lecturer.dart';
+import 'package:askit/view/individual_lecture_page_attendee.dart';
 
 enum TypeOfLecture { previous, upcoming }
 bool filterLecturer = true;

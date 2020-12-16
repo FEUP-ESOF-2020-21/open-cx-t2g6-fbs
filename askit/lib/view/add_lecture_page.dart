@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:askit/create_lecture_page.dart';
-import 'package:askit/choose_lecture_page.dart';
+import 'package:askit/view/create_lecture_page.dart';
+import 'package:askit/view/choose_lecture_page.dart';
 
 class AddLecturePage extends StatefulWidget {
   @override

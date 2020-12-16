@@ -1,7 +1,7 @@
-import 'package:askit/lecture.dart';
-import 'package:askit/view_questions_lecturer.dart';
+import 'package:askit/model/lecture.dart';
+import 'package:askit/view/view_questions_lecturer.dart';
 import 'package:flutter/material.dart';
-import 'package:askit/home_page.dart';
+import 'package:askit/view/home_page.dart';
 import 'dart:core';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
