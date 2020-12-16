@@ -70,4 +70,8 @@ class Lecture {
         "/" +
         this.maxCapacity.toString();
   }
+
+  void setFileName(String fileName) {
+    this.fileName = fileName;
+  }
 }

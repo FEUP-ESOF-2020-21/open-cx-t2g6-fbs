@@ -6,6 +6,12 @@ import 'dart:core';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:ext_storage/ext_storage.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as http;
+import 'package:path/path.dart' as Path;
+
+File _file;
 
 class ViewSpecificUserLecturePageAsLecturer extends StatefulWidget {
   @override
@@ -18,7 +24,6 @@ class _ViewSpecificUserLectureStateAsLecturer
   Lecture lecture;
 
   final globalKey = GlobalKey<ScaffoldState>();
-
   _ViewSpecificUserLectureStateAsLecturer() {
     this.lecture = selectedLecture;
   }
@@ -62,6 +67,7 @@ class _ViewSpecificUserLectureStateAsLecturer
                     splashColor: Colors.grey,
                     onPressed: () {
                       /*TODO This must do something aka upload a file as if user was creating a lecture*/
+                      chooseFile();
                     },
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(40)),
@@ -106,7 +112,6 @@ class _ViewSpecificUserLectureStateAsLecturer
 
     var title = lecture.getTitle();
     var fileName = lecture.getFileName();
-    print('lectures/$title/$fileName');
     var storageRef = storage.ref().child('lectures/$title/$fileName');
 
     String path = await ExtStorage.getExternalStoragePublicDirectory(
@@ -116,6 +121,42 @@ class _ViewSpecificUserLectureStateAsLecturer
 
     File file = new File(fullPath);
     storageRef.writeToFile(file);
+  }
+
+  Future chooseFile() async {
+    _file = await FilePicker.getFile();
+    if (_file != null) {
+      uploadFile();
+    }
+  }
+
+  Future uploadFile() async {
+    String fileName = Path.basename(_file.path);
+    String title = this.lecture.getTitle();
+    firebase_storage.FirebaseStorage storage =
+        firebase_storage.FirebaseStorage.instance;
+    var storageRef = storage.ref().child('lectures/$title/$fileName');
+
+    firebase_storage.UploadTask uploadTask = storageRef.putFile(_file);
+    uploadTask.whenComplete(() => {
+          setState(() {
+            lecture.setFileName(fileName);
+            editLectureFile();
+          }),
+        });
+  }
+
+  Future editLectureFile() async {
+    var url = "https://web.fe.up.pt/~up201806296/database/editLectureFile.php";
+
+    url = url +
+        "?lectureId=" +
+        lecture.getId().toString() +
+        "&fileUrl=" +
+        lecture.getFileName();
+
+    var encoded = Uri.encodeFull(url);
+    await http.get(encoded);
   }
 }
 
