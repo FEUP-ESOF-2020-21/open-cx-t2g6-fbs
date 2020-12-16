@@ -169,7 +169,7 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.only(left: 35.0, top: 50.0, right: 20.0));
       } else {
         temp = Container(
-          padding: EdgeInsets.only(left: 10.0, right: 10.0),
+          padding: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10),
           height: 240.0,
           child: new ListView.builder(
               itemCount: listOfLectures.length,
