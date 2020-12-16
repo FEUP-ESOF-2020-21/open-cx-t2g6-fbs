@@ -1,11 +1,13 @@
 import 'dart:io';
 import 'package:askit/lecture.dart';
 import 'package:askit/view_questions_attendee.dart';
+import 'package:downloads_path_provider/downloads_path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:askit/home_page.dart';
 import 'dart:core';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:ext_storage/ext_storage.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:http/http.dart' as http;
 
 class ViewSpecificUserLecturePageAsAttendee extends StatefulWidget {
   @override
@@ -83,13 +85,22 @@ class _ViewSpecificUserLectureStateAsAttendee
     print('lectures/$title/$fileName');
     var storageRef = storage.ref().child('lectures/$title/$fileName');
 
-    String path = await ExtStorage.getExternalStoragePublicDirectory(
-        ExtStorage.DIRECTORY_DOWNLOADS);
+    final directory = await DownloadsPathProvider.downloadsDirectory;
+    final path ='${directory.path}/lecture.pdf';
 
-    String fullPath = "$path/lecture.pdf";
 
-    File file = new File(fullPath);
-    storageRef.writeToFile(file);
+    String url = await storageRef.getDownloadURL();
+    var data = await http.get(url);
+    var bytes = data.bodyBytes;
+
+
+    var status = await Permission.storage.status;
+    if (!status.isGranted) {
+      await Permission.storage.request();
+    }
+
+    File file = new File(path);
+    file.writeAsBytes(bytes);
   }
 }
 
