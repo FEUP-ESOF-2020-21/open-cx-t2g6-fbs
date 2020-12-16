@@ -17,12 +17,17 @@ class _SubmitQuestionState extends State<SubmitQuestionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-          // Change this argument to customize the height of the app bar
-          preferredSize: Size.fromHeight(50.0),
-          child: AppBar(
-              title: Text('SUBMIT QUESTION', style: TextStyle(fontSize: 30)))),
+      backgroundColor: new Color.fromARGB(255, 190, 180, 255),
       body: new ListView(children: [
+        SizedBox(height: 35),
+        Padding(
+          padding: EdgeInsets.only(right: 10, left:10),
+          child: FittedBox(
+              fit: BoxFit.fitWidth,
+              child:  _titleText("Submit Question", 50),
+            )
+        ),
+        SizedBox(height: 35),
         MyCustomForm(),
       ]),
     );
@@ -53,7 +58,12 @@ class MyCustomFormState extends State<MyCustomForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           new TextFormField(
-            decoration: InputDecoration(labelText: 'Enter the question'),
+            cursorColor: Colors.purple[900],
+            decoration: InputDecoration(
+              labelText: 'Enter the question',
+              labelStyle: TextStyle(color: Colors.purple[900]),
+              focusedBorder: UnderlineInputBorder(borderSide: BorderSide(width: 2, color: Colors.purple[900]))
+            ),
             validator: (value) {
               if (value.isEmpty) {
                 return 'Please enter some text';
@@ -63,6 +73,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             },
           ),
           new TextFormField(
+            cursorColor: Colors.purple[900],
             validator: (value) {
               if (value.isEmpty) {
                 return 'Please enter a valid number';
@@ -70,33 +81,44 @@ class MyCustomFormState extends State<MyCustomForm> {
               slide = int.parse(value);
               return null;
             },
-            decoration:
-                new InputDecoration(labelText: "Enter the slide number"),
+            decoration: InputDecoration(
+              labelText: 'Enter the slide number',
+              labelStyle: TextStyle(color: Colors.purple[900]),
+              focusedBorder: UnderlineInputBorder(borderSide: BorderSide(width: 2, color: Colors.purple[900]))
+            ),
             keyboardType: TextInputType.number,
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.digitsOnly
             ],
             // Only numbers can be entered
           ),
+          SizedBox(height: 35),
           Padding(
             padding: const EdgeInsets.only(top: 20.0),
             child: Center(
                 child: ElevatedButton(
-              onPressed: () {
-                // Validate returns true if the form is valid, or false
-                // otherwise.
-                if (_formKey.currentState.validate()) {
-                  // If the form is valid, display a Snackbar.
-                  Scaffold.of(context).showSnackBar(
-                      SnackBar(content: Text('Submitting question...')));
-                  sendData().then((result) {
-                    Navigator.pop(context);
-                  });
-                }
-              },
-              child: Text('Submit'),
-            )),
-          ),
+                    child: Text('Submit', style: new TextStyle(fontSize: 15)),
+                      onPressed: () {
+                        // Validate returns true if the form is valid, or false
+                        // otherwise.
+                        if (_formKey.currentState.validate()) {
+                        // If the form is valid, display a Snackbar.
+                        Scaffold.of(context).showSnackBar(
+                          SnackBar(content: Text('Submitting question...')));
+                        sendData().then((result) {
+                          Navigator.pop(context);
+                        });
+                        }
+                      },
+                    style: 
+                    ElevatedButton.styleFrom(
+                      primary: Colors.purple[900],
+                      minimumSize: Size(50, 50),
+                      side: BorderSide(width: 3.0, color: Colors.white),
+                      shadowColor: Colors.black
+                    ),
+                ),
+          )),
         ],
       ),
     );
@@ -118,4 +140,36 @@ class MyCustomFormState extends State<MyCustomForm> {
     var encoded = Uri.encodeFull(url);
     await http.get(encoded);
   }
+}
+
+Widget _titleText(String text, double size) {
+  return Center(
+    child: 
+      Stack(
+        children: [
+          Text(text,
+            style: TextStyle(
+              fontSize: size,
+              foreground: Paint()
+                ..style = PaintingStyle.stroke
+                ..strokeWidth = 6
+                ..color = Colors.purple[900]
+              ),
+            ),
+          Text(text,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: size,
+              shadows: <Shadow>[
+                Shadow(
+                  offset: Offset(6.0, 6.0),
+                  blurRadius: 8.0,
+                  color: Colors.purple[900],
+                ), 
+              ],
+            ),
+          ),
+        ],
+      )
+  );
 }

@@ -24,12 +24,11 @@ class _CreateLectureState extends State<CreateLecturePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-          // Change this argument to customize the height of the app bar
-          preferredSize: Size.fromHeight(50.0),
-          child: AppBar(
-              title: Text('CREATE LECTURE', style: TextStyle(fontSize: 30)))),
+      backgroundColor: new Color.fromARGB(255, 190, 180, 255),
       body: new ListView(children: [
+        SizedBox(height: 35),
+        _titleText("Create Lecture", 45),
+        SizedBox(height: 15),
         MyCustomForm(),
       ]),
     );
@@ -44,6 +43,7 @@ class MyCustomForm extends StatefulWidget {
 }
 
 class MyCustomFormState extends State<MyCustomForm> {
+  FocusNode myFocusNode = new FocusNode();
   // Create a global key that uniquely identifies the Form widget
   // and allows validation of the form.
   //
@@ -63,7 +63,12 @@ class MyCustomFormState extends State<MyCustomForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           new TextFormField(
-            decoration: InputDecoration(labelText: 'Enter the title'),
+            cursorColor: Colors.purple[900],
+            decoration: InputDecoration(
+              labelText: 'Enter the title',
+              labelStyle: TextStyle(color: Colors.purple[900]),
+              focusedBorder: UnderlineInputBorder(borderSide: BorderSide(width: 2, color: Colors.purple[900]))
+            ),
             validator: (value) {
               if (value.isEmpty) {
                 return 'Please enter some text';
@@ -73,7 +78,12 @@ class MyCustomFormState extends State<MyCustomForm> {
             },
           ),
           new TextFormField(
-            decoration: InputDecoration(labelText: 'Enter the description'),
+            cursorColor: Colors.purple[900],
+            decoration: InputDecoration(
+              labelText: 'Enter the description',
+              labelStyle: TextStyle(color: Colors.purple[900]),
+              focusedBorder: UnderlineInputBorder(borderSide: BorderSide(width: 2, color: Colors.purple[900]))
+            ),
             validator: (value) {
               if (value.isEmpty) {
                 return 'Please enter some text';
@@ -83,6 +93,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             },
           ),
           new TextFormField(
+            cursorColor: Colors.purple[900],
             validator: (value) {
               if (value.isEmpty) {
                 return 'Please enter a valid number';
@@ -90,7 +101,11 @@ class MyCustomFormState extends State<MyCustomForm> {
               capacity = int.parse(value);
               return null;
             },
-            decoration: new InputDecoration(labelText: "Enter the capacity"),
+            decoration: InputDecoration(
+              labelText: 'Enter the capacity',
+              labelStyle: TextStyle(color: Colors.purple[900]),
+              focusedBorder: UnderlineInputBorder(borderSide: BorderSide(width: 2, color: Colors.purple[900]))
+            ),
             keyboardType: TextInputType.number,
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.digitsOnly
@@ -98,7 +113,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             // Only numbers can be entered
           ),
           new Container(
-            child: Text("Choose the date:\n"),
+            child: Text("Choose the date:\n", style: TextStyle(color: Colors.purple[900])),
             padding: EdgeInsets.only(top: 20),
           ),
           new Container(
@@ -118,50 +133,74 @@ class MyCustomFormState extends State<MyCustomForm> {
               },
             ),
           ),
-          new Row(children: [
+          new Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
             new Padding(
-                padding: const EdgeInsets.only(
-                    top: 50, left: 50, right: 50, bottom: 10),
+                padding: const EdgeInsets.only(top: 50, left: 30, right: 50, bottom: 10),
                 child: new Container(
                   height: 60,
                   child: ElevatedButton(
-                    child: Text('Choose File'),
-                    onPressed: chooseFile,
-                  ),
+                    child: Text('Choose File', style: new TextStyle(fontSize: 15)),
+                      onPressed: () {
+                        chooseFile();
+                      },
+                    style: 
+                    ElevatedButton.styleFrom(
+                      primary: Colors.purple[900],
+                      minimumSize: Size(50, 50),
+                      side: BorderSide(width: 3.0, color: Colors.white),
+                      shadowColor: Colors.black
+                    )))),
+            new Padding(
+                padding: const EdgeInsets.only(top: 50,  left: 30, right: 30, bottom: 10),
+                child: new Container(
+                  height: 60,
+                  child: ElevatedButton(
+                    child: Text('Upload File', style: new TextStyle(fontSize: 15)),
+                      onPressed: !_uploadedFile ? null : () => uploadFile(),
+                    style: 
+                    ElevatedButton.styleFrom(
+                      primary: Colors.purple[900],
+                      minimumSize: Size(50, 50),
+                      side: BorderSide(width: 3.0, color: Colors.white),
+                      shadowColor: Colors.black
+                    ))
                 )),
-            new Padding(
-                padding: const EdgeInsets.only(top: 50),
-                child: new Container(
-                  height: 60,
-                  child: ElevatedButton(
-                    child: Text('Upload File'),
-                    onPressed: !_uploadedFile ? null : () => uploadFile(),
-                  ),
-                ))
           ]),
           Padding(
-              padding: const EdgeInsets.only(left: 50, top: 10),
-              child: new Row(children: [_tmpWidget])),
+              padding: const EdgeInsets.only(left: 10, top: 10),
+              child: new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [_tmpWidget])
+                ),
           Padding(
             padding: const EdgeInsets.only(top: 20.0),
             child: Center(
                 child: ElevatedButton(
-              onPressed: _uploadingFile
-                  ? null
-                  : () {
-                      // Validate returns true if the form is valid, or false
-                      // otherwise.
-                      if (_formKey.currentState.validate()) {
-                        // If the form is valid, display a Snackbar.
-                        Scaffold.of(context).showSnackBar(
-                            SnackBar(content: Text('Creating lecture...')));
-                        sendData().then((result) {
-                          Navigator.pop(context);
-                        });
-                        //Process data
-                      }
-                    },
-              child: Text('Submit'),
+                    child: Text('Submit', style: new TextStyle(fontSize: 15)),
+                      onPressed: _uploadingFile
+                        ? null
+                        : () {
+                            // Validate returns true if the form is valid, or false
+                            // otherwise.
+                            if (_formKey.currentState.validate()) {
+                              // If the form is valid, display a Snackbar.
+                              Scaffold.of(context).showSnackBar(
+                                  SnackBar(content: Text('Creating lecture...')));
+                              sendData().then((result) {
+                                Navigator.pop(context);
+                              });
+                              //Process data
+                            }
+                          },
+                    style: 
+                    ElevatedButton.styleFrom(
+                      primary: Colors.purple[900],
+                      minimumSize: Size(50, 50),
+                      side: BorderSide(width: 3.0, color: Colors.white),
+                      shadowColor: Colors.black
+                    ),
             )),
           ),
         ],
@@ -175,7 +214,10 @@ class MyCustomFormState extends State<MyCustomForm> {
       _uploadedFile = true;
       List<String> list = _file.toString().split("/");
       String fileName = list.last;
-      _tmpWidget = new Text("File chosen: " + fileName);
+      _tmpWidget = FittedBox(
+              fit: BoxFit.fitWidth,
+              child: new Text("File chosen: " + fileName)
+            );
     });
   }
 
@@ -220,4 +262,36 @@ class MyCustomFormState extends State<MyCustomForm> {
           }),
         });
   }
+}
+
+Widget _titleText(String text, double size) {
+  return Center(
+    child: 
+      Stack(
+        children: [
+          Text(text,
+            style: TextStyle(
+              fontSize: size,
+              foreground: Paint()
+                ..style = PaintingStyle.stroke
+                ..strokeWidth = 6
+                ..color = Colors.purple[900]
+              ),
+            ),
+          Text(text,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: size,
+              shadows: <Shadow>[
+                Shadow(
+                  offset: Offset(6.0, 6.0),
+                  blurRadius: 8.0,
+                  color: Colors.purple[900],
+                ), 
+              ],
+            ),
+          ),
+        ],
+      )
+  );
 }

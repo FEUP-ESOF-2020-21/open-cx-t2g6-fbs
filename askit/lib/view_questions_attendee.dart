@@ -28,43 +28,40 @@ class _ViewQuestionsAsAttendeeState extends State<ViewQuestionsAsAttendee> {
   Widget build(BuildContext context) {
     getQuestions();
     return Scaffold(
-        appBar: PreferredSize(
-            // Change this argument to customize the height of the app bar
-            preferredSize: Size.fromHeight(50.0),
-            child: AppBar(title: Text('HOME', style: TextStyle(fontSize: 30)))),
+        backgroundColor: new Color.fromARGB(255, 190, 180, 255),
         body: new Column(children: [
-          new Container(
-              child: Text(
-                  'Questions for Lecture #' +
-                      selectedLecture.getId().toString(),
-                  style: TextStyle(fontSize: 20)),
-              padding: EdgeInsets.only(top: 20.0, bottom: 20)),
+          SizedBox(height: 35),
+          FittedBox(
+              fit: BoxFit.fitWidth,
+              child:  _titleText("Questions for Lecture #" + selectedLecture.getId().toString(), 50),
+            ),
+          SizedBox(height: 35),
           new Row(
             children: [
               new Flexible(
-                  child: ListTile(
-                      title: const Text('New'),
-                      leading: Radio(
-                        value: SortingType.byNew,
-                        groupValue: _type,
-                        onChanged: (SortingType value) {
-                          setState(() {
-                            _type = value;
-                          });
-                        },
-                      ))),
-              new Flexible(
-                  child: ListTile(
-                      title: const Text('Rating'),
-                      leading: Radio(
-                        value: SortingType.byHot,
-                        groupValue: _type,
-                        onChanged: (SortingType value) {
-                          setState(() {
-                            _type = value;
-                          });
-                        },
-                      )))
+                child: RadioListTile(
+                  title: Text('New', style: TextStyle(color: Colors.purple[900], fontWeight: FontWeight.bold)),
+                  activeColor: Colors.purple[900],
+                  value: SortingType.byNew,
+                  groupValue: _type,
+                  onChanged: (SortingType value) {
+                    setState(() {
+                      _type = value;
+                    });
+                  },
+                )),
+                new Flexible(
+                child: RadioListTile(
+                  title: Text('Rating', style: TextStyle(color: Colors.purple[900], fontWeight: FontWeight.bold)),
+                  activeColor: Colors.purple[900],
+                  value: SortingType.byHot,
+                  groupValue: _type,
+                  onChanged: (SortingType value) {
+                    setState(() {
+                      _type = value;
+                    });
+                  },
+                )),
             ],
           ),
           temp_questions,
@@ -110,13 +107,13 @@ class _ViewQuestionsAsAttendeeState extends State<ViewQuestionsAsAttendee> {
                         onTap: () {},
                         leading: new IconButton(
                             icon: new Icon(Icons.arrow_downward,
-                                color: Colors.blueAccent[200]),
+                                color: Colors.purple[900]),
                             onPressed: () {
                               downvoteQuestion(listOfQuestions[index].getId());
                             }),
                         trailing: new IconButton(
                             icon: new Icon(Icons.arrow_upward,
-                                color: Colors.orange),
+                                color: Colors.purple[900]),
                             onPressed: () {
                               upvoteQuestion(listOfQuestions[index].getId());
                             }),
@@ -153,19 +150,24 @@ class _ViewQuestionsAsAttendeeState extends State<ViewQuestionsAsAttendee> {
             alignment: Alignment.bottomCenter,
             child: Padding(
                 padding: EdgeInsets.only(bottom: 50),
-                child: OutlineButton(
-                    child: Text('Submit Question'),
-                    splashColor: Colors.grey,
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SubmitQuestionPage()));
-                    },
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(40)),
-                    highlightElevation: 0,
-                    borderSide: BorderSide(color: Colors.grey)))));
+                child: 
+                new OutlineButton(
+                child: Text('Submit Question', style: TextStyle(color: Colors.purple[900])),
+                  splashColor: Color.fromARGB(255, 190, 180, 255),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                      builder: (context) => SubmitQuestionPage()));
+                    },    
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(40)),
+                highlightElevation: 0,
+                borderSide: BorderSide(color: Colors.purple[900])
+                )
+            )
+          )
+        );
   }
 
   Future upvoteQuestion(int questionId) async {
@@ -195,4 +197,36 @@ class _ViewQuestionsAsAttendeeState extends State<ViewQuestionsAsAttendee> {
           })
         });
   }
+}
+
+Widget _titleText(String text, double size) {
+  return Center(
+    child: 
+      Stack(
+        children: [
+          Text(text,
+            style: TextStyle(
+              fontSize: size,
+              foreground: Paint()
+                ..style = PaintingStyle.stroke
+                ..strokeWidth = 6
+                ..color = Colors.purple[900]
+              ),
+            ),
+          Text(text,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: size,
+              shadows: <Shadow>[
+                Shadow(
+                  offset: Offset(6.0, 6.0),
+                  blurRadius: 8.0,
+                  color: Colors.purple[900],
+                ), 
+              ],
+            ),
+          ),
+        ],
+      )
+  );
 }
