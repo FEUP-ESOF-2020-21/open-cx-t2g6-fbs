@@ -22,28 +22,28 @@ class _ViewSpecificUserLectureStateAsAttendee
   }
   @override
   Widget build(BuildContext context) {
+    Color _color = lecture.getFileName() != "" ? Colors.purple[900] : null;
     return Scaffold(
-        appBar: PreferredSize(
-            // Change this argument to customize the height of the app bar
-            preferredSize: Size.fromHeight(50.0),
-            child: AppBar(title: Text('HOME', style: TextStyle(fontSize: 30)))),
+        backgroundColor: new Color.fromARGB(255, 190, 180, 255),
         body: new Column(children: [
-          new Container(
-              child: Text('SELECTED LECTURE', style: TextStyle(fontSize: 20)),
-              padding: EdgeInsets.only(top: 80.0, bottom: 20)),
+          SizedBox(height: 35),
+          _titleText("Selected Lecture", 40),
+          SizedBox(height: 35),
           new ListTile(
               title: Text(lecture.printIdAndTitle() +
                   "\n" +
                   lecture.printTheRest() +
                   "\n" +
                   "Role: Attendee")),
+          SizedBox(height: 35),
           new Text("File uploaded: " +
               (lecture.getFileName() == ""
                   ? "No file uploaded"
                   : lecture.getFileName())),
+          SizedBox(height: 35),
           new OutlineButton(
-              child: Text('Download files'),
-              splashColor: Colors.grey,
+              child: Text('Download files', style: TextStyle(color: _color)),
+              splashColor: Color.fromARGB(255, 190, 180, 255),
               onPressed: lecture.getFileName() == ""
                   ? null
                   : () {
@@ -52,10 +52,10 @@ class _ViewSpecificUserLectureStateAsAttendee
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(40)),
               highlightElevation: 0,
-              borderSide: BorderSide(color: Colors.grey)),
+              borderSide: BorderSide(color: Colors.purple[900])),
           new OutlineButton(
-              child: Text('View Questions'),
-              splashColor: Colors.grey,
+              child: Text('View Questions', style: TextStyle(color: Colors.purple[900])),
+              splashColor: Color.fromARGB(255, 190, 180, 255),
               onPressed: () {
                 Navigator.push(
                     context,
@@ -65,7 +65,7 @@ class _ViewSpecificUserLectureStateAsAttendee
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(40)),
               highlightElevation: 0,
-              borderSide: BorderSide(color: Colors.grey))
+              borderSide: BorderSide(color: Colors.purple[900]))
         ]));
   }
 
@@ -86,4 +86,36 @@ class _ViewSpecificUserLectureStateAsAttendee
     File file = new File(fullPath);
     storageRef.writeToFile(file);
   }
+}
+
+Widget _titleText(String text, double size) {
+  return Center(
+    child: 
+      Stack(
+        children: [
+          Text(text,
+            style: TextStyle(
+              fontSize: size,
+              foreground: Paint()
+                ..style = PaintingStyle.stroke
+                ..strokeWidth = 6
+                ..color = Colors.purple[900]
+              ),
+            ),
+          Text(text,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: size,
+              shadows: <Shadow>[
+                Shadow(
+                  offset: Offset(6.0, 6.0),
+                  blurRadius: 8.0,
+                  color: Colors.purple[900],
+                ), 
+              ],
+            ),
+          ),
+        ],
+      )
+  );
 }
