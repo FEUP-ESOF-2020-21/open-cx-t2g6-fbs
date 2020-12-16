@@ -1,11 +1,13 @@
 import 'dart:io';
 import 'package:askit/lecture.dart';
 import 'package:askit/view_questions_attendee.dart';
+import 'package:downloads_path_provider/downloads_path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:askit/home_page.dart';
 import 'dart:core';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:ext_storage/ext_storage.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:http/http.dart' as http;
 
 class ViewSpecificUserLecturePageAsAttendee extends StatefulWidget {
   @override
@@ -16,6 +18,7 @@ class ViewSpecificUserLecturePageAsAttendee extends StatefulWidget {
 class _ViewSpecificUserLectureStateAsAttendee
     extends State<ViewSpecificUserLecturePageAsAttendee> {
   Lecture lecture;
+  final globalKey = GlobalKey<ScaffoldState>();
 
   _ViewSpecificUserLectureStateAsAttendee() {
     this.lecture = selectedLecture;
@@ -24,54 +27,58 @@ class _ViewSpecificUserLectureStateAsAttendee
   Widget build(BuildContext context) {
     Color _color = lecture.getFileName() != "" ? Colors.purple[900] : null;
     return Scaffold(
+        key: globalKey,
         body: new Column(children: [
-      SizedBox(height: 35),
-      Padding(
-          padding: EdgeInsets.only(right: 10, left: 10),
-          child: FittedBox(
-            fit: BoxFit.fitWidth,
-            child: _titleText(lecture.getTitle(), 40),
-          )),
-      SizedBox(height: 35),
-      new ListTile(
-          title: Text(lecture.printIdAndTitle() +
-              "\n" +
-              lecture.printTheRest() +
-              "\n" +
-              "Role: Attendee")),
-      SizedBox(height: 35),
-      new Text("File uploaded: " +
-          (lecture.getFileName() == ""
-              ? "No file uploaded"
-              : lecture.getFileName())),
-      SizedBox(height: 35),
-      new OutlineButton(
-          child: Text('Download files', style: TextStyle(color: _color)),
-          splashColor: Color.fromARGB(255, 190, 180, 255),
-          onPressed: lecture.getFileName() == ""
-              ? null
-              : () {
-                  downloadFile();
-                },
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-          highlightElevation: 0,
-          borderSide: BorderSide(color: Colors.purple[900])),
-      new OutlineButton(
-          child: Text('View Questions',
-              style: TextStyle(color: Colors.purple[900])),
-          splashColor: Color.fromARGB(255, 190, 180, 255),
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ViewQuestionsAsAttendee()));
-          },
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-          highlightElevation: 0,
-          borderSide: BorderSide(color: Colors.purple[900]))
-    ]));
+          SizedBox(height: 35),
+          Padding(
+              padding: EdgeInsets.only(right: 10, left: 10),
+              child: FittedBox(
+                fit: BoxFit.fitWidth,
+                child: _titleText(lecture.getTitle(), 40),
+              )),
+          SizedBox(height: 35),
+          new ListTile(
+              title: Text(lecture.printIdAndTitle() +
+                  "\n" +
+                  lecture.printTheRest() +
+                  "\n" +
+                  "Role: Attendee")),
+          SizedBox(height: 35),
+          new Text("File uploaded: " +
+              (lecture.getFileName() == ""
+                  ? "No file uploaded"
+                  : lecture.getFileName())),
+          SizedBox(height: 35),
+          new OutlineButton(
+              child: Text('Download files', style: TextStyle(color: _color)),
+              splashColor: Color.fromARGB(255, 190, 180, 255),
+              onPressed: lecture.getFileName() == ""
+                  ? null
+                  : () {
+                      final snackBar =
+                          SnackBar(content: Text('Downloading file...'));
+                      globalKey.currentState.showSnackBar(snackBar);
+                      downloadFile();
+                    },
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40)),
+              highlightElevation: 0,
+              borderSide: BorderSide(color: Colors.purple[900])),
+          new OutlineButton(
+              child: Text('View Questions',
+                  style: TextStyle(color: Colors.purple[900])),
+              splashColor: Color.fromARGB(255, 190, 180, 255),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ViewQuestionsAsAttendee()));
+              },
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40)),
+              highlightElevation: 0,
+              borderSide: BorderSide(color: Colors.purple[900]))
+        ]));
   }
 
   Future downloadFile() async {
@@ -83,13 +90,20 @@ class _ViewSpecificUserLectureStateAsAttendee
     print('lectures/$title/$fileName');
     var storageRef = storage.ref().child('lectures/$title/$fileName');
 
-    String path = await ExtStorage.getExternalStoragePublicDirectory(
-        ExtStorage.DIRECTORY_DOWNLOADS);
+    final directory = await DownloadsPathProvider.downloadsDirectory;
+    final path = '${directory.path}/lecture.pdf';
 
-    String fullPath = "$path/lecture.pdf";
+    String url = await storageRef.getDownloadURL();
+    var data = await http.get(url);
+    var bytes = data.bodyBytes;
 
-    File file = new File(fullPath);
-    storageRef.writeToFile(file);
+    var status = await Permission.storage.status;
+    if (!status.isGranted) {
+      await Permission.storage.request();
+    }
+
+    File file = new File(path);
+    file.writeAsBytes(bytes);
   }
 }
 

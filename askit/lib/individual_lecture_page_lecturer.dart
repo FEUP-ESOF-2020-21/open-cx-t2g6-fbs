@@ -17,6 +17,8 @@ class _ViewSpecificUserLectureStateAsLecturer
     extends State<ViewSpecificUserLecturePageAsLecturer> {
   Lecture lecture;
 
+  final globalKey = GlobalKey<ScaffoldState>();
+
   _ViewSpecificUserLectureStateAsLecturer() {
     this.lecture = selectedLecture;
   }
@@ -24,75 +26,78 @@ class _ViewSpecificUserLectureStateAsLecturer
   Widget build(BuildContext context) {
     Color _color = lecture.getFileName() != "" ? Colors.purple[900] : null;
     return Scaffold(
+        key: globalKey,
         body: new Column(children: [
-      SizedBox(height: 35),
-      Padding(
-          padding: EdgeInsets.only(right: 10, left: 10),
-          child: FittedBox(
+          SizedBox(height: 35),
+          Padding(
+              padding: EdgeInsets.only(right: 10, left: 10),
+              child: FittedBox(
+                fit: BoxFit.fitWidth,
+                child: _titleText(lecture.getTitle(), 40),
+              )),
+          SizedBox(height: 35),
+          new ListTile(
+              title: Text(lecture.printIdAndTitle() +
+                  "\n" +
+                  lecture.printTheRest() +
+                  "\n" +
+                  "Role: Lecturer")),
+          SizedBox(height: 35),
+          FittedBox(
             fit: BoxFit.fitWidth,
-            child: _titleText(lecture.getTitle(), 40),
-          )),
-      SizedBox(height: 35),
-      new ListTile(
-          title: Text(lecture.printIdAndTitle() +
-              "\n" +
-              lecture.printTheRest() +
-              "\n" +
-              "Role: Lecturer")),
-      SizedBox(height: 35),
-      FittedBox(
-        fit: BoxFit.fitWidth,
-        child: new Text("File uploaded: " +
-            (lecture.getFileName() == ""
-                ? "No file uploaded"
-                : lecture.getFileName())),
-      ),
-      //TODO Add option in same row to upload new file and let user know whether a file is already uploaded or not
-      SizedBox(height: 35),
-      new Row(children: [
-        new Padding(
-            //TODO CENTER THIS PROPERLY
+            child: new Text("File uploaded: " +
+                (lecture.getFileName() == ""
+                    ? "No file uploaded"
+                    : lecture.getFileName())),
+          ),
+          SizedBox(height: 35),
+          new Row(children: [
+            new Padding(
+                //TODO CENTER THIS PROPERLY
 
-            padding: EdgeInsets.only(left: 60, right: 20),
-            child: OutlineButton(
-                child: Text('Replace file',
-                    style: TextStyle(color: Colors.purple[900])),
+                padding: EdgeInsets.only(left: 60, right: 20),
+                child: OutlineButton(
+                    child: Text('Replace file',
+                        style: TextStyle(color: Colors.purple[900])),
+                    splashColor: Colors.grey,
+                    onPressed: () {
+                      /*TODO This must do something aka upload a file as if user was creating a lecture*/
+                    },
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(40)),
+                    highlightElevation: 0,
+                    borderSide: BorderSide(color: Colors.purple[900]))),
+            new OutlineButton(
+                child: Text('Download files', style: TextStyle(color: _color)),
                 splashColor: Colors.grey,
-                onPressed: () {
-                  /*TODO This must do something aka upload a file as if user was creating a lecture*/
-                },
+                onPressed: lecture.getFileName() == ""
+                    ? null
+                    : () {
+                        final snackBar =
+                            SnackBar(content: Text('Downloading file...'));
+                        globalKey.currentState.showSnackBar(snackBar);
+                        downloadFile();
+                      },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(40)),
                 highlightElevation: 0,
-                borderSide: BorderSide(color: Colors.purple[900]))),
-        new OutlineButton(
-            child: Text('Download files', style: TextStyle(color: _color)),
-            splashColor: Colors.grey,
-            onPressed: lecture.getFileName() == ""
-                ? null
-                : () {
-                    downloadFile();
-                  },
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-            highlightElevation: 0,
-            borderSide: BorderSide(color: Colors.purple[900]))
-      ]),
-      new OutlineButton(
-          child: Text('View Questions',
-              style: TextStyle(color: Colors.purple[900])),
-          splashColor: Colors.grey,
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ViewQuestionsAsLecturer()));
-          },
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-          highlightElevation: 0,
-          borderSide: BorderSide(color: Colors.purple[900]))
-    ]));
+                borderSide: BorderSide(color: Colors.purple[900]))
+          ]),
+          new OutlineButton(
+              child: Text('View Questions',
+                  style: TextStyle(color: Colors.purple[900])),
+              splashColor: Colors.grey,
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ViewQuestionsAsLecturer()));
+              },
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40)),
+              highlightElevation: 0,
+              borderSide: BorderSide(color: Colors.purple[900]))
+        ]));
   }
 
   Future downloadFile() async {
