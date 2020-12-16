@@ -23,19 +23,16 @@ class _ViewQuestionsAsLecturerState extends State<ViewQuestionsAsLecturer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PreferredSize(
-            // Change this argument to customize the height of the app bar
-            preferredSize: Size.fromHeight(50.0),
-            child: AppBar(title: Text('HOME', style: TextStyle(fontSize: 30)))),
         body: new Column(children: [
-          new Container(
-              child: Text(
-                  'Questions for Lecture #' +
-                      selectedLecture.getId().toString(),
-                  style: TextStyle(fontSize: 20)),
-              padding: EdgeInsets.only(top: 20.0, bottom: 20)),
-          temp_questions
-        ]));
+      SizedBox(height: 35),
+      FittedBox(
+        fit: BoxFit.fitWidth,
+        child: _titleText(
+            "Questions for Lecture #" + selectedLecture.getId().toString(), 50),
+      ),
+      SizedBox(height: 35),
+      temp_questions
+    ]));
   }
 
   Future getQuestions() async {
@@ -93,4 +90,35 @@ class _ViewQuestionsAsLecturerState extends State<ViewQuestionsAsLecturer> {
 
     return result;
   }
+}
+
+Widget _titleText(String text, double size) {
+  return Center(
+      child: Stack(
+    children: [
+      Text(
+        text,
+        style: TextStyle(
+            fontSize: size,
+            foreground: Paint()
+              ..style = PaintingStyle.stroke
+              ..strokeWidth = 6
+              ..color = Colors.purple[900]),
+      ),
+      Text(
+        text,
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: size,
+          shadows: <Shadow>[
+            Shadow(
+              offset: Offset(6.0, 6.0),
+              blurRadius: 8.0,
+              color: Colors.purple[900],
+            ),
+          ],
+        ),
+      ),
+    ],
+  ));
 }
