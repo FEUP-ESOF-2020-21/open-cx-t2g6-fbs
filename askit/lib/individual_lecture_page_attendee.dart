@@ -18,6 +18,7 @@ class ViewSpecificUserLecturePageAsAttendee extends StatefulWidget {
 class _ViewSpecificUserLectureStateAsAttendee
     extends State<ViewSpecificUserLecturePageAsAttendee> {
   Lecture lecture;
+  final globalKey = GlobalKey<ScaffoldState>();
 
   _ViewSpecificUserLectureStateAsAttendee() {
     this.lecture = selectedLecture;
@@ -26,56 +27,58 @@ class _ViewSpecificUserLectureStateAsAttendee
   Widget build(BuildContext context) {
     Color _color = lecture.getFileName() != "" ? Colors.purple[900] : null;
     return Scaffold(
+        key: globalKey,
         body: new Column(children: [
-      SizedBox(height: 35),
-      Padding(
-          padding: EdgeInsets.only(right: 10, left: 10),
-          child: FittedBox(
-            fit: BoxFit.fitWidth,
-            child: _titleText(lecture.getTitle(), 40),
-          )),
-      SizedBox(height: 35),
-      new ListTile(
-          title: Text(lecture.printIdAndTitle() +
-              "\n" +
-              lecture.printTheRest() +
-              "\n" +
-              "Role: Attendee")),
-      SizedBox(height: 35),
-      new Text("File uploaded: " +
-          (lecture.getFileName() == ""
-              ? "No file uploaded"
-              : lecture.getFileName())),
-      SizedBox(height: 35),
-      new OutlineButton(
-          child: Text('Download files', style: TextStyle(color: _color)),
-          splashColor: Color.fromARGB(255, 190, 180, 255),
-          onPressed: lecture.getFileName() == ""
-              ? null
-              : () {
-                  Scaffold.of(context).showSnackBar(
-                      SnackBar(content: Text('Downloading file...')));
-                  downloadFile();
-                },
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-          highlightElevation: 0,
-          borderSide: BorderSide(color: Colors.purple[900])),
-      new OutlineButton(
-          child: Text('View Questions',
-              style: TextStyle(color: Colors.purple[900])),
-          splashColor: Color.fromARGB(255, 190, 180, 255),
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ViewQuestionsAsAttendee()));
-          },
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-          highlightElevation: 0,
-          borderSide: BorderSide(color: Colors.purple[900]))
-    ]));
+          SizedBox(height: 35),
+          Padding(
+              padding: EdgeInsets.only(right: 10, left: 10),
+              child: FittedBox(
+                fit: BoxFit.fitWidth,
+                child: _titleText(lecture.getTitle(), 40),
+              )),
+          SizedBox(height: 35),
+          new ListTile(
+              title: Text(lecture.printIdAndTitle() +
+                  "\n" +
+                  lecture.printTheRest() +
+                  "\n" +
+                  "Role: Attendee")),
+          SizedBox(height: 35),
+          new Text("File uploaded: " +
+              (lecture.getFileName() == ""
+                  ? "No file uploaded"
+                  : lecture.getFileName())),
+          SizedBox(height: 35),
+          new OutlineButton(
+              child: Text('Download files', style: TextStyle(color: _color)),
+              splashColor: Color.fromARGB(255, 190, 180, 255),
+              onPressed: lecture.getFileName() == ""
+                  ? null
+                  : () {
+                      final snackBar =
+                          SnackBar(content: Text('Downloading file...'));
+                      globalKey.currentState.showSnackBar(snackBar);
+                      downloadFile();
+                    },
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40)),
+              highlightElevation: 0,
+              borderSide: BorderSide(color: Colors.purple[900])),
+          new OutlineButton(
+              child: Text('View Questions',
+                  style: TextStyle(color: Colors.purple[900])),
+              splashColor: Color.fromARGB(255, 190, 180, 255),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ViewQuestionsAsAttendee()));
+              },
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40)),
+              highlightElevation: 0,
+              borderSide: BorderSide(color: Colors.purple[900]))
+        ]));
   }
 
   Future downloadFile() async {
