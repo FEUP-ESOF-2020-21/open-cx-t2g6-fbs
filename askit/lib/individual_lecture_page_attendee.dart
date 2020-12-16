@@ -27,7 +27,13 @@ class _ViewSpecificUserLectureStateAsAttendee
         backgroundColor: new Color.fromARGB(255, 190, 180, 255),
         body: new Column(children: [
           SizedBox(height: 35),
-          _titleText("Selected Lecture", 40),
+          Padding(
+            padding: EdgeInsets.only(right: 10, left: 10),
+            child: FittedBox(
+              fit: BoxFit.fitWidth,
+              child: _titleText(lecture.getTitle(), 40),
+            )
+          ),
           SizedBox(height: 35),
           new ListTile(
               title: Text(lecture.printIdAndTitle() +
