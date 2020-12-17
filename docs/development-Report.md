@@ -518,8 +518,8 @@ In this section you should start by briefly describing the overall components of
 <img src="./images/logicDiagram.jpeg" height="" alt="Component Diagram UML">
 
 Our goal was to divide our code into three different packages, in order to follow the MVC pattern.
-Model - used to hold the information regarding each question and lecture.
-View - responsible for displaying the app to the user.
+Model - used to hold the information regarding each question and lecture.  
+View - responsible for displaying the app to the user.  
 Controller - processes user input in order to update the display and navigate through packages. It also updates the stored information via the database functions.
 
 ### Physical architecture
