@@ -498,7 +498,7 @@ Effort: M
 
 ### Domain model
 
-<img src="./images/problem_domain_uml.jpg" height="320" alt="Problem Domain UML">
+<img src="./images/problem_domain_uml.jpg" width="100%" alt="Problem Domain UML">
 
 Each lecture has a title, description, date, current attendance and a maximum capacity. Aditionally, the lecturer can also upload the presentation so that the attendees can follow along.  
 Each user of the app can attend several lectures, either as the _Lecturer_ or as an _Attendee_. Furthermore, attendees can ask questions in a specific lecture and vote on other existing questions.
@@ -515,19 +515,18 @@ In this section you should start by briefly describing the overall components of
 
 ### Logical architecture
 
-The purpose of this subsection is to document the high-level logical structure of the code, using a UML diagram with logical packages, without the worry of allocating to components, processes or machines.
+<img src="./images/logicDiagram.jpeg" height="" alt="Component Diagram UML">
 
-It can be beneficial to present the system both in a horizontal or vertical decomposition:
-
-horizontal decomposition may define layers and implementation concepts, such as the user interface, business logic and concepts;
-vertical decomposition can define a hierarchy of subsystems that cover all layers of implementation.
+Our goal was to divide our code into three different packages, in order to follow the MVC pattern.  
+Model - used to hold the information regarding each question and lecture.  
+View - responsible for displaying the app to the user.  
+Controller - processes user input in order to update the display and navigate through packages. It also updates the stored information via the database functions.
 
 ### Physical architecture
 
-<img src="./images/component_diagram_uml.png" height="210" alt="Component Diagram UML">
-The goal of this subsection is to document the high-level physical structure of the software system (machines, connections, software components installed, and their dependencies) using UML deployment diagrams or component diagrams (separate or integrated), showing the physical structure of the system.
+<img src="./images/component_diagram_uml.png" alt="Component Diagram UML">
 
-It should describe also the technologies considered and justify the selections made. Examples of technologies relevant for openCX are, for example, frameworks for mobile applications (Flutter vs ReactNative vs ...), languages to program with microbit, and communication with things (beacons, sensors, etc.).
+Our project's physical structure is quite simple. All of the app information is stored in a remote database, so that when a user creates a lecture or submits a question, another user can see the new information in real time upon accessing the respective page.
 
 ### Prototype
 
