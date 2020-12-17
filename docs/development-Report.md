@@ -524,7 +524,7 @@ Controller - processes user input in order to update the display and navigate th
 
 ### Physical architecture
 
-<img src="./images/component_diagram_uml.png" height="210" alt="Component Diagram UML">
+<img src="./images/component_diagram_uml.png" alt="Component Diagram UML">
 
 Our project's physical structure is quite simple. All of the app information is stored in a remote database, so that when a user creates a lecture or submits a question, another user can see the new information in real time upon accessing the respective page.
 
