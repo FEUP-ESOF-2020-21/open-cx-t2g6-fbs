@@ -27,6 +27,8 @@ class _ViewSpecificUserLectureStateAsLecturer
   _ViewSpecificUserLectureStateAsLecturer() {
     this.lecture = selectedLecture;
   }
+
+  //TODO ADD RADIO BUTTONS TO CHANGE STATUS
   @override
   Widget build(BuildContext context) {
     Color _color = lecture.getFileName() != "" ? Colors.purple[900] : null;
@@ -58,15 +60,12 @@ class _ViewSpecificUserLectureStateAsLecturer
           SizedBox(height: 35),
           new Row(children: [
             new Padding(
-                //TODO CENTER THIS PROPERLY
-
                 padding: EdgeInsets.only(left: 60, right: 20),
                 child: OutlineButton(
                     child: Text('Replace file',
                         style: TextStyle(color: Colors.purple[900])),
                     splashColor: Colors.grey,
                     onPressed: () {
-                      /*TODO This must do something aka upload a file as if user was creating a lecture*/
                       chooseFile();
                     },
                     shape: RoundedRectangleBorder(
@@ -158,6 +157,20 @@ class _ViewSpecificUserLectureStateAsLecturer
     var encoded = Uri.encodeFull(url);
     await http.get(encoded);
   }
+}
+
+Future updateStatus(int newStatus) async {
+  var url = "https://web.fe.up.pt/~up201806296/database/editLectureStatus.php";
+
+  url = url +
+      "?status=" +
+      newStatus.toString() +
+      "&lectureId=" +
+      selectedLecture.getId().toString();
+
+  var encoded = Uri.encodeFull(url);
+
+  http.get(encoded);
 }
 
 Widget _titleText(String text, double size) {
