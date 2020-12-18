@@ -71,14 +71,12 @@ class _ViewSpecificUserLectureStateAsAttendee
               child: Text('View Questions',
                   style: TextStyle(color: Colors.purple[900])),
               splashColor: Color.fromARGB(255, 190, 180, 255),
-              onPressed: lecture.getStatus() != 1
-                  ? null
-                  : () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ViewQuestionsAsAttendee()));
-                    },
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ViewQuestionsAsAttendee()));
+              },
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(40)),
               highlightElevation: 0,

@@ -158,12 +158,15 @@ class _ViewQuestionsAsAttendeeState extends State<ViewQuestionsAsAttendee> {
                     child: Text('Submit Question',
                         style: TextStyle(color: Colors.purple[900])),
                     splashColor: Color.fromARGB(255, 190, 180, 255),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SubmitQuestionPage()));
-                    },
+                    onPressed: lecture.getStatus() != 1
+                        ? null
+                        : () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        SubmitQuestionPage()));
+                          },
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(40)),
                     highlightElevation: 0,
