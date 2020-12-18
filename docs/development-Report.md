@@ -252,7 +252,7 @@ As a lecturer, I can change the status of my presentation (Live/Finished)
 
 Value: Should have
 
-Effort: M
+Effort: L
 
 ### - User story #06(Submit Presentation):
 
@@ -309,7 +309,7 @@ As an attendee, I can access the slides submitted by the lecturer to follow alon
 
 Value: Must have
 
-Effort: S
+Effort: M
 
 ### - User story #08(Select Slide Number):
 
@@ -333,7 +333,7 @@ As a user I can select which slide I have a doubt so that it is easier for the l
 
 Value: Must have
 
-Effort: M
+Effort: S
 
 ### - User story #09(Vote on Questions):
 
@@ -401,7 +401,7 @@ As a user, I can vote on which questions I like the most so that they are more l
 
 Value: Must have
 
-Effort: M
+Effort: XL
 
 ### - User story #10(See Questions Sorted by Rating):
 
@@ -434,7 +434,7 @@ As a lecturer I can look at the highest rated questions so that I can answer the
 
 Value: Must have
 
-Effort: M
+Effort: S
 
 ### - User story #11(Reply to Questions post Lecture):
 
