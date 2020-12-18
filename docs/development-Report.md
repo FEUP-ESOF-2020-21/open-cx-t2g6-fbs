@@ -333,7 +333,7 @@ As a user I can select which slide I have a doubt so that it is easier for the l
 
 Value: Must have
 
-Effort: S
+Effort: L
 
 ### - User story #09(Vote on Questions):
 
