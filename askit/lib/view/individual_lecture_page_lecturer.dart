@@ -12,6 +12,7 @@ import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as Path;
 
 File _file;
+enum LectureStatus { notStarted, live, finished }
 
 class ViewSpecificUserLecturePageAsLecturer extends StatefulWidget {
   @override
@@ -22,10 +23,15 @@ class ViewSpecificUserLecturePageAsLecturer extends StatefulWidget {
 class _ViewSpecificUserLectureStateAsLecturer
     extends State<ViewSpecificUserLecturePageAsLecturer> {
   Lecture lecture;
-
+  LectureStatus _type;
   final globalKey = GlobalKey<ScaffoldState>();
   _ViewSpecificUserLectureStateAsLecturer() {
     this.lecture = selectedLecture;
+    _type = lecture.getStatus() == 0
+        ? LectureStatus.notStarted
+        : (lecture.getStatus() == 1
+            ? LectureStatus.live
+            : LectureStatus.finished);
   }
 
   //TODO ADD RADIO BUTTONS TO CHANGE STATUS
@@ -49,6 +55,48 @@ class _ViewSpecificUserLectureStateAsLecturer
                   lecture.printTheRest() +
                   "\n" +
                   "Role: Lecturer")),
+          new Flexible(
+              child: RadioListTile(
+            title: Text('Not Started Yet',
+                style: TextStyle(
+                    color: Colors.purple[900], fontWeight: FontWeight.bold)),
+            activeColor: Colors.purple[900],
+            value: LectureStatus.notStarted,
+            groupValue: _type,
+            onChanged: (LectureStatus value) {
+              setState(() {
+                _type = value;
+              });
+            },
+          )),
+          new Flexible(
+              child: RadioListTile(
+            title: Text('Live',
+                style: TextStyle(
+                    color: Colors.purple[900], fontWeight: FontWeight.bold)),
+            activeColor: Colors.purple[900],
+            value: LectureStatus.live,
+            groupValue: _type,
+            onChanged: (LectureStatus value) {
+              setState(() {
+                _type = value;
+              });
+            },
+          )),
+          new Flexible(
+              child: RadioListTile(
+            title: Text('Finished',
+                style: TextStyle(
+                    color: Colors.purple[900], fontWeight: FontWeight.bold)),
+            activeColor: Colors.purple[900],
+            value: LectureStatus.finished,
+            groupValue: _type,
+            onChanged: (LectureStatus value) {
+              setState(() {
+                _type = value;
+              });
+            },
+          )),
           SizedBox(height: 35),
           FittedBox(
             fit: BoxFit.fitWidth,
