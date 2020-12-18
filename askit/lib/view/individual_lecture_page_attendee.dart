@@ -42,7 +42,10 @@ class _ViewSpecificUserLectureStateAsAttendee
                   "\n" +
                   lecture.printTheRest() +
                   "\n" +
-                  "Role: Attendee")),
+                  "Role: Attendee" +
+                  "\n" +
+                  "Status:" +
+                  lecture.getStatusString())),
           SizedBox(height: 35),
           new Text("File uploaded: " +
               (lecture.getFileName() == ""
@@ -68,12 +71,14 @@ class _ViewSpecificUserLectureStateAsAttendee
               child: Text('View Questions',
                   style: TextStyle(color: Colors.purple[900])),
               splashColor: Color.fromARGB(255, 190, 180, 255),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ViewQuestionsAsAttendee()));
-              },
+              onPressed: lecture.getStatus() != 1
+                  ? null
+                  : () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ViewQuestionsAsAttendee()));
+                    },
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(40)),
               highlightElevation: 0,
@@ -91,7 +96,8 @@ class _ViewSpecificUserLectureStateAsAttendee
     var storageRef = storage.ref().child('lectures/$title/$fileName');
 
     //final directory = await DownloadsPathProvider.downloadsDirectory;
-    final directory = await ExtStorage.getExternalStoragePublicDirectory(ExtStorage.DIRECTORY_DOWNLOADS);
+    final directory = await ExtStorage.getExternalStoragePublicDirectory(
+        ExtStorage.DIRECTORY_DOWNLOADS);
     final path = '$directory/lecture.pdf';
 
     String url = await storageRef.getDownloadURL();
