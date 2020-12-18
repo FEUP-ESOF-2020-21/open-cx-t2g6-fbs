@@ -72,6 +72,7 @@ class _ViewSpecificUserLectureStateAsLecturer
             onChanged: (LectureStatus value) {
               setState(() {
                 _type = value;
+                updateStatus(value);
               });
             },
           )),
@@ -86,6 +87,7 @@ class _ViewSpecificUserLectureStateAsLecturer
             onChanged: (LectureStatus value) {
               setState(() {
                 _type = value;
+                updateStatus(value);
               });
             },
           )),
@@ -100,6 +102,7 @@ class _ViewSpecificUserLectureStateAsLecturer
             onChanged: (LectureStatus value) {
               setState(() {
                 _type = value;
+                updateStatus(value);
               });
             },
           )),
@@ -213,12 +216,20 @@ class _ViewSpecificUserLectureStateAsLecturer
   }
 }
 
-Future updateStatus(int newStatus) async {
+Future updateStatus(LectureStatus newStatus) async {
   var url = "https://web.fe.up.pt/~up201806296/database/editLectureStatus.php";
+
+  var tmp;
+  if (newStatus == LectureStatus.notStarted) {
+    tmp = 0;
+  } else if (newStatus == LectureStatus.live) {
+    tmp = 1;
+  } else
+    tmp = 2;
 
   url = url +
       "?status=" +
-      newStatus.toString() +
+      tmp.toString() +
       "&lectureId=" +
       selectedLecture.getId().toString();
 
