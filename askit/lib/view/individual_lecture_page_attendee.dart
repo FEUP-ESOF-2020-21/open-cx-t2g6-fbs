@@ -8,6 +8,7 @@ import 'dart:core';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:permission_handler/permission_handler.dart';
 import 'package:http/http.dart' as http;
+import 'package:ext_storage/ext_storage.dart';
 
 class ViewSpecificUserLecturePageAsAttendee extends StatefulWidget {
   @override
@@ -90,8 +91,9 @@ class _ViewSpecificUserLectureStateAsAttendee
     print('lectures/$title/$fileName');
     var storageRef = storage.ref().child('lectures/$title/$fileName');
 
-    final directory = await DownloadsPathProvider.downloadsDirectory;
-    final path = '${directory.path}/lecture.pdf';
+    //final directory = await DownloadsPathProvider.downloadsDirectory;
+    final directory = await ExtStorage.getExternalStoragePublicDirectory(ExtStorage.DIRECTORY_DOWNLOADS);
+    final path = '$directory/lecture.pdf';
 
     String url = await storageRef.getDownloadURL();
     var data = await http.get(url);
