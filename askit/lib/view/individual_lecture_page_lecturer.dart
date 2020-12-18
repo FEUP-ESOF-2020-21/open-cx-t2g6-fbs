@@ -55,6 +55,12 @@ class _ViewSpecificUserLectureStateAsLecturer
                   lecture.printTheRest() +
                   "\n" +
                   "Role: Lecturer")),
+          new Container(
+              child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                      padding: EdgeInsets.only(left: 20),
+                      child: Text("Status: ")))),
           new Flexible(
               child: RadioListTile(
             title: Text('Not Started Yet',
