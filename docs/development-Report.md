@@ -500,8 +500,10 @@ Effort: M
 
 <img src="./images/problem_domain_uml.jpg" width="100%" alt="Problem Domain UML">
 
-Each lecture has a title, description, date, current attendance and a maximum capacity. Aditionally, the lecturer can also upload the presentation so that the attendees can follow along.  
+Each lecture has a title, description, date, current attendance, a maximum capacity and a field representing the status (0 - Not started yet; 1 - Live; 2 - Finished). Aditionally, the lecturer can also upload the presentation so that the attendees can follow along.  
 Each user of the app can attend several lectures, either as the _Lecturer_ or as an _Attendee_. Furthermore, attendees can ask questions in a specific lecture and vote on other existing questions.
+
+NB: Replies to Questions are not represented in the model as we decided not to implement that feature.
 
 ## Architecture and Design
 
@@ -527,12 +529,6 @@ Controller - processes user input in order to update the display and navigate th
 <img src="./images/component_diagram_uml.png" alt="Component Diagram UML">
 
 Our project's physical structure is quite simple. All of the app information is stored in a remote database, so that when a user creates a lecture or submits a question, another user can see the new information in real time upon accessing the respective page.
-
-### Prototype
-
-To help on validating all the architectural, design and technological decisions made, we usually implement a vertical prototype, a thin vertical slice of the system.
-
-In this subsection please describe in more detail which, and how, user(s) story(ies) were implemented.
 
 ## Implementation
 
