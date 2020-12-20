@@ -42,7 +42,10 @@ class _ViewSpecificUserLectureStateAsAttendee
                   "\n" +
                   lecture.printTheRest() +
                   "\n" +
-                  "Role: Attendee")),
+                  "Role: Attendee" +
+                  "\n" +
+                  "Status:" +
+                  lecture.getStatusString())),
           SizedBox(height: 35),
           new Text("File uploaded: " +
               (lecture.getFileName() == ""
@@ -91,7 +94,8 @@ class _ViewSpecificUserLectureStateAsAttendee
     var storageRef = storage.ref().child('lectures/$title/$fileName');
 
     //final directory = await DownloadsPathProvider.downloadsDirectory;
-    final directory = await ExtStorage.getExternalStoragePublicDirectory(ExtStorage.DIRECTORY_DOWNLOADS);
+    final directory = await ExtStorage.getExternalStoragePublicDirectory(
+        ExtStorage.DIRECTORY_DOWNLOADS);
     final path = '$directory/lecture.pdf';
 
     String url = await storageRef.getDownloadURL();

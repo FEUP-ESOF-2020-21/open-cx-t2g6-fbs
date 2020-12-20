@@ -12,6 +12,7 @@ import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as Path;
 
 File _file;
+enum LectureStatus { notStarted, live, finished }
 
 class ViewSpecificUserLecturePageAsLecturer extends StatefulWidget {
   @override
@@ -22,11 +23,18 @@ class ViewSpecificUserLecturePageAsLecturer extends StatefulWidget {
 class _ViewSpecificUserLectureStateAsLecturer
     extends State<ViewSpecificUserLecturePageAsLecturer> {
   Lecture lecture;
-
+  LectureStatus _type;
   final globalKey = GlobalKey<ScaffoldState>();
   _ViewSpecificUserLectureStateAsLecturer() {
     this.lecture = selectedLecture;
+    _type = lecture.getStatus() == 0
+        ? LectureStatus.notStarted
+        : (lecture.getStatus() == 1
+            ? LectureStatus.live
+            : LectureStatus.finished);
   }
+
+  //TODO ADD RADIO BUTTONS TO CHANGE STATUS
   @override
   Widget build(BuildContext context) {
     Color _color = lecture.getFileName() != "" ? Colors.purple[900] : null;
@@ -47,6 +55,57 @@ class _ViewSpecificUserLectureStateAsLecturer
                   lecture.printTheRest() +
                   "\n" +
                   "Role: Lecturer")),
+          new Container(
+              child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                      padding: EdgeInsets.only(left: 20),
+                      child: Text("Status: ")))),
+          new Flexible(
+              child: RadioListTile(
+            title: Text('Not Started Yet',
+                style: TextStyle(
+                    color: Colors.purple[900], fontWeight: FontWeight.bold)),
+            activeColor: Colors.purple[900],
+            value: LectureStatus.notStarted,
+            groupValue: _type,
+            onChanged: (LectureStatus value) {
+              setState(() {
+                _type = value;
+                updateStatus(value);
+              });
+            },
+          )),
+          new Flexible(
+              child: RadioListTile(
+            title: Text('Live',
+                style: TextStyle(
+                    color: Colors.purple[900], fontWeight: FontWeight.bold)),
+            activeColor: Colors.purple[900],
+            value: LectureStatus.live,
+            groupValue: _type,
+            onChanged: (LectureStatus value) {
+              setState(() {
+                _type = value;
+                updateStatus(value);
+              });
+            },
+          )),
+          new Flexible(
+              child: RadioListTile(
+            title: Text('Finished',
+                style: TextStyle(
+                    color: Colors.purple[900], fontWeight: FontWeight.bold)),
+            activeColor: Colors.purple[900],
+            value: LectureStatus.finished,
+            groupValue: _type,
+            onChanged: (LectureStatus value) {
+              setState(() {
+                _type = value;
+                updateStatus(value);
+              });
+            },
+          )),
           SizedBox(height: 35),
           FittedBox(
             fit: BoxFit.fitWidth,
@@ -58,15 +117,12 @@ class _ViewSpecificUserLectureStateAsLecturer
           SizedBox(height: 35),
           new Row(children: [
             new Padding(
-                //TODO CENTER THIS PROPERLY
-
                 padding: EdgeInsets.only(left: 60, right: 20),
                 child: OutlineButton(
                     child: Text('Replace file',
                         style: TextStyle(color: Colors.purple[900])),
                     splashColor: Colors.grey,
                     onPressed: () {
-                      /*TODO This must do something aka upload a file as if user was creating a lecture*/
                       chooseFile();
                     },
                     shape: RoundedRectangleBorder(
@@ -158,6 +214,28 @@ class _ViewSpecificUserLectureStateAsLecturer
     var encoded = Uri.encodeFull(url);
     await http.get(encoded);
   }
+}
+
+Future updateStatus(LectureStatus newStatus) async {
+  var url = "https://web.fe.up.pt/~up201806296/database/editLectureStatus.php";
+
+  var tmp;
+  if (newStatus == LectureStatus.notStarted) {
+    tmp = 0;
+  } else if (newStatus == LectureStatus.live) {
+    tmp = 1;
+  } else
+    tmp = 2;
+
+  url = url +
+      "?status=" +
+      tmp.toString() +
+      "&lectureId=" +
+      selectedLecture.getId().toString();
+
+  var encoded = Uri.encodeFull(url);
+
+  http.get(encoded);
 }
 
 Widget _titleText(String text, double size) {

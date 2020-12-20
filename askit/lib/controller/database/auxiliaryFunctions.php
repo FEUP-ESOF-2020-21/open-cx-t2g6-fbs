@@ -35,6 +35,7 @@
     echo $row["Capacity"] . "\n";
     echo $row["Attendance"] . "\n";
     echo $row["Slides"] . "\n";
+    echo $row["Status"] . "\n";
   }
 
   function printPreviousLectures($results){

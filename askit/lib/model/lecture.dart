@@ -8,8 +8,10 @@ class Lecture {
   int maxCapacity;
   int attendance;
   String fileName;
+  int status;
 
-  Lecture(id, title, description, date, capacity, attendance, fileName) {
+  Lecture(
+      id, title, description, date, capacity, attendance, fileName, status) {
     this.id = id;
     this.title = title;
     this.description = description;
@@ -17,6 +19,7 @@ class Lecture {
     this.maxCapacity = capacity;
     this.attendance = attendance;
     this.fileName = fileName;
+    this.status = status;
   }
 
   int getId() {
@@ -74,4 +77,29 @@ class Lecture {
   void setFileName(String fileName) {
     this.fileName = fileName;
   }
+
+  String getStatusString() {
+    switch (this.status) {
+      case 0:
+        return "Not started yet";
+        break;
+
+      case 1:
+        return "Live";
+        break;
+
+      case 2:
+        return "Finished";
+        break;
+
+      default:
+        return "Invalid Status";
+    }
+  }
+
+  int getStatus() {
+    return this.status;
+  }
+
+  //TODO ADD FUNCTION SETSTATUS WHICH WILL UPDATE STATUS IN DATABASE!!!
 }

@@ -114,12 +114,12 @@ class _ChooseLectureState extends State<ChooseLecturePage> {
     List<Lecture> result = new List();
     if (list.length == 0) return result;
 
-    int numberOfLectures = (list.length) ~/ 7;
+    int numberOfLectures = (list.length) ~/ 8;
 
     int offset = 0;
 
     //Extract lectures depending on the filters. Time filters are being applied in the .php file
-    for (int i = 1; i <= numberOfLectures; i++, offset += 7) {
+    for (int i = 1; i <= numberOfLectures; i++, offset += 8) {
       result.add(new Lecture(
           int.parse(list[offset]),
           list[offset + 1],
@@ -127,7 +127,8 @@ class _ChooseLectureState extends State<ChooseLecturePage> {
           list[offset + 3],
           int.parse(list[offset + 4]),
           int.parse(list[offset + 5]),
-          list[offset + 6]));
+          list[offset + 6],
+          int.parse(list[offset + 7])));
     }
 
     return result;
