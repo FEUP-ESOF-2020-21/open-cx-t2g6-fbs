@@ -552,18 +552,10 @@ A good practice is to simplify this, avoiding repetitions, and automating the te
 
 Configuration and change management are key activities to control change to, and maintain the integrity of, a project’s artifacts (code, models, documents).
 
-For the purpose of ESOF, we will use a very simple approach, just to manage feature requests, bug fixes, and improvements, using GitHub issues and following the GitHub flow.
+We used a very simple approach, just to manage feature requests, bug fixes, and improvements, using GitHub issues and following the GitHub flow.
 
 ## Project management
 
 Software project management is an art and science of planning and leading software projects, in which software projects are planned, implemented, monitored and controlled.
 
-In the context of ESOF, we expect that each team adopts a project management tool capable of registering tasks, assign tasks to people, add estimations to tasks, monitor tasks progress, and therefore being able to track their projects.
-
-Example of tools to do this are:
-
-Trello.com
-Github Projects
-Pivotal Tracker
-Jira
-We recommend to use the simplest tool that can possibly work for the team.
+We decided to use [Github Projects](https://github.com/FEUP-ESOF-2020-21/open-cx-t2g6-fbs/projects/1).
