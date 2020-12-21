@@ -507,13 +507,7 @@ NB: Replies to Questions are not represented in the model as we decided not to i
 
 ## Architecture and Design
 
-The architecture of a software system encompasses the set of key decisions about its overall organization.
-
-A well written architecture document is brief but reduces the amount of time it takes new programmers to a project to understand the code to feel able to make modifications and enhancements.
-
-To document the architecture requires describing the decomposition of the system in their parts (high-level components) and the key behaviors and collaborations between them.
-
-In this section you should start by briefly describing the overall components of the project and their interrelations. You should also describe how you solved typical problems you may have encountered, pointing to well-known architectural and design patterns, if applicable.
+The following sections show the connection between the technologies and modules used in this project.
 
 ### Logical architecture
 
@@ -532,11 +526,7 @@ Our project's physical structure is quite simple. All of the app information is 
 
 ## Implementation
 
-Regular product increments are a good practice of product management.
-
-While not necessary, sometimes it might be useful to explain a few aspects of the code that have the greatest potential to confuse software engineers about how it works. Since the code should speak by itself, try to keep this section as short and simple as possible.
-
-Use cross-links to the code repository and only embed real fragments of code when strictly needed, since they tend to become outdated very soon.
+The logs for our product increments can be found [here](https://github.com/FEUP-ESOF-2020-21/open-cx-t2g6-fbs/releases)
 
 ### Test
 
