@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:askit/view/home_page.dart';
 import 'dart:core';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:http/http.dart' as http;
 import 'package:ext_storage/ext_storage.dart';
+import 'package:open_file/open_file.dart' as open_file;
 
 class ViewSpecificUserLecturePageAsAttendee extends StatefulWidget {
   @override
@@ -58,15 +60,29 @@ class _ViewSpecificUserLectureStateAsAttendee
               onPressed: lecture.getFileName() == ""
                   ? null
                   : () {
-                      final snackBar =
-                          SnackBar(content: Text('Downloading file...'));
-                      globalKey.currentState.showSnackBar(snackBar);
-                      downloadFile();
-                    },
+                final snackBar =
+                SnackBar(content: Text('Downloading file...'));
+                globalKey.currentState.showSnackBar(snackBar);
+                downloadFile();
+              },
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(40)),
               highlightElevation: 0,
               borderSide: BorderSide(color: Colors.purple[900])),
+
+          new OutlineButton(
+              child: Text('Open file', style: TextStyle(color: _color)),
+              splashColor: Color.fromARGB(255, 190, 180, 255),
+              onPressed: lecture.getFileName() == ""
+                  ? null
+                  : () {
+                openFile();
+              },
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40)),
+              highlightElevation: 0,
+              borderSide: BorderSide(color: Colors.purple[900])),
+
           new OutlineButton(
               child: Text('View Questions',
                   style: TextStyle(color: Colors.purple[900])),
@@ -115,30 +131,37 @@ class _ViewSpecificUserLectureStateAsAttendee
 Widget _titleText(String text, double size) {
   return Center(
       child: Stack(
-    children: [
-      Text(
-        text,
-        style: TextStyle(
-            fontSize: size,
-            foreground: Paint()
-              ..style = PaintingStyle.stroke
-              ..strokeWidth = 6
-              ..color = Colors.purple[900]),
-      ),
-      Text(
-        text,
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: size,
-          shadows: <Shadow>[
-            Shadow(
-              offset: Offset(6.0, 6.0),
-              blurRadius: 8.0,
-              color: Colors.purple[900],
+        children: [
+          Text(
+            text,
+            style: TextStyle(
+                fontSize: size,
+                foreground: Paint()
+                  ..style = PaintingStyle.stroke
+                  ..strokeWidth = 6
+                  ..color = Colors.purple[900]),
+          ),
+          Text(
+            text,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: size,
+              shadows: <Shadow>[
+                Shadow(
+                  offset: Offset(6.0, 6.0),
+                  blurRadius: 8.0,
+                  color: Colors.purple[900],
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-    ],
-  ));
+          ),
+        ],
+      ));
+}
+
+Future<File> openFile() async {
+  final directory = await ExtStorage.getExternalStoragePublicDirectory(
+      ExtStorage.DIRECTORY_DOWNLOADS);
+  final path = '$directory/lecture.pdf';
+  final result = await open_file.OpenFile.open(path);
 }
