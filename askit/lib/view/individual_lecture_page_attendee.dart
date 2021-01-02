@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:askit/view/home_page.dart';
 import 'dart:core';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:http/http.dart' as http;
 import 'package:ext_storage/ext_storage.dart';
+import 'package:open_file/open_file.dart' as open_file;
 
 class ViewSpecificUserLecturePageAsAttendee extends StatefulWidget {
   @override
@@ -19,6 +21,7 @@ class _ViewSpecificUserLectureStateAsAttendee
     extends State<ViewSpecificUserLecturePageAsAttendee> {
   Lecture lecture;
   final globalKey = GlobalKey<ScaffoldState>();
+  bool downloaded = false;
 
   _ViewSpecificUserLectureStateAsAttendee() {
     this.lecture = selectedLecture;
@@ -68,6 +71,18 @@ class _ViewSpecificUserLectureStateAsAttendee
               highlightElevation: 0,
               borderSide: BorderSide(color: Colors.purple[900])),
           new OutlineButton(
+              child: Text('Open file', style: TextStyle(color: _color)),
+              splashColor: Color.fromARGB(255, 190, 180, 255),
+              onPressed: lecture.getFileName() == "" || !downloaded
+                  ? null
+                  : () {
+                      openFile();
+                    },
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40)),
+              highlightElevation: 0,
+              borderSide: BorderSide(color: Colors.purple[900])),
+          new OutlineButton(
               child: Text('View Questions',
                   style: TextStyle(color: Colors.purple[900])),
               splashColor: Color.fromARGB(255, 190, 180, 255),
@@ -109,6 +124,9 @@ class _ViewSpecificUserLectureStateAsAttendee
 
     File file = new File(path);
     file.writeAsBytes(bytes);
+    setState(() {
+      downloaded = true;
+    });
   }
 }
 
@@ -141,4 +159,11 @@ Widget _titleText(String text, double size) {
       ),
     ],
   ));
+}
+
+Future<File> openFile() async {
+  final directory = await ExtStorage.getExternalStoragePublicDirectory(
+      ExtStorage.DIRECTORY_DOWNLOADS);
+  final path = '$directory/lecture.pdf';
+  final result = await open_file.OpenFile.open(path);
 }
